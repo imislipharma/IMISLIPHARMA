@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İMİŞLİ PHARMA — İmişli | Onlayn Aptek Kataloqu</title>
-    <meta name="description" content="İMİŞLİ PHARMA — İmişli şəhərində orijinal dərman vasitələri, vitaminlər, kosmetika, uşaq qidaları və tibbi ləvazimatlar. Kataloqdan seçin, WhatsApp ilə sifariş edin.">
-    <meta property="og:title" content="İMİŞLİ PHARMA — İmişli">
+    <title>İMİSLİ PHARMA — İmişli | Onlayn Aptek Kataloqu</title>
+    <meta name="description" content="İMİSLİ PHARMA — İmişli şəhərində orijinal dərman vasitələri, vitaminlər, kosmetika, uşaq qidaları və tibbi ləvazimatlar. Kataloqdan seçin, WhatsApp ilə sifariş edin.">
+    <meta property="og:title" content="İMİSLİ PHARMA — İmişli">
     <meta property="og:description" content="Orijinal dərman vasitələri və tibbi məhsullar. WhatsApp ilə sürətli sifariş.">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#059669">
@@ -105,7 +105,7 @@
                     </svg>
                 </div>
                 <div>
-                    <span class="text-lg md:text-xl font-display font-extrabold text-emerald-900 tracking-tight leading-none">İMİŞLİ <span class="text-emerald-600">PHARMA</span></span>
+                    <span class="text-lg md:text-xl font-display font-extrabold text-emerald-900 tracking-tight leading-none">İMİSLİ <span class="text-emerald-600">PHARMA</span></span>
                     <span class="block text-[11px] text-gray-400 font-medium">İmişli şəhəri</span>
                 </div>
             </a>
@@ -238,7 +238,7 @@
         <section id="haqqimizda" class="max-w-4xl mx-auto px-4 py-14 scroll-mt-20 text-center">
             <h2 class="text-xl md:text-2xl font-display font-bold text-gray-900 mb-4">Haqqımızda</h2>
             <p class="text-gray-500 text-sm md:text-base leading-relaxed">
-                İMİŞLİ PHARMA olaraq İmişli sakinlərinə keyfiyyətli və orijinal dərman vasitələri təqdim etməyi məqsəd qoymuşuq.
+                İMİSLİ PHARMA olaraq İmişli sakinlərinə keyfiyyətli və orijinal dərman vasitələri təqdim etməyi məqsəd qoymuşuq.
                 Peşəkar əczaçı komandamız məhsul seçimindən düzgün istifadəyə qədər hər addımda sizinlə əlaqədədir.
                 Sifarişinizi kataloqdan seçin və ya WhatsApp vasitəsilə resept şəklini göndərin — qalanını bizə həvalə edin.
             </p>
@@ -463,7 +463,7 @@
     <footer id="elaqe" class="bg-gray-900 text-white mt-16 py-12 px-4 scroll-mt-20">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="space-y-3">
-                <h3 class="text-xl font-display font-bold text-emerald-400">İMİŞLİ PHARMA</h3>
+                <h3 class="text-xl font-display font-bold text-emerald-400">İMİSLİ PHARMA</h3>
                 <p class="text-gray-400 text-sm">Keyfiyyətli xidmət və zəmanətli tibbi preparatlar ilə xidmətinizdəyik.</p>
             </div>
             <div class="space-y-2">
@@ -492,10 +492,10 @@
             openHour: 8,
             closeHour: 22,
             storageKeys: {
-                products: 'imişliPharma_products_v2',
-                cart: 'imişliPharma_cart_v1',
-                adminPass: 'imişliPharma_adminPass',
-                adminSession: 'imişliPharma_adminSession'
+                products: 'imisliPharma_products_v2',
+                cart: 'imisliPharma_cart_v1',
+                adminPass: 'imisliPharma_adminPass',
+                adminSession: 'imisliPharma_adminSession'
             }
         };
 
@@ -966,6 +966,7 @@
             const modal = document.getElementById('adminPanelModal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
+            resetAdminForm();
         }
 
         function handleImageInput(e) {
@@ -973,8 +974,14 @@
             if (!file) return;
             if (!file.type.startsWith('image/')) { toast('Yalnız şəkil faylı seçin', 'error'); return; }
             const reader = new FileReader();
+            reader.onerror = function() {
+                toast('Şəkil oxunarkən xəta baş verdi', 'error');
+            };
             reader.onload = function (ev) {
                 const img = new Image();
+                img.onerror = function() {
+                    toast('Şəkil yüklənərkən xəta baş verdi', 'error');
+                };
                 img.onload = function () {
                     const canvas = document.createElement('canvas');
                     const maxW = 500;
@@ -1013,6 +1020,8 @@
                 if (p) {
                     p.name = name; p.category = category; p.price = price; p.oldPrice = oldPrice;
                     p.desc = desc; p.stock = stock; p.isNew = isNew;
+                    // Kateqoriya dəyişdikdə ikonu da yenilə
+                    p.icon = CATEGORY_ICONS[category] || 'fa-capsules';
                     if (pendingImageData) p.image = pendingImageData;
                 }
                 toast('Məhsul yeniləndi', 'success');
@@ -1037,6 +1046,7 @@
             state.editingId = null;
             document.getElementById('adminForm').reset();
             pendingImageData = null;
+            document.getElementById('pImageInput').value = '';
             document.getElementById('pImagePreview').classList.add('hidden');
             document.getElementById('pStock').checked = true;
             document.getElementById('adminFormTitle').textContent = 'Yeni Məhsul Əlavə Et';
@@ -1055,6 +1065,8 @@
             document.getElementById('pDesc').value = p.desc || '';
             document.getElementById('pStock').checked = p.stock !== false;
             document.getElementById('pIsNew').checked = !!p.isNew;
+            // Fayl seçicini sıfırla ki, yeni şəkil seçərkən onchange işləsin
+            document.getElementById('pImageInput').value = '';
             pendingImageData = null;
             const preview = document.getElementById('pImagePreview');
             if (p.image) { preview.src = p.image; preview.classList.remove('hidden'); }
@@ -1068,131 +1080,4 @@
         function deleteProduct(id) {
             const p = state.products.find(x => x.id === id);
             if (!p) return;
-            openConfirm('"' + p.name + '" məhsulunu silmək istədiyinizə əminsiniz?', function () {
-                state.products = state.products.filter(x => x.id !== id);
-                state.cart = state.cart.filter(x => x.id !== id);
-                persistProducts();
-                persistCart();
-                renderAdminTable();
-                updateAdminStats();
-                applyFilters();
-                renderCart();
-                toast('Məhsul silindi', 'success');
-            });
-        }
-
-        function renderAdminTable() {
-            const container = document.getElementById('adminListContainer');
-            const q = document.getElementById('adminSearchInput').value.trim().toLowerCase();
-            let list = state.products;
-            if (q) list = list.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
-
-            if (list.length === 0) {
-                container.innerHTML = '<p class="text-sm text-gray-400 text-center py-6">Məhsul tapılmadı</p>';
-                return;
-            }
-            container.innerHTML = '';
-            list.forEach(p => {
-                const row = document.createElement('div');
-                row.className = 'flex items-center gap-3 p-3 border border-gray-100 rounded-xl hover:bg-gray-50 transition';
-                const img = p.image ? '<img src="' + p.image + '" class="w-full h-full object-cover">' : '<i class="fa-solid ' + (p.icon || 'fa-capsules') + '"></i>';
-                row.innerHTML = `
-                    <div class="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 overflow-hidden shrink-0">${img}</div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-semibold text-sm text-gray-900 truncate">${escapeHtml(p.name)}</p>
-                        <p class="text-xs text-gray-400">${escapeHtml(p.category)} · ${formatPrice(p.price)} ${p.stock === false ? '· <span class="text-red-500 font-semibold">Stokda yoxdur</span>' : ''}</p>
-                    </div>
-                    <button onclick="editProduct(${p.id})" class="p-2 text-gray-400 hover:text-emerald-600 transition" aria-label="Redaktə et"><i class="fa-solid fa-pen"></i></button>
-                    <button onclick="deleteProduct(${p.id})" class="p-2 text-gray-400 hover:text-red-600 transition" aria-label="Sil"><i class="fa-solid fa-trash"></i></button>
-                `;
-                container.appendChild(row);
-            });
-        }
-
-        function updateAdminStats() {
-            document.getElementById('adminStatTotal').textContent = state.products.length;
-            document.getElementById('adminStatOut').textContent = state.products.filter(p => p.stock === false).length;
-            const value = state.products.reduce((sum, p) => sum + p.price, 0);
-            document.getElementById('adminStatValue').textContent = value.toFixed(2);
-        }
-
-        /* ==================== EHTİYAT NÜSXƏ ==================== */
-        function exportData() {
-            const payload = { products: state.products, exportedAt: new Date().toISOString(), source: 'İmişli Pharma' };
-            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            const dateStr = new Date().toISOString().slice(0, 10);
-            a.href = url;
-            a.download = 'imisli-pharma-yedek-' + dateStr + '.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            toast('Ehtiyat nüsxə endirildi', 'success');
-        }
-
-        function handleImportFile(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function (ev) {
-                try {
-                    const data = JSON.parse(ev.target.result);
-                    const list = Array.isArray(data) ? data : data.products;
-                    if (!Array.isArray(list)) throw new Error('invalid');
-                    openConfirm(list.length + ' məhsul tapıldı. Mövcud kataloq bunlarla əvəz olunsun?', function () {
-                        state.products = list;
-                        persistProducts();
-                        renderAdminTable();
-                        updateAdminStats();
-                        applyFilters();
-                        toast('Data uğurla idxal edildi', 'success');
-                    });
-                } catch (err) {
-                    toast('Fayl oxuna bilmədi — düzgün ehtiyat faylı seçin', 'error');
-                }
-                e.target.value = '';
-            };
-            reader.readAsText(file);
-        }
-
-        function handleChangePassword(e) {
-            e.preventDefault();
-            const current = document.getElementById('currentPass').value;
-            const next = document.getElementById('newPass').value;
-            const saved = localStorage.getItem(CONFIG.storageKeys.adminPass);
-            if (current !== saved) { toast('Cari şifrə yanlışdır', 'error'); return; }
-            if (next.length < 4) { toast('Yeni şifrə ən azı 4 simvol olmalıdır', 'error'); return; }
-            localStorage.setItem(CONFIG.storageKeys.adminPass, next);
-            toast('Şifrə uğurla dəyişdirildi', 'success');
-            document.getElementById('changePassForm').reset();
-        }
-
-        /* ==================== YUXARIYA QAYIT DÜYMƏSİ ==================== */
-        window.addEventListener('scroll', function () {
-            const btn = document.getElementById('btnBackToTop');
-            if (window.scrollY > 500) { btn.classList.remove('opacity-0', 'pointer-events-none'); }
-            else { btn.classList.add('opacity-0', 'pointer-events-none'); }
-        });
-
-        /* ==================== BAŞLANĞIC ==================== */
-        function init() {
-            migrateOldData();
-            loadProducts();
-            loadCart();
-            state.isAdmin = sessionStorage.getItem(CONFIG.storageKeys.adminSession) === '1';
-
-            document.getElementById('whatsappPrescriptionLink').href = 'https://wa.me/' + CONFIG.whatsappNumber + '?text=' + encodeURIComponent('Salam, dərman barədə məlumat almaq istəyirəm.');
-            document.getElementById('footerWhatsappLink').href = 'https://wa.me/' + CONFIG.whatsappNumber;
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-            applyFilters();
-            renderCart();
-            updateOpenStatus();
-            setInterval(updateOpenStatus, 60000);
-        }
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
-</body>
-</html>
+            openConfirm('"' + p.name + '" məhsulunu
