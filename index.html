@@ -1,38 +1,31 @@
 <!DOCTYPE html>
-<html lang="az">
+<html lang="az" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İMİŞLİ PHARMA — İmişli | Onlayn Aptek Kataloqu</title>
-    <meta name="description" content="İMİŞLİ PHARMA — İmişli şəhərində orijinal dərman vasitələri, vitaminlər, kosmetika, uşaq qidaları və tibbi ləvazimatlar. Kataloqdan seçin, WhatsApp ilə sifariş edin.">
-    <meta property="og:title" content="İMİŞLİ PHARMA — İmişli">
-    <meta property="og:description" content="Orijinal dərman vasitələri və tibbi məhsullar. WhatsApp ilə sürətli sifariş.">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#059669">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23059669'/%3E%3Cpath d='M42 20h16v22h22v16H58v22H42V58H20V42h22z' fill='white'/%3E%3C/svg%3E">
+    <title>İMİŞLİ PHARMA — Premium Onlayn Aptek</title>
+    <meta name="description" content="İMİŞLİ PHARMA — İmişli şəhərində premium keyfiyyətli dərman vasitələri, vitaminlər, kosmetika və tibbi ləvazimatlar.">
+    <meta name="theme-color" content="#064e3b">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='28' fill='%23059669'/%3E%3Cpath d='M38 18h24v24h24v16H62v24H38V58H14V42h24z' fill='white'/%3E%3C/svg%3E">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        sans: ['Inter', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                        body: ['Inter', 'system-ui', 'sans-serif'],
                     },
                     colors: {
-                        emerald: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            200: '#a7f3d0',
-                            300: '#6ee7b7',
-                            400: '#34d399',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                            800: '#065f46',
-                            900: '#064e3b',
+                        brand: {
+                            50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0',
+                            300: '#6ee7b7', 400: '#34d399', 500: '#10b981',
+                            600: '#059669', 700: '#047857', 800: '#065f46', 900: '#064e3b',
+                        },
+                        gold: {
+                            400: '#fbbf24', 500: '#f59e0b', 600: '#d97706',
                         }
                     }
                 }
@@ -40,201 +33,280 @@
         }
     </script>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-
-    <!-- FontAwesome İkonlar -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        :root { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; }
-
-        /* Premium Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #10b981, #059669); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #047857; }
-
-        .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
-
-        .gradient-bg {
-            background: linear-gradient(135deg, #047857 0%, #10b981 40%, #34d399 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 8s ease infinite;
+        :root {
+            --cursor-size: 20px;
+            --cursor-hover-size: 60px;
         }
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        
+        * { cursor: none; }
+        @media (pointer: coarse) { * { cursor: auto; } .custom-cursor { display: none; } }
 
-        /* Floating particles */
-        .particle {
-            position: absolute;
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #fafaf9;
+            overflow-x: hidden;
+        }
+        body.dark { background: #0c0a09; color: #e7e5e4; }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            border: 2px solid #059669;
             border-radius: 50%;
-            background: rgba(255,255,255,0.08);
             pointer-events: none;
+            z-index: 9999;
+            transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s, transform 0.1s;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); }
-            33% { transform: translateY(-40px) translateX(30px); }
-            66% { transform: translateY(30px) translateX(-20px); }
+        .custom-cursor.hovering {
+            width: var(--cursor-hover-size);
+            height: var(--cursor-hover-size);
+            background: rgba(5, 150, 105, 0.1);
+            border-color: #059669;
         }
-
-        /* Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        /* Gradient text */
-        .gradient-text {
-            background: linear-gradient(135deg, #ffffff 0%, #d1fae5 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Kateqoriya scroll zolağını gizlət */
-        .scrollbar-none::-webkit-scrollbar { display: none; }
-        .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* Nəbz xətti */
-        .pulse-line path {
-            stroke-dasharray: 2200;
-            stroke-dashoffset: 2200;
-            animation: drawPulse 2.4s ease-out forwards;
-        }
-        @keyframes drawPulse { to { stroke-dashoffset: 0; } }
-
-        /* Kart animasiyası */
-        @keyframes cardIn {
-            from { opacity: 0; transform: translateY(24px) scale(0.96); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .card-in { animation: cardIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) both; }
-
-        /* Toast animasiyası */
-        @keyframes toastIn {
-            from { opacity: 0; transform: translateX(20px) scale(0.95); }
-            to { opacity: 1; transform: translateX(0) scale(1); }
-        }
-        .toast-item { animation: toastIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) both; }
-        .toast-out { opacity: 0; transform: translateX(20px) scale(0.95); transition: all 0.25s ease-in; }
-
-        /* Premium kart hover */
-        .product-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 24px 48px -12px rgba(5, 150, 105, 0.18);
-        }
-        .img-zoom {
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .product-card:hover .img-zoom {
-            transform: scale(1.1);
+        .cursor-dot {
+            position: fixed;
+            top: 0; left: 0;
+            width: 6px; height: 6px;
+            background: #059669;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
         }
 
-        /* Premium badge */
-        .premium-badge {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
-        }
-        .new-badge {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+        /* Noise texture overlay */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
 
-        /* Skeleton loading */
+        /* Smooth scroll container */
+        .smooth-scroll { scroll-behavior: smooth; }
+
+        /* Premium scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #059669, #047857); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #065f46; }
+
+        /* Glass morphism */
+        .glass-premium {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+        }
+        .dark .glass-premium {
+            background: rgba(28, 25, 23, 0.7);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Text reveal animation */
+        .reveal-text {
+            overflow: hidden;
+        }
+        .reveal-text span {
+            display: inline-block;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s;
+        }
+        .reveal-text.visible span {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Magnetic button */
+        .magnetic-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .magnetic-btn::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #059669, #10b981);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+        .magnetic-btn:hover::before { opacity: 0.3; }
+
+        /* 3D Tilt Card */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: transform 0.1s ease-out;
+        }
+        .tilt-content {
+            transform: translateZ(30px);
+        }
+
+        /* Shimmer loading */
         @keyframes shimmer {
             0% { background-position: -1000px 0; }
             100% { background-position: 1000px 0; }
         }
-        .skeleton {
-            background: linear-gradient(90deg, #f0fdfa 25%, #ccfbf1 50%, #f0fdfa 75%);
+        .shimmer {
+            background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.4) 50%, transparent 75%);
             background-size: 1000px 100%;
             animation: shimmer 2s infinite;
         }
 
-        /* Scroll reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Gradient text */
+        .text-gradient {
+            background: linear-gradient(135deg, #059669 0%, #34d399 50%, #059669 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: gradientMove 3s linear infinite;
         }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Stagger children */
-        .stagger-children > * {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .stagger-children.visible > * {
-            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        .stagger-children.visible > *:nth-child(1) { animation-delay: 0.05s; }
-        .stagger-children.visible > *:nth-child(2) { animation-delay: 0.1s; }
-        .stagger-children.visible > *:nth-child(3) { animation-delay: 0.15s; }
-        .stagger-children.visible > *:nth-child(4) { animation-delay: 0.2s; }
-        .stagger-children.visible > *:nth-child(5) { animation-delay: 0.25s; }
-        .stagger-children.visible > *:nth-child(6) { animation-delay: 0.3s; }
-        .stagger-children.visible > *:nth-child(7) { animation-delay: 0.35s; }
-        .stagger-children.visible > *:nth-child(8) { animation-delay: 0.4s; }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes gradientMove {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
 
-        /* Modal animation */
-        .modal-content {
-            animation: modalIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        /* Glow effects */
+        .glow-green {
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.15);
         }
-        @keyframes modalIn {
-            from { opacity: 0; transform: scale(0.92) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+        .glow-gold {
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
         }
 
-        /* Wave separator */
-        .wave-top {
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .float-anim { animation: float 6s ease-in-out infinite; }
+
+        /* Pulse ring */
+        @keyframes pulseRing {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+        .pulse-ring::before {
+            content: '';
             position: absolute;
-            top: -1px;
-            left: 0;
-            width: 100%;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid #10b981;
+            animation: pulseRing 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        /* Product card premium */
+        .product-premium {
+            background: white;
+            border-radius: 24px;
             overflow: hidden;
-            line-height: 0;
-            transform: rotate(180deg);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(0,0,0,0.04);
         }
-        .wave-top svg {
-            position: relative;
-            display: block;
-            width: calc(100% + 1.3px);
-            height: 60px;
+        .product-premium:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 30px 60px -15px rgba(5, 150, 105, 0.2);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+        .dark .product-premium {
+            background: #1c1917;
+            border-color: rgba(255,255,255,0.06);
         }
 
-        /* Klaviatura ilə naviqasiya üçün görünən fokus */
-        :focus-visible { outline: 2px solid #059669; outline-offset: 2px; border-radius: 8px; }
+        /* Image zoom container */
+        .img-zoom-container { overflow: hidden; }
+        .img-zoom-container img {
+            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .product-premium:hover .img-zoom-container img {
+            transform: scale(1.15);
+        }
 
-        /* Hərəkətə həssas istifadəçilər üçün */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.001ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.001ms !important;
-                scroll-behavior: auto !important;
+        /* Badge premium */
+        .badge-premium {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        .badge-new {
+            background: linear-gradient(135deg, #059669, #047857);
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+        }
+
+        /* Section divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #059669, transparent);
+            opacity: 0.2;
+        }
+
+        /* Counter animation */
+        .counter-value {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Toast premium */
+        .toast-premium {
+            animation: toastSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes toastSlide {
+            from { transform: translateX(100px) scale(0.9); opacity: 0; }
+            to { transform: translateX(0) scale(1); opacity: 1; }
+        }
+
+        /* Mobile bottom nav */
+        @media (max-width: 768px) {
+            .mobile-nav {
+                position: fixed;
+                bottom: 0; left: 0; right: 0;
+                z-index: 50;
+                background: rgba(255,255,255,0.9);
+                backdrop-filter: blur(20px);
+                border-top: 1px solid rgba(0,0,0,0.05);
+                padding: 12px 24px calc(12px + env(safe-area-inset-bottom));
             }
-            .pulse-line path { stroke-dashoffset: 0; }
-            .gradient-bg { animation: none; }
+            .dark .mobile-nav {
+                background: rgba(12, 10, 9, 0.9);
+                border-color: rgba(255,255,255,0.05);
+            }
         }
 
+        /* Hero gradient mesh */
+        .mesh-gradient {
+            background: 
+                radial-gradient(at 0% 0%, hsla(160,80%,35%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(150,70%,45%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, hsla(170,60%,30%,1) 0, transparent 50%), 
+                radial-gradient(at 0% 100%, hsla(155,70%,40%,1) 0, transparent 50%);
+            background-size: 200% 200%;
+            animation: meshMove 15s ease infinite;
+        }
+        @keyframes meshMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Line clamp */
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -242,485 +314,581 @@
             overflow: hidden;
         }
 
-        /* Drag & drop zone */
-        .drop-zone {
-            border: 2px dashed #d1d5db;
-            transition: all 0.3s ease;
-        }
-        .drop-zone.dragover {
-            border-color: #059669;
-            background: #ecfdf5;
+        /* Hide scrollbar for horizontal scroll */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Focus visible */
+        :focus-visible { outline: 2px solid #059669; outline-offset: 3px; border-radius: 8px; }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
     </style>
 </head>
-<body class="bg-[#F6FAF8] text-gray-800 font-sans min-h-screen flex flex-col">
+<body class="antialiased text-gray-800 dark:text-stone-200">
+
+    <!-- Noise Overlay -->
+    <div class="noise"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
 
     <!-- ============ HEADER ============ -->
-    <header id="top" class="glass sticky top-0 z-40 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center gap-3">
-            <!-- Loqo -->
-            <a href="#top" class="flex items-center space-x-2.5 shrink-0 group">
-                <div class="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-200 group-hover:shadow-emerald-300 transition-all duration-300">
-                    <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M42 20h16v22h22v16H58v22H42V58H20V42h22z" fill="white"/>
-                    </svg>
-                </div>
-                <div>
-                    <span class="text-lg md:text-xl font-display font-extrabold text-emerald-900 tracking-tight leading-none">İMİŞLİ <span class="text-emerald-600">PHARMA</span></span>
-                    <span class="block text-[11px] text-gray-400 font-medium">İmişli şəhəri</span>
-                </div>
-            </a>
-
-            <!-- Naviqasiya (masaüstü) -->
-            <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold text-gray-500">
-                <a href="#top" class="hover:text-emerald-700 transition relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-emerald-600 after:transition-all hover:after:w-full">Ana Səhifə</a>
-                <a href="#kataloq" class="hover:text-emerald-700 transition relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-emerald-600 after:transition-all hover:after:w-full">Kataloq</a>
-                <a href="#haqqimizda" class="hover:text-emerald-700 transition relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-emerald-600 after:transition-all hover:after:w-full">Haqqımızda</a>
-                <a href="#elaqe" class="hover:text-emerald-700 transition relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-emerald-600 after:transition-all hover:after:w-full">Əlaqə</a>
-            </nav>
-
-            <!-- Sağ düymələr -->
-            <div class="flex items-center gap-2">
-                <button onclick="openAdminEntry()" class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-500 transition hover:scale-105 active:scale-95" aria-label="Admin girişi" title="Admin">
-                    <i class="fa-solid fa-lock text-sm"></i>
-                </button>
-                <button onclick="openCart()" class="relative w-10 h-10 flex items-center justify-center rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 transition hover:scale-105 active:scale-95" aria-label="Səbət">
-                    <i class="fa-solid fa-cart-shopping text-sm"></i>
-                    <span id="cartCountBadge" class="hidden absolute -top-1.5 -right-1.5 bg-emerald-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md">0</span>
-                </button>
-                <a id="whatsappPrescriptionLink" href="#" target="_blank"
-                   class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 md:px-4 md:py-2.5 rounded-xl text-xs md:text-sm font-semibold transition flex items-center gap-2 shadow-lg shadow-emerald-200 hover:shadow-emerald-300 hover:-translate-y-0.5 active:translate-y-0">
-                    <i class="fa-brands fa-whatsapp text-base md:text-lg"></i>
-                    <span class="hidden sm:inline">Resept Göndər</span>
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+            <div class="glass-premium rounded-2xl px-5 py-3 flex items-center justify-between gap-4">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group magnetic-btn" data-magnetic>
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-brand-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/30 group-hover:shadow-brand-500/50 transition-all duration-500 group-hover:scale-110">
+                        <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+                            <path d="M38 18h24v24h24v16H62v24H38V58H14V42h24z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-lg font-display font-bold text-gray-900 dark:text-white tracking-tight">İMİŞLİ <span class="text-brand-600">PHARMA</span></span>
+                        <span class="block text-[10px] text-gray-400 font-medium tracking-widest uppercase">Premium Aptek</span>
+                    </div>
                 </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center gap-8">
+                    <a href="#kataloq" class="text-sm font-medium text-gray-600 dark:text-stone-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors magnetic-btn" data-magnetic>Kataloq</a>
+                    <a href="#haqqimizda" class="text-sm font-medium text-gray-600 dark:text-stone-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors magnetic-btn" data-magnetic>Haqqımızda</a>
+                    <a href="#elaqe" class="text-sm font-medium text-gray-600 dark:text-stone-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors magnetic-btn" data-magnetic>Əlaqə</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-3">
+                    <!-- Dark mode toggle -->
+                    <button onclick="toggleDark()" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-stone-800 flex items-center justify-center text-gray-600 dark:text-stone-400 hover:bg-gray-200 dark:hover:bg-stone-700 transition magnetic-btn" data-magnetic aria-label="Dark mode">
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
+                    </button>
+
+                    <!-- Admin -->
+                    <button onclick="openAdminEntry()" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-stone-800 flex items-center justify-center text-gray-500 dark:text-stone-500 hover:bg-gray-200 dark:hover:bg-stone-700 transition magnetic-btn" data-magnetic aria-label="Admin">
+                        <i class="fa-solid fa-lock text-sm"></i>
+                    </button>
+
+                    <!-- Cart -->
+                    <button onclick="openCart()" class="relative w-10 h-10 rounded-xl bg-gray-100 dark:bg-stone-800 flex items-center justify-center text-gray-700 dark:text-stone-300 hover:bg-gray-200 dark:hover:bg-stone-700 transition magnetic-btn" data-magnetic aria-label="Səbət">
+                        <i class="fa-solid fa-bag-shopping text-sm"></i>
+                        <span id="cartCountBadge" class="hidden absolute -top-1 -right-1 bg-brand-600 text-white text-[9px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-lg shadow-brand-500/40">0</span>
+                    </button>
+
+                    <!-- CTA -->
+                    <a href="https://wa.me/994516011390" target="_blank" class="hidden sm:flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:-translate-y-0.5 magnetic-btn" data-magnetic>
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Resept Göndər</span>
+                    </a>
+                </div>
             </div>
         </div>
     </header>
 
-    <main class="flex-1">
-        <!-- ============ HERO ============ -->
-        <section class="relative overflow-hidden gradient-bg text-white py-16 md:py-24 px-4">
-            <!-- Floating particles -->
-            <div class="particle w-64 h-64 top-10 left-10" style="animation: float 18s infinite ease-in-out;"></div>
-            <div class="particle w-48 h-48 top-20 right-20" style="animation: float 22s infinite ease-in-out 2s;"></div>
-            <div class="particle w-32 h-32 bottom-10 left-1/3" style="animation: float 16s infinite ease-in-out 4s;"></div>
+    <!-- ============ HERO ============ -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
+        <!-- Background -->
+        <div class="absolute inset-0 mesh-gradient opacity-10 dark:opacity-20"></div>
+        
+        <!-- Floating orbs -->
+        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-400/20 rounded-full blur-3xl float-anim"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-300/10 rounded-full blur-3xl float-anim" style="animation-delay: -3s;"></div>
 
-            <svg class="pulse-line absolute inset-x-0 bottom-0 w-full h-20 md:h-28 opacity-20 pointer-events-none" viewBox="0 0 800 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0,50 H100 L120,20 L140,80 L160,10 L180,90 L200,50 H340 L360,50 H400 L420,25 L440,75 L460,15 L480,85 L500,50 H800" stroke="white" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
-            </svg>
+        <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
+            <!-- Status pill -->
+            <div class="inline-flex items-center gap-2 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl border border-brand-200 dark:border-brand-800/50 px-4 py-2 rounded-full text-xs font-semibold text-brand-700 dark:text-brand-400 mb-8 shadow-lg shadow-brand-500/10">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span id="statusPing" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                    <span id="statusDot" class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-500"></span>
+                </span>
+                <span id="statusText">Yüklənir...</span>
+            </div>
 
-            <div class="max-w-4xl mx-auto text-center space-y-5 md:space-y-6 relative z-10">
-                <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-semibold border border-white/10 shadow-lg">
-                    <span id="openStatusDot" class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse shadow-[0_0_8px_rgba(110,231,183,0.8)]"></span>
-                    <span id="openStatusText">Yüklənir...</span>
-                </div>
+            <!-- Main heading -->
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-display font-extrabold text-gray-900 dark:text-white leading-[1.1] mb-6 tracking-tight">
+                <span class="reveal-text block"><span>Sağlamlığınız</span></span>
+                <span class="reveal-text block"><span class="text-gradient">Bizim Missiyamızdır</span></span>
+            </h1>
 
-                <h1 class="text-3xl md:text-5xl font-display font-extrabold leading-tight gradient-text drop-shadow-sm">Sağlamlığınız Bizim Üçün Dəyərlidir</h1>
-                <p class="text-emerald-50/90 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
-                    Orijinal dərman vasitələri, tibbi avadanlıqlar və uşaq qidaları. Kataloqdan seçin, səbətə atın və WhatsApp vasitəsilə anında sifariş edin.
-                </p>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-stone-400 max-w-2xl mx-auto mb-10 leading-relaxed reveal-text">
+                <span>Orijinal dərman vasitələri, premium tibbi avadanlıqlar və uşaq qidaları. Keyfiyyətə zəmanət veririk.</span>
+            </p>
 
-                <div class="pt-2 max-w-xl mx-auto">
-                    <div class="relative group">
-                        <input type="text" id="searchInputHero" oninput="handleSearchInput(this)" placeholder="Dərman və ya kateqoriya axtarın..."
-                               class="w-full pl-12 pr-4 py-3.5 rounded-2xl text-gray-800 focus:outline-none focus:ring-4 focus:ring-emerald-300/50 shadow-xl text-sm transition-all duration-300 group-hover:shadow-2xl">
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-gray-400 group-hover:text-emerald-500 transition-colors"></i>
+            <!-- Search -->
+            <div class="max-w-xl mx-auto relative group reveal-text">
+                <span>
+                    <div class="relative">
+                        <input type="text" id="searchInputHero" oninput="handleSearch(this)" placeholder="Dərman, vitamin və ya kateqoriya axtarın..." 
+                            class="w-full pl-14 pr-6 py-4 rounded-2xl bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-800 text-gray-800 dark:text-stone-200 focus:outline-none focus:ring-4 focus:ring-brand-500/20 focus:border-brand-500 shadow-xl shadow-black/5 dark:shadow-black/20 transition-all duration-300 text-sm">
+                        <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-brand-500 transition-colors"></i>
+                        <kbd class="hidden sm:inline-block absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-mono bg-gray-100 dark:bg-stone-800 text-gray-400 px-2 py-1 rounded-md border border-gray-200 dark:border-stone-700">Ctrl K</kbd>
                     </div>
-                </div>
+                </span>
             </div>
-        </section>
 
-        <!-- ============ ÜSTÜNLÜKLƏR ============ -->
-        <section class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-5 stagger-children">
-            <div class="reveal bg-white p-5 rounded-2xl shadow-sm border border-gray-100/80 flex items-center gap-4 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
-                <div class="p-3.5 bg-gradient-to-br from-emerald-50 to-teal-50 text-emerald-600 rounded-xl text-xl shadow-sm">
-                    <i class="fa-solid fa-shield-halved"></i>
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-8 max-w-lg mx-auto mt-16">
+                <div class="text-center">
+                    <div class="text-2xl md:text-3xl font-display font-bold text-brand-600 counter-value" data-target="500">0</div>
+                    <div class="text-xs text-gray-500 dark:text-stone-500 mt-1 font-medium uppercase tracking-wider">Məhsul</div>
                 </div>
-                <div>
-                    <h3 class="font-bold text-gray-900 text-sm">100% Zəmanətli</h3>
-                    <p class="text-xs text-gray-500 mt-0.5">Yalnız sertifikatlı dərmanlar</p>
+                <div class="text-center">
+                    <div class="text-2xl md:text-3xl font-display font-bold text-brand-600 counter-value" data-target="8">0</div>
+                    <div class="text-xs text-gray-500 dark:text-stone-500 mt-1 font-medium uppercase tracking-wider">İl Təcrübə</div>
                 </div>
-            </div>
-            <div class="reveal bg-white p-5 rounded-2xl shadow-sm border border-gray-100/80 flex items-center gap-4 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
-                <div class="p-3.5 bg-gradient-to-br from-emerald-50 to-teal-50 text-emerald-600 rounded-xl text-xl shadow-sm">
-                    <i class="fa-solid fa-clock"></i>
-                </div>
-                <div>
-                    <h3 class="font-bold text-gray-900 text-sm">Hər Gün Xidmət</h3>
-                    <p class="text-xs text-gray-500 mt-0.5">08:00 - 22:00 xidmətinizdəyik</p>
+                <div class="text-center">
+                    <div class="text-2xl md:text-3xl font-display font-bold text-brand-600 counter-value" data-target="10000">0</div>
+                    <div class="text-xs text-gray-500 dark:text-stone-500 mt-1 font-medium uppercase tracking-wider">Müştəri</div>
                 </div>
             </div>
-            <div class="reveal bg-white p-5 rounded-2xl shadow-sm border border-gray-100/80 flex items-center gap-4 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
-                <div class="p-3.5 bg-gradient-to-br from-emerald-50 to-teal-50 text-emerald-600 rounded-xl text-xl shadow-sm">
-                    <i class="fa-solid fa-headset"></i>
-                </div>
-                <div>
-                    <h3 class="font-bold text-gray-900 text-sm">Əczaçı Məsləhəti</h3>
-                    <p class="text-xs text-gray-500 mt-0.5">WhatsApp ilə onlayn sorğu</p>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <!-- ============ KATEQORİYALAR VƏ MƏHSULLAR ============ -->
-        <section id="kataloq" class="max-w-7xl mx-auto px-4 py-8 scroll-mt-20">
-            <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4 reveal">
-                <h2 class="text-2xl md:text-3xl font-display font-bold text-gray-900">Məhsul Kataloqu</h2>
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+            <span class="text-[10px] uppercase tracking-widest text-gray-400">Aşağı sürüşdürün</span>
+            <div class="w-5 h-8 border-2 border-gray-300 rounded-full flex justify-center pt-1">
+                <div class="w-1 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-container">
+                <div class="group p-8 rounded-3xl bg-white dark:bg-stone-900 border border-gray-100 dark:border-stone-800 hover:border-brand-200 dark:hover:border-brand-800/50 transition-all duration-500 hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-50 to-brand-100 dark:from-brand-900/20 dark:to-brand-800/20 flex items-center justify-center text-brand-600 text-2xl mb-5 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-brand-500/10">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-gray-900 dark:text-white mb-2">100% Orijinal</h3>
+                    <p class="text-sm text-gray-500 dark:text-stone-400 leading-relaxed">Bütün məhsullar sertifikatlı və orijinaldır. Saxta məhsul yoxdur.</p>
+                </div>
+                <div class="group p-8 rounded-3xl bg-white dark:bg-stone-900 border border-gray-100 dark:border-stone-800 hover:border-brand-200 dark:hover:border-brand-800/50 transition-all duration-500 hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-50 to-brand-100 dark:from-brand-900/20 dark:to-brand-800/20 flex items-center justify-center text-brand-600 text-2xl mb-5 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-brand-500/10">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-gray-900 dark:text-white mb-2">Sürətli Çatdırılma</h3>
+                    <p class="text-sm text-gray-500 dark:text-stone-400 leading-relaxed">Sifarişləriniz eyni gün ərzində hazırlanır və çatdırılır.</p>
+                </div>
+                <div class="group p-8 rounded-3xl bg-white dark:bg-stone-900 border border-gray-100 dark:border-stone-800 hover:border-brand-200 dark:hover:border-brand-800/50 transition-all duration-500 hover:shadow-2xl hover:shadow-brand-500/5 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-50 to-brand-100 dark:from-brand-900/20 dark:to-brand-800/20 flex items-center justify-center text-brand-600 text-2xl mb-5 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-brand-500/10">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-gray-900 dark:text-white mb-2">Peşəkar Məsləhət</h3>
+                    <p class="text-sm text-gray-500 dark:text-stone-400 leading-relaxed">Əczaçılarımız 7/24 WhatsApp üzərindən sizə kömək edir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CATALOG ============ -->
+    <section id="kataloq" class="py-20 px-4 scroll-mt-24">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                <div>
+                    <span class="text-xs font-bold text-brand-600 uppercase tracking-widest mb-2 block">Kataloq</span>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-white">Məhsullarımız</h2>
+                </div>
                 <div class="flex items-center gap-3">
-                    <div class="relative flex-1 md:w-64 group">
-                        <input type="text" id="searchInputCatalog" oninput="handleSearchInput(this)" placeholder="Axtar..."
-                               class="w-full pl-10 pr-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all duration-300 group-hover:border-emerald-300">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-gray-400 text-xs group-hover:text-emerald-500 transition-colors"></i>
+                    <div class="relative group">
+                        <input type="text" id="searchInputCatalog" oninput="handleSearch(this)" placeholder="Axtar..." 
+                            class="w-48 md:w-64 pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-800 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-gray-400 text-xs"></i>
                     </div>
-                    <select id="sortSelect" onchange="handleSortChange(this)" class="border border-gray-200 rounded-xl text-sm px-3 py-2.5 text-gray-600 focus:outline-none focus:border-emerald-500 bg-white hover:border-emerald-300 transition-colors cursor-pointer">
+                    <select id="sortSelect" onchange="handleSort(this)" class="bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-800 rounded-xl px-4 py-2.5 text-sm text-gray-600 dark:text-stone-400 focus:outline-none focus:border-brand-500 cursor-pointer">
                         <option value="default">Sıralama</option>
-                        <option value="price-asc">Qiymət: aşağıdan</option>
-                        <option value="price-desc">Qiymət: yuxarıdan</option>
-                        <option value="name-asc">Ad: A-Z</option>
+                        <option value="price-asc">Qiymət ↑</option>
+                        <option value="price-desc">Qiymət ↓</option>
+                        <option value="name-asc">A-Z</option>
                     </select>
                 </div>
             </div>
 
-            <!-- Kateqoriya Filtr Düymələri -->
-            <div class="flex gap-2.5 overflow-x-auto pb-4 mb-4 scrollbar-none reveal">
-                <button onclick="filterCategory('all', this)" class="cat-btn active bg-emerald-600 text-white text-xs px-5 py-2.5 rounded-xl whitespace-nowrap font-semibold transition-all duration-300 shadow-md shadow-emerald-200 hover:shadow-lg">Hamısı</button>
-                <button onclick="filterCategory('Vitamini', this)" class="cat-btn bg-white text-gray-600 border border-gray-200 text-xs px-5 py-2.5 rounded-xl whitespace-nowrap font-semibold transition-all duration-300 hover:border-emerald-500 hover:text-emerald-700 hover:-translate-y-0.5">Vitamini</button>
-                <button onclick="filterCategory('Kosmetika', this)" class="cat-btn bg-white text-gray-600 border border-gray-200 text-xs px-5 py-2.5 rounded-xl whitespace-nowrap font-semibold transition-all duration-300 hover:border-emerald-500 hover:text-emerald-700 hover:-translate-y-0.5">Kosmetika</button>
-                <button onclick="filterCategory('Uşaq', this)" class="cat-btn bg-white text-gray-600 border border-gray-200 text-xs px-5 py-2.5 rounded-xl whitespace-nowrap font-semibold transition-all duration-300 hover:border-emerald-500 hover:text-emerald-700 hover:-translate-y-0.5">Uşaq Qidaları</button>
-                <button onclick="filterCategory('Tibbi', this)" class="cat-btn bg-white text-gray-600 border border-gray-200 text-xs px-5 py-2.5 rounded-xl whitespace-nowrap font-semibold transition-all duration-300 hover:border-emerald-500 hover:text-emerald-700 hover:-translate-y-0.5">Tibbi Ləvazimat</button>
+            <!-- Categories -->
+            <div class="flex gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
+                <button onclick="filterCat('all', this)" class="cat-btn active px-5 py-2.5 rounded-xl text-xs font-bold bg-brand-600 text-white shadow-lg shadow-brand-500/25 transition-all duration-300 whitespace-nowrap">Hamısı</button>
+                <button onclick="filterCat('Vitamini', this)" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-stone-900 text-gray-600 dark:text-stone-400 border border-gray-200 dark:border-stone-800 hover:border-brand-500 hover:text-brand-600 transition-all duration-300 whitespace-nowrap">Vitamini</button>
+                <button onclick="filterCat('Kosmetika', this)" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-stone-900 text-gray-600 dark:text-stone-400 border border-gray-200 dark:border-stone-800 hover:border-brand-500 hover:text-brand-600 transition-all duration-300 whitespace-nowrap">Kosmetika</button>
+                <button onclick="filterCat('Uşaq', this)" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-stone-900 text-gray-600 dark:text-stone-400 border border-gray-200 dark:border-stone-800 hover:border-brand-500 hover:text-brand-600 transition-all duration-300 whitespace-nowrap">Uşaq Qidaları</button>
+                <button onclick="filterCat('Tibbi', this)" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-stone-900 text-gray-600 dark:text-stone-400 border border-gray-200 dark:border-stone-800 hover:border-brand-500 hover:text-brand-600 transition-all duration-300 whitespace-nowrap">Tibbi Ləvazimat</button>
             </div>
 
-            <!-- Boş nəticə vəziyyəti -->
-            <div id="emptyState" class="hidden text-center py-20 text-gray-400 reveal">
-                <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fa-solid fa-magnifying-glass text-3xl text-gray-300"></i>
+            <!-- Empty state -->
+            <div id="emptyState" class="hidden text-center py-20">
+                <div class="w-24 h-24 bg-gray-100 dark:bg-stone-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-magnifying-glass text-3xl text-gray-300 dark:text-stone-600"></i>
                 </div>
-                <p class="text-sm font-medium">Axtarışa uyğun məhsul tapılmadı</p>
-                <p class="text-xs mt-1 text-gray-400">Başqa açar söz ilə yoxlayın</p>
+                <p class="text-gray-500 dark:text-stone-500 font-medium">Axtarışa uyğun məhsul tapılmadı</p>
             </div>
 
-            <!-- Məhsul Tor Şəbəkəsi -->
-            <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 stagger-children"></div>
-        </section>
-
-        <!-- ============ HAQQIMIZDA ============ -->
-        <section id="haqqimizda" class="max-w-4xl mx-auto px-4 py-16 scroll-mt-20 text-center reveal">
-            <h2 class="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-5">Haqqımızda</h2>
-            <p class="text-gray-500 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
-                İMİŞLİ PHARMA olaraq İmişli sakinlərinə keyfiyyətli və orijinal dərman vasitələri təqdim etməyi məqsəd qoymuşuq.
-                Peşəkar əczaçı komandamız məhsul seçimindən düzgün istifadəyə qədər hər addımda sizinlə əlaqədədir.
-                Sifarişinizi kataloqdan seçin və ya WhatsApp vasitəsilə resept şəklini göndərin — qalanını bizə həvalə edin.
-            </p>
-        </section>
-    </main>
-
-    <!-- Wave Separator -->
-    <div class="relative bg-[#F6FAF8]">
-        <div class="wave-top">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#111827"></path>
-            </svg>
+            <!-- Product Grid -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 stagger-container"></div>
         </div>
-    </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="haqqimizda" class="py-24 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-50/30 to-transparent dark:via-brand-900/5"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="text-xs font-bold text-brand-600 uppercase tracking-widest mb-3 block">Haqqımızda</span>
+            <h2 class="text-3xl md:text-5xl font-display font-bold text-gray-900 dark:text-white mb-6 leading-tight">İMİŞLİ PHARMA</h2>
+            <p class="text-gray-600 dark:text-stone-400 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
+                2016-cı ildən bəri İmişli sakinlərinə xidmət edirik. Keyfiyyətli dərman vasitələri, peşəkar əczaçı komandası və müasir standartlarla təchiz olunmuş aptek şəbəkəsi.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="flex items-center gap-2 bg-white dark:bg-stone-900 px-5 py-3 rounded-xl border border-gray-100 dark:border-stone-800 shadow-sm">
+                    <i class="fa-solid fa-check-circle text-brand-500"></i>
+                    <span class="text-sm font-medium text-gray-700 dark:text-stone-300">Sertifikatlı Məhsullar</span>
+                </div>
+                <div class="flex items-center gap-2 bg-white dark:bg-stone-900 px-5 py-3 rounded-xl border border-gray-100 dark:border-stone-800 shadow-sm">
+                    <i class="fa-solid fa-check-circle text-brand-500"></i>
+                    <span class="text-sm font-medium text-gray-700 dark:text-stone-300">7/24 Onlayn Dəstək</span>
+                </div>
+                <div class="flex items-center gap-2 bg-white dark:bg-stone-900 px-5 py-3 rounded-xl border border-gray-100 dark:border-stone-800 shadow-sm">
+                    <i class="fa-solid fa-check-circle text-brand-500"></i>
+                    <span class="text-sm font-medium text-gray-700 dark:text-stone-300">Pulsuz Məsləhət</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- ============ FOOTER ============ -->
-    <footer id="elaqe" class="bg-gray-900 text-white mt-0 py-12 px-4 scroll-mt-20 relative">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="space-y-3">
-                <h3 class="text-xl font-display font-bold text-emerald-400">İMİŞLİ PHARMA</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Keyfiyyətli xidmət və zəmanətli tibbi preparatlar ilə xidmətinizdəyik. Sağlamlığınız — bizim missiyamızdır.</p>
+    <footer id="elaqe" class="bg-gray-900 dark:bg-black text-white pt-20 pb-8 px-4 relative overflow-hidden">
+        <!-- Glow -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 100 100" fill="none"><path d="M38 18h24v24h24v16H62v24H38V58H14V42h24z" fill="white"/></svg>
+                        </div>
+                        <span class="text-xl font-display font-bold">İMİŞLİ <span class="text-brand-400">PHARMA</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
+                        İmişli şəhərinin ən müasir aptek şəbəkəsi. Sağlamlığınız — bizim ən böyük dəyərimizdir.
+                    </p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-400 hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-400 hover:text-white transition"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-400 hover:text-white transition"><i class="fa-brands fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-wider text-gray-300 mb-5">Kateqoriyalar</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brand-400 transition">Vitamini & Qida Əlavələri</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition">Qulluq & Kosmetika</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition">Uşaq Məhsulları</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition">Tibbi Ləvazimat</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-wider text-gray-300 mb-5">Əlaqə</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand-500"></i> İmişli, Şəfalı əllərin yanı</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-brand-500"></i> 051 601 13 90</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-clock text-brand-500"></i> 08:00 - 22:00</li>
+                    </ul>
+                    <a href="https://wa.me/994516011390" target="_blank" class="mt-5 inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white px-5 py-3 rounded-xl text-sm font-semibold transition shadow-lg shadow-brand-500/25">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Yaz
+                    </a>
+                </div>
             </div>
-            <div class="space-y-2.5">
-                <h4 class="font-bold text-lg mb-3">Əlaqə Məlumatları</h4>
-                <p class="text-gray-400 text-sm flex items-start gap-2"><i class="fa-solid fa-location-dot text-emerald-500 mt-0.5"></i> İmişli rayonu, Şəfalı əllərin yanı</p>
-                <p class="text-gray-400 text-sm flex items-center gap-2"><i class="fa-solid fa-phone text-emerald-500"></i> Tel / WhatsApp: 051 601 13 90</p>
-                <p class="text-gray-400 text-sm flex items-center gap-2"><i class="fa-solid fa-clock text-emerald-500"></i> İş saatları: 08:00 - 22:00 (Hər gün)</p>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-gray-500"> 2026 İMİŞLİ PHARMA. Bütün hüquqlar qorunur.</p>
+                <p class="text-xs text-gray-600">Premium Aptek Təcrübəsi</p>
             </div>
-            <div>
-                <h4 class="font-bold text-lg mb-3">Sürətli Əlaqə</h4>
-                <a id="footerWhatsappLink" href="#" target="_blank" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 py-3.5 rounded-xl font-bold text-sm transition shadow-lg shadow-emerald-900/30 hover:-translate-y-0.5 active:translate-y-0">
-                    <i class="fa-brands fa-whatsapp mr-2"></i> WhatsApp ilə Birbaşa Yazın
-                </a>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto border-t border-white/10 mt-8 pt-6 text-center text-xs text-gray-500">
-            &copy; <span id="currentYear"></span> İMİŞLİ PHARMA. Bütün hüquqlar qorunur.
         </div>
     </footer>
 
-    <!-- ============ SƏBƏT DRAWER ============ -->
-    <div id="cartOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden z-50 transition-opacity duration-300 opacity-0" onclick="closeCart()"></div>
-    <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-white shadow-2xl z-50 translate-x-full transition-transform duration-300 flex flex-col">
-        <div class="flex items-center justify-between p-5 border-b border-gray-100 bg-gray-50/50">
-            <h3 class="font-display font-bold text-lg text-gray-900"><i class="fa-solid fa-cart-shopping text-emerald-600 mr-2"></i>Səbətiniz</h3>
-            <button onclick="closeCart()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-700 transition" aria-label="Bağla"><i class="fa-solid fa-xmark"></i></button>
+    <!-- ============ CART DRAWER ============ -->
+    <div id="cartOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden z-50 opacity-0 transition-opacity duration-300" onclick="closeCart()"></div>
+    <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full sm:w-[440px] bg-white dark:bg-stone-900 shadow-2xl z-50 translate-x-full transition-transform duration-500 flex flex-col">
+        <div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-stone-800">
+            <h3 class="font-display font-bold text-xl text-gray-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-bag-shopping text-brand-600"></i> Səbətiniz
+            </h3>
+            <button onclick="closeCart()" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-stone-800 flex items-center justify-center text-gray-500 hover:text-gray-900 dark:hover:text-white transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
         </div>
-        <div class="flex-1 overflow-y-auto px-5 py-2">
-            <div id="cartEmptyMsg" class="text-center text-gray-400 text-sm py-16">
-                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fa-solid fa-cart-shopping text-2xl text-gray-300"></i>
+        <div class="flex-1 overflow-y-auto px-6 py-4">
+            <div id="cartEmpty" class="text-center py-20">
+                <div class="w-20 h-20 bg-gray-100 dark:bg-stone-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-bag-shopping text-3xl text-gray-300 dark:text-stone-600"></i>
                 </div>
-                <span class="font-medium">Səbətiniz hələ boşdur</span>
+                <p class="text-gray-500 dark:text-stone-500 font-medium">Səbətiniz boşdur</p>
+                <p class="text-xs text-gray-400 mt-1">Məhsul əlavə edin</p>
             </div>
-            <div id="cartItemsContainer"></div>
+            <div id="cartItems"></div>
         </div>
-        <div class="p-5 border-t border-gray-100 space-y-3 bg-gray-50/30">
-            <div class="flex items-center justify-between text-sm font-semibold text-gray-700">
-                <span>Ümumi Məbləğ</span>
-                <span id="cartSubtotal" class="text-emerald-700 font-extrabold text-lg">0.00 AZN</span>
+        <div class="p-6 border-t border-gray-100 dark:border-stone-800 bg-gray-50/50 dark:bg-stone-900/50">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-sm font-medium text-gray-600 dark:text-stone-400">Ümumi</span>
+                <span id="cartTotal" class="text-2xl font-display font-bold text-brand-600">0.00 AZN</span>
             </div>
-            <button onclick="checkoutWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-sm transition shadow-lg shadow-emerald-200 hover:shadow-emerald-300 flex items-center justify-center gap-2 hover:-translate-y-0.5 active:translate-y-0">
+            <button onclick="checkout()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 rounded-2xl text-sm transition shadow-xl shadow-brand-500/20 hover:shadow-brand-500/30 flex items-center justify-center gap-2">
                 <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp ilə Sifariş Et
             </button>
-            <button onclick="clearCart()" class="w-full text-gray-400 hover:text-red-500 text-xs font-semibold py-1.5 transition hover:bg-red-50 rounded-lg">Səbəti Təmizlə</button>
+            <button onclick="clearCart()" class="w-full mt-2 text-gray-400 hover:text-red-500 text-xs font-medium py-2 transition">Səbəti Təmizlə</button>
         </div>
     </aside>
 
-    <!-- ============ MƏHSUL ÖN BAXIŞ MODALI ============ -->
-    <div id="quickViewModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden items-center justify-center p-4 z-50 opacity-0 transition-opacity duration-300">
-        <div class="modal-content bg-white rounded-3xl max-w-lg w-full shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
-            <div class="relative">
-                <button onclick="closeQuickView()" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur flex items-center justify-center text-gray-500 hover:text-gray-800 z-10 shadow-sm hover:shadow transition" aria-label="Bağla"><i class="fa-solid fa-xmark"></i></button>
-                <div id="qvImageWrap" class="h-60 bg-gradient-to-br from-emerald-50 to-teal-50 flex items-center justify-center text-emerald-600 text-5xl overflow-hidden"></div>
+    <!-- ============ QUICK VIEW ============ -->
+    <div id="quickView" class="fixed inset-0 bg-black/50 backdrop-blur-md hidden items-center justify-center p-4 z-50 opacity-0 transition-opacity duration-300">
+        <div class="modal-content bg-white dark:bg-stone-900 rounded-3xl max-w-lg w-full shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+            <div class="relative h-72 bg-gradient-to-br from-brand-50 to-brand-100 dark:from-stone-800 dark:to-stone-900 flex items-center justify-center overflow-hidden">
+                <button onclick="closeQuickView()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 dark:bg-black/50 backdrop-blur flex items-center justify-center text-gray-600 dark:text-white hover:scale-110 transition z-10">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div id="qvImage" class="w-full h-full flex items-center justify-center"></div>
             </div>
-            <div class="p-6 space-y-4">
-                <div>
-                    <span id="qvCategory" class="text-[10px] bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md font-bold uppercase tracking-wider"></span>
-                    <h3 id="qvName" class="font-display font-bold text-xl text-gray-900 mt-2.5"></h3>
-                    <p id="qvDesc" class="text-sm text-gray-500 mt-1.5 leading-relaxed"></p>
+            <div class="p-8">
+                <span id="qvCategory" class="text-[10px] font-bold uppercase tracking-widest text-brand-600 bg-brand-50 dark:bg-brand-900/20 px-3 py-1 rounded-full"></span>
+                <h3 id="qvName" class="font-display font-bold text-2xl text-gray-900 dark:text-white mt-3 mb-2"></h3>
+                <p id="qvDesc" class="text-sm text-gray-500 dark:text-stone-400 leading-relaxed mb-5"></p>
+                <div class="flex items-center justify-between mb-6">
+                    <div id="qvPrice" class="flex items-baseline gap-2"></div>
+                    <span id="qvStock"></span>
                 </div>
-                <div class="flex items-center justify-between pt-1">
-                    <div id="qvPriceWrap" class="flex items-baseline gap-2"></div>
-                    <span id="qvStockBadge"></span>
-                </div>
-                <div class="flex items-center gap-3 pt-2">
-                    <div class="flex items-center border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
-                        <button onclick="changeQvQty(-1)" class="px-3.5 py-2.5 text-gray-500 hover:bg-white hover:text-emerald-600 transition font-bold">−</button>
-                        <span id="qvQty" class="px-4 font-bold text-sm min-w-[2rem] text-center">1</span>
-                        <button onclick="changeQvQty(1)" class="px-3.5 py-2.5 text-gray-500 hover:bg-white hover:text-emerald-600 transition font-bold">+</button>
+                <div class="flex gap-3">
+                    <div class="flex items-center bg-gray-100 dark:bg-stone-800 rounded-xl overflow-hidden">
+                        <button onclick="changeQvQty(-1)" class="px-4 py-3 text-gray-600 dark:text-stone-400 hover:text-brand-600 font-bold transition">−</button>
+                        <span id="qvQty" class="px-4 font-bold text-gray-900 dark:text-white min-w-[2rem] text-center">1</span>
+                        <button onclick="changeQvQty(1)" class="px-4 py-3 text-gray-600 dark:text-stone-400 hover:text-brand-600 font-bold transition">+</button>
                     </div>
-                    <button id="qvAddBtn" onclick="addQvToCart()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-lg shadow-emerald-200 hover:shadow-emerald-300">Səbətə At</button>
+                    <button id="qvAdd" onclick="addQvToCart()" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-brand-500/20">Səbətə At</button>
                 </div>
-                <a id="qvWhatsappLink" href="#" target="_blank" class="block text-center text-emerald-700 text-xs font-bold hover:underline py-1">
-                    <i class="fa-brands fa-whatsapp mr-1"></i>Bu məhsul haqqında soruşun
-                </a>
             </div>
         </div>
     </div>
 
-    <!-- ============ ADMİN GİRİŞ MODALI ============ -->
-    <div id="adminLoginModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden items-center justify-center p-4 z-50 opacity-0 transition-opacity duration-300">
-        <div class="modal-content bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl">
-            <div class="flex justify-between items-center mb-1">
-                <h3 id="adminLoginTitle" class="text-lg font-bold text-gray-900">Admin Girişi</h3>
-                <button onclick="closeAdminLogin()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-400 hover:text-gray-600 transition" aria-label="Bağla"><i class="fa-solid fa-xmark"></i></button>
+    <!-- ============ ADMIN LOGIN ============ -->
+    <div id="adminLogin" class="fixed inset-0 bg-black/50 backdrop-blur-md hidden items-center justify-center p-4 z-50 opacity-0 transition-opacity duration-300">
+        <div class="modal-content bg-white dark:bg-stone-900 rounded-3xl p-8 max-w-sm w-full shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="loginTitle" class="text-xl font-display font-bold text-gray-900 dark:text-white">Admin Girişi</h3>
+                <button onclick="hideModal('adminLogin')" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-stone-800 flex items-center justify-center text-gray-400 hover:text-gray-600 dark:hover:text-white transition"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <p id="adminLoginHint" class="text-xs text-gray-400 mb-5"></p>
-            <form id="adminLoginForm" onsubmit="handleAdminLoginSubmit(event)" class="space-y-4">
+            <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-600 mb-1.5">Şifrə</label>
-                    <input type="password" id="adminPassInput" required minlength="4" class="w-full border border-gray-200 rounded-xl p-3 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition" placeholder="••••">
+                    <label class="block text-xs font-semibold text-gray-600 dark:text-stone-400 mb-1.5">Şifrə</label>
+                    <input type="password" id="loginPass" required minlength="4" class="w-full bg-gray-50 dark:bg-stone-800 border border-gray-200 dark:border-stone-700 rounded-xl p-3 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition dark:text-white" placeholder="••••">
                 </div>
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-lg shadow-emerald-200 hover:shadow-emerald-300">
-                    Daxil Ol
-                </button>
+                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-brand-500/20">Daxil Ol</button>
             </form>
         </div>
     </div>
 
-    <!-- ============ ADMİN PANEL ============ -->
-    <div id="adminPanelModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden items-center justify-center p-4 z-50 opacity-0 transition-opacity duration-300">
-        <div class="modal-content bg-white rounded-3xl max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between p-5 border-b border-gray-100 sticky top-0 bg-white/90 backdrop-blur-md rounded-t-3xl z-10">
-                <h3 class="text-lg font-display font-bold text-gray-900"><i class="fa-solid fa-gauge text-emerald-600 mr-2"></i>Admin Panel</h3>
-                <div class="flex items-center gap-3">
-                    <button onclick="logoutAdmin()" class="text-xs font-semibold text-gray-400 hover:text-red-500 transition flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-red-50">
-                        <i class="fa-solid fa-right-from-bracket"></i> <span class="hidden sm:inline">Çıxış</span>
-                    </button>
-                    <button onclick="closeAdminPanel()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-400 hover:text-gray-600 transition" aria-label="Bağla"><i class="fa-solid fa-xmark"></i></button>
+    <!-- ============ ADMIN PANEL ============ -->
+    <div id="adminPanel" class="fixed inset-0 bg-black/50 backdrop-blur-md hidden items-center justify-center p-4 z-50 opacity-0 transition-opacity duration-300">
+        <div class="modal-content bg-white dark:bg-stone-900 rounded-3xl max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-white/90 dark:bg-stone-900/90 backdrop-blur-xl border-b border-gray-100 dark:border-stone-800 p-5 rounded-t-3xl flex justify-between items-center z-10">
+                <h3 class="font-display font-bold text-lg text-gray-900 dark:text-white"><i class="fa-solid fa-gauge text-brand-600 mr-2"></i>Admin Panel</h3>
+                <div class="flex gap-2">
+                    <button onclick="logoutAdmin()" class="text-xs font-semibold text-gray-400 hover:text-red-500 px-3 py-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition">Çıxış</button>
+                    <button onclick="hideModal('adminPanel')" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-stone-800 flex items-center justify-center text-gray-400 hover:text-gray-600 dark:hover:text-white transition"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
-
             <div class="p-5 space-y-6">
-                <!-- Statistika -->
+                <!-- Stats -->
                 <div class="grid grid-cols-3 gap-3">
-                    <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-3 text-center border border-emerald-100/50">
-                        <p id="adminStatTotal" class="text-xl font-extrabold text-emerald-700">0</p>
-                        <p class="text-[10px] text-emerald-700/70 font-bold uppercase tracking-wide mt-0.5">Məhsul</p>
+                    <div class="bg-gradient-to-br from-brand-50 to-brand-100 dark:from-brand-900/20 dark:to-brand-800/20 rounded-2xl p-4 text-center border border-brand-100 dark:border-brand-800/30">
+                        <p id="statTotal" class="text-2xl font-display font-bold text-brand-700 dark:text-brand-400">0</p>
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-brand-600/70 mt-1">Məhsul</p>
                     </div>
-                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-3 text-center border border-amber-100/50">
-                        <p id="adminStatOut" class="text-xl font-extrabold text-amber-600">0</p>
-                        <p class="text-[10px] text-amber-600/70 font-bold uppercase tracking-wide mt-0.5">Stok yoxdur</p>
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl p-4 text-center border border-amber-100 dark:border-amber-800/30">
+                        <p id="statOut" class="text-2xl font-display font-bold text-amber-600">0</p>
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-amber-600/70 mt-1">Stok Yoxdur</p>
                     </div>
-                    <div class="bg-gradient-to-br from-gray-50 to-slate-50 rounded-xl p-3 text-center border border-gray-100">
-                        <p id="adminStatValue" class="text-xl font-extrabold text-gray-700">0.00</p>
-                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wide mt-0.5">Kataloq dəyəri</p>
+                    <div class="bg-gradient-to-br from-gray-50 to-slate-50 dark:from-stone-800 dark:to-stone-900 rounded-2xl p-4 text-center border border-gray-100 dark:border-stone-700">
+                        <p id="statValue" class="text-2xl font-display font-bold text-gray-700 dark:text-stone-300">0</p>
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">Dəyər (AZN)</p>
                     </div>
                 </div>
 
-                <!-- Məhsul forması -->
-                <div id="adminFormWrapper" class="border border-gray-100 rounded-2xl p-4 bg-gray-50/30">
-                    <h4 id="adminFormTitle" class="font-bold text-sm text-gray-900 mb-3">Yeni Məhsul Əlavə Et</h4>
-                    <form id="adminForm" onsubmit="handleAdminFormSubmit(event)" class="space-y-3">
+                <!-- Form -->
+                <div class="bg-gray-50/50 dark:bg-stone-800/50 rounded-2xl p-5 border border-gray-100 dark:border-stone-800">
+                    <h4 id="formTitle" class="font-display font-bold text-sm text-gray-900 dark:text-white mb-4">Yeni Məhsul Əlavə Et</h4>
+                    <form onsubmit="handleProductSubmit(event)" class="space-y-3">
                         <div class="grid grid-cols-2 gap-3">
                             <div class="col-span-2">
-                                <label class="block text-xs font-semibold text-gray-600 mb-1">Məhsul Adı</label>
-                                <input type="text" id="pName" required class="w-full border border-gray-200 rounded-xl p-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition" placeholder="Məs: Vitamin C 1000mg">
+                                <label class="block text-xs font-semibold text-gray-600 dark:text-stone-400 mb-1">Məhsul Adı</label>
+                                <input type="text" id="pName" required class="w-full bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 rounded-xl p-2.5 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition dark:text-white">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-gray-600 mb-1">Kateqoriya</label>
-                                <select id="pCategory" class="w-full border border-gray-200 rounded-xl p-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition bg-white">
-                                    <option value="Vitamini">Vitamini &amp; Qida Əlavələri</option>
-                                    <option value="Kosmetika">Qulluq &amp; Kosmetika</option>
-                                    <option value="Uşaq">Uşaq Qidaları &amp; Qulluq</option>
+                                <label class="block text-xs font-semibold text-gray-600 dark:text-stone-400 mb-1">Kateqoriya</label>
+                                <select id="pCategory" class="w-full bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 rounded-xl p-2.5 text-sm focus:outline-none focus:border-brand-500 dark:text-white">
+                                    <option value="Vitamini">Vitamini</option>
+                                    <option value="Kosmetika">Kosmetika</option>
+                                    <option value="Uşaq">Uşaq Qidaları</option>
                                     <option value="Tibbi">Tibbi Ləvazimat</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-gray-600 mb-1">Qiymət (AZN)</label>
-                                <input type="number" step="0.01" min="0.01" id="pPrice" required class="w-full border border-gray-200 rounded-xl p-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition" placeholder="0.00">
+                                <label class="block text-xs font-semibold text-gray-600 dark:text-stone-400 mb-1">Qiymət (AZN)</label>
+                                <input type="number" step="0.01" min="0.01" id="pPrice" required class="w-full bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 rounded-xl p-2.5 text-sm focus:outline-none focus:border-brand-500 dark:text-white">
                             </div>
                             <div class="col-span-2">
-                                <label class="block text-xs font-semibold text-gray-600 mb-1">Endirimdən Əvvəlki Qiymət (AZN, könüllü)</label>
-                                <input type="number" step="0.01" min="0" id="pOldPrice" placeholder="Yalnız endirim varsa doldurun" class="w-full border border-gray-200 rounded-xl p-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition">
+                                <label class="block text-xs font-semibold text-gray-600 dark:text-stone-400 mb-1">Endirimdən Əvvəlki Qiymət (könüllü)</label>
+                                <input type="number" step="0.01" min="0" id="pOldPrice" class="w-full bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 rounded-xl p-2.5 text-sm focus:outline-none focus:border-brand-500 dark:text-white">
                             </div>
                             <div class="col-span-2">
-                                <label class="block text-xs font-semibold text-gray-600 mb-1">Qısa Təsvir</label>
-                                <input type="text" id="pDesc" class="w-full border border-gray-200 rounded-xl p-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition" placeholder="Məs: İmmunitet dəstəyi üçün">
+                                <label class="block text-xs font-semibold text-gray-600 dark:text-stone-400 mb-1">Təsvir</label>
+                                <input type="text" id="pDesc" class="w-full bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 rounded-xl p-2.5 text-sm focus:outline-none focus:border-brand-500 dark:text-white">
                             </div>
-                            
-                            <!-- Şəkil seçimi: File upload və ya URL -->
                             <div class="col-span-2">
-                                <label class="block text-xs font-semibold text-gray-600 mb-1">Şəkil</label>
+                                <label class="block text-xs font-semibold text-gray-600 dark:text-stone-400 mb-1">Şəkil</label>
                                 <div class="flex gap-2 mb-2">
-                                    <button type="button" onclick="setImageMode('file')" id="btnModeFile" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-medium transition">Fayl Yüklə</button>
-                                    <button type="button" onclick="setImageMode('url')" id="btnModeUrl" class="text-xs px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 font-medium transition hover:bg-gray-200">URL ilə</button>
+                                    <button type="button" onclick="setImgMode('file')" id="btnFile" class="text-xs px-3 py-1.5 rounded-lg bg-brand-600 text-white font-medium">Fayl</button>
+                                    <button type="button" onclick="setImgMode('url')" id="btnUrl" class="text-xs px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-stone-800 text-gray-600 dark:text-stone-400 font-medium">URL</button>
                                 </div>
-                                
-                                <!-- File Upload Zone -->
-                                <div id="fileUploadZone" class="drop-zone rounded-xl p-4 text-center cursor-pointer relative">
-                                    <input type="file" id="pImageInput" accept="image/*" onchange="handleImageInput(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                <div id="zoneFile" class="border-2 border-dashed border-gray-300 dark:border-stone-700 rounded-xl p-4 text-center relative hover:border-brand-500 transition cursor-pointer">
+                                    <input type="file" id="pFile" accept="image/*" onchange="handleImgFile(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                                     <i class="fa-solid fa-cloud-arrow-up text-2xl text-gray-300 mb-1"></i>
-                                    <p class="text-xs text-gray-400">Şəkili buraya sürükləyin və ya klikləyin</p>
-                                    <p class="text-[10px] text-gray-300 mt-0.5">Maks. 5MB (JPG, PNG)</p>
+                                    <p class="text-xs text-gray-400">Sürükləyin və ya klikləyin</p>
                                 </div>
-                                
-                                <!-- URL Input -->
-                                <div id="urlInputZone" class="hidden">
-                                    <input type="url" id="pImageUrl" onchange="handleImageUrlInput(this.value)" placeholder="https://..." class="w-full border border-gray-200 rounded-xl p-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition">
+                                <div id="zoneUrl" class="hidden">
+                                    <input type="url" id="pUrl" onchange="handleImgUrl(this.value)" placeholder="https://..." class="w-full bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 rounded-xl p-2.5 text-sm focus:outline-none focus:border-brand-500 dark:text-white">
                                 </div>
-                                
-                                <img id="pImagePreview" class="hidden mt-2 w-20 h-20 object-cover rounded-xl border border-gray-200 shadow-sm">
+                                <img id="pPreview" class="hidden mt-2 w-16 h-16 object-cover rounded-lg border border-gray-200 dark:border-stone-700">
                             </div>
-                            
-                            <label class="flex items-center gap-2 text-xs font-semibold text-gray-600 cursor-pointer">
-                                <input type="checkbox" id="pStock" checked class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4"> Stokda var
+                            <label class="flex items-center gap-2 text-xs font-semibold text-gray-600 dark:text-stone-400 cursor-pointer">
+                                <input type="checkbox" id="pStock" checked class="rounded text-brand-600 focus:ring-brand-500 w-4 h-4"> Stokda var
                             </label>
-                            <label class="flex items-center gap-2 text-xs font-semibold text-gray-600 cursor-pointer">
-                                <input type="checkbox" id="pIsNew" class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4"> "Yeni" nişanı göstər
+                            <label class="flex items-center gap-2 text-xs font-semibold text-gray-600 dark:text-stone-400 cursor-pointer">
+                                <input type="checkbox" id="pNew" class="rounded text-brand-600 focus:ring-brand-500 w-4 h-4"> Yeni nişanı
                             </label>
                         </div>
-                        <div class="flex gap-2 pt-1">
-                            <button type="button" id="btnCancelEdit" onclick="resetAdminForm()" class="hidden flex-1 border border-gray-200 text-gray-500 hover:bg-gray-50 font-bold py-2.5 rounded-xl text-sm transition">İmtina Et</button>
-                            <button type="submit" id="submitProductBtn" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-md hover:shadow-lg">Əlavə Et</button>
+                        <div class="flex gap-2">
+                            <button type="button" id="btnCancel" onclick="resetForm()" class="hidden flex-1 border border-gray-200 dark:border-stone-700 text-gray-500 dark:text-stone-400 font-bold py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-stone-800 transition">İmtina</button>
+                            <button type="submit" id="btnSubmit" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white font-bold py-2.5 rounded-xl transition shadow-lg shadow-brand-500/20">Əlavə Et</button>
                         </div>
                     </form>
                 </div>
 
-                <!-- Məhsul siyahısı -->
+                <!-- List -->
                 <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <h4 class="font-bold text-sm text-gray-900">Mövcud Məhsullar</h4>
-                        <input type="text" id="adminSearchInput" oninput="renderAdminTable()" placeholder="Siyahıda axtar..." class="text-xs border border-gray-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-emerald-500 w-36">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-display font-bold text-sm text-gray-900 dark:text-white">Məhsullar</h4>
+                        <input type="text" id="adminSearch" oninput="renderAdmin()" placeholder="Axtar..." class="text-xs bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 rounded-lg px-3 py-1.5 focus:outline-none focus:border-brand-500 w-32 dark:text-white">
                     </div>
-                    <div id="adminListContainer" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
+                    <div id="adminList" class="space-y-2 max-h-64 overflow-y-auto pr-1"></div>
                 </div>
 
-                <!-- Ehtiyat nüsxə -->
-                <div class="border-t border-gray-100 pt-5">
-                    <h4 class="font-bold text-sm text-gray-900 mb-1">Ehtiyat Nüsxə</h4>
-                    <p class="text-xs text-gray-400 mb-3">Məhsullar yalnız bu brauzerdə saxlanılır. Məlumat itkisinin qarşısını almaq üçün mütəmadi ehtiyat nüsxəsi endirin.</p>
+                <!-- Backup -->
+                <div class="border-t border-gray-100 dark:border-stone-800 pt-5">
+                    <h4 class="font-display font-bold text-sm text-gray-900 dark:text-white mb-3">Ehtiyat Nüsxə</h4>
                     <div class="flex gap-2">
-                        <button onclick="exportData()" class="flex-1 border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2 hover:border-emerald-300">
-                            <i class="fa-solid fa-box-archive"></i> Ehtiyat Nüsxə Endir
+                        <button onclick="exportData()" class="flex-1 border border-gray-200 dark:border-stone-700 hover:bg-gray-50 dark:hover:bg-stone-800 text-gray-700 dark:text-stone-300 font-semibold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i> Endir
                         </button>
-                        <label class="flex-1 border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2 cursor-pointer hover:border-emerald-300">
-                            <i class="fa-solid fa-file-import"></i> Bərpa Et
-                            <input type="file" accept="application/json" onchange="handleImportFile(event)" class="hidden">
+                        <label class="flex-1 border border-gray-200 dark:border-stone-700 hover:bg-gray-50 dark:hover:bg-stone-800 text-gray-700 dark:text-stone-300 font-semibold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-upload"></i> Bərpa Et
+                            <input type="file" accept="application/json" onchange="importData(event)" class="hidden">
                         </label>
                     </div>
                 </div>
 
-                <!-- Şifrə dəyişimi -->
-                <div class="border-t border-gray-100 pt-5">
-                    <h4 class="font-bold text-sm text-gray-900 mb-3">Admin Şifrəsini Dəyiş</h4>
-                    <form id="changePassForm" onsubmit="handleChangePassword(event)" class="grid grid-cols-2 gap-2">
-                        <input type="password" id="currentPass" placeholder="Cari şifrə" required class="col-span-1 border border-gray-200 rounded-xl p-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition">
-                        <input type="password" id="newPass" placeholder="Yeni şifrə" required minlength="4" class="col-span-1 border border-gray-200 rounded-xl p-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition">
-                        <button type="submit" class="col-span-2 bg-gray-800 hover:bg-gray-900 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-md hover:shadow-lg">Şifrəni Dəyiş</button>
+                <!-- Password -->
+                <div class="border-t border-gray-100 dark:border-stone-800 pt-5">
+                    <h4 class="font-display font-bold text-sm text-gray-900 dark:text-white mb-3">Şifrəni Dəyiş</h4>
+                    <form onsubmit="changePass(event)" class="grid grid-cols-2 gap-2">
+                        <input type="password" id="curPass" placeholder="Cari şifrə" required class="bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 rounded-xl p-2.5 text-sm focus:outline-none focus:border-brand-500 dark:text-white">
+                        <input type="password" id="newPass" placeholder="Yeni şifrə" required minlength="4" class="bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 rounded-xl p-2.5 text-sm focus:outline-none focus:border-brand-500 dark:text-white">
+                        <button type="submit" class="col-span-2 bg-gray-900 dark:bg-white dark:text-gray-900 text-white font-bold py-2.5 rounded-xl transition hover:opacity-90">Dəyiş</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============ TƏSDİQ MODALI ============ -->
-    <div id="confirmModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden items-center justify-center p-4 z-[60] opacity-0 transition-opacity duration-300">
-        <div class="modal-content bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl text-center">
-            <div class="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-3">
+    <!-- ============ CONFIRM ============ -->
+    <div id="confirmModal" class="fixed inset-0 bg-black/50 backdrop-blur-md hidden items-center justify-center p-4 z-[60] opacity-0 transition-opacity duration-300">
+        <div class="modal-content bg-white dark:bg-stone-900 rounded-2xl p-6 max-w-sm w-full shadow-2xl text-center">
+            <div class="w-12 h-12 bg-amber-50 dark:bg-amber-900/20 rounded-full flex items-center justify-center mx-auto mb-3">
                 <i class="fa-solid fa-triangle-exclamation text-amber-500 text-xl"></i>
             </div>
-            <p id="confirmMessage" class="text-sm text-gray-700 font-medium mb-5"></p>
+            <p id="confirmMsg" class="text-sm text-gray-700 dark:text-stone-300 font-medium mb-5"></p>
             <div class="flex gap-3">
-                <button onclick="closeConfirm()" class="flex-1 border border-gray-200 hover:bg-gray-50 text-gray-600 font-bold py-2.5 rounded-xl text-sm transition">İmtina</button>
-                <button onclick="handleConfirmYes()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-md hover:shadow-lg">Təsdiqlə</button>
+                <button onclick="closeConfirm()" class="flex-1 border border-gray-200 dark:border-stone-700 hover:bg-gray-50 dark:hover:bg-stone-800 text-gray-600 dark:text-stone-400 font-bold py-2.5 rounded-xl transition">İmtina</button>
+                <button onclick="confirmYes()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 rounded-xl transition shadow-lg shadow-red-500/20">Təsdiqlə</button>
             </div>
         </div>
     </div>
 
-    <!-- ============ TOAST BİLDİRİŞLƏRİ ============ -->
-    <div id="toastContainer" class="fixed top-20 right-4 z-[70] flex flex-col gap-2 items-end"></div>
+    <!-- ============ TOASTS ============ -->
+    <div id="toasts" class="fixed top-24 right-4 z-[70] flex flex-col gap-3 items-end pointer-events-none"></div>
 
-    <!-- ============ YUXARIYA QAYIT ============ -->
-    <button id="btnBackToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gray-900 text-white shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 z-30 hover:bg-emerald-600 hover:scale-110" aria-label="Yuxarı qayıt">
+    <!-- ============ BACK TO TOP ============ -->
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-brand-600 text-white shadow-2xl shadow-brand-500/30 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 z-40 hover:scale-110 hover:bg-brand-700">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <!-- ============ JAVASCRIPT MƏNTİQİ ============ -->
+    <!-- ============ MOBILE NAV ============ -->
+    <nav class="mobile-nav hidden md:hidden flex justify-around items-center">
+        <a href="#top" class="flex flex-col items-center gap-1 text-gray-400 hover:text-brand-600 transition">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span class="text-[9px] font-medium">Ana</span>
+        </a>
+        <a href="#kataloq" class="flex flex-col items-center gap-1 text-gray-400 hover:text-brand-600 transition">
+            <i class="fa-solid fa-grid-2 text-lg"></i>
+            <span class="text-[9px] font-medium">Kataloq</span>
+        </a>
+        <button onclick="openCart()" class="flex flex-col items-center gap-1 text-gray-400 hover:text-brand-600 transition relative">
+            <i class="fa-solid fa-bag-shopping text-lg"></i>
+            <span class="text-[9px] font-medium">Səbət</span>
+            <span id="mobBadge" class="hidden absolute -top-1 right-1 w-4 h-4 bg-brand-600 text-white text-[8px] rounded-full flex items-center justify-center">0</span>
+        </button>
+        <a href="#elaqe" class="flex flex-col items-center gap-1 text-gray-400 hover:text-brand-600 transition">
+            <i class="fa-solid fa-phone text-lg"></i>
+            <span class="text-[9px] font-medium">Əlaqə</span>
+        </a>
+    </nav>
+
+    <!-- ============ JAVASCRIPT ============ -->
     <script>
-        /* ==================== TƏNZİMLƏMƏLƏR ==================== */
+        // ============ CONFIG ============
         const CONFIG = {
-            whatsappNumber: '994516011390',
-            openHour: 8,
-            closeHour: 22,
-            storageKeys: {
-                products: 'imişliPharma_products_v2',
-                cart: 'imişliPharma_cart_v1',
-                adminPass: 'imişliPharma_adminPass',
-                adminSession: 'imişliPharma_adminSession'
+            whatsapp: '994516011390',
+            open: 8, close: 22,
+            keys: {
+                products: 'pharma_products_v3',
+                cart: 'pharma_cart_v2',
+                adminPass: 'pharma_admin',
+                adminSession: 'pharma_session'
             }
         };
 
-        const CATEGORY_ICONS = {
-            'Vitamini': 'fa-pills',
-            'Kosmetika': 'fa-pump-medical',
-            'Uşaq': 'fa-baby-carriage',
-            'Tibbi': 'fa-kit-medical'
+        const ICONS = {
+            Vitamini: 'fa-pills',
+            Kosmetika: 'fa-pump-soap',
+            Uşaq: 'fa-baby-carriage',
+            Tibbi: 'fa-kit-medical'
         };
 
-        // Real şəkilli default məhsullar
         const DEFAULT_PRODUCTS = [
-            { id: 1, name: "Vitamin C 1000mg", category: "Vitamini", price: 12.50, oldPrice: null, desc: "İmmunitet dəstəyi üçün effektiv vitamin", icon: "fa-pills", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=300&fit=crop", stock: true, isNew: false, createdAt: Date.now() },
-            { id: 2, name: "Nəmləndirici Krem", category: "Kosmetika", price: 24.00, oldPrice: 32.00, desc: "Həssas dərilər üçün 24 saat nəmlik", icon: "fa-pump-medical", image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=300&fit=crop", stock: true, isNew: false, createdAt: Date.now() },
-            { id: 3, name: "Uşaq Qatışığı N1", category: "Uşaq", price: 18.90, oldPrice: null, desc: "0-6 ay uşaqlar üçün tam qida dəyəri", icon: "fa-baby-carriage", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=300&fit=crop", stock: true, isNew: true, createdAt: Date.now() },
-            { id: 4, name: "Rəqəmsal Termometr", category: "Tibbi", price: 8.50, oldPrice: null, desc: "Saniyələr içində dəqiq hərarət ölçmə", icon: "fa-temperature-high", image: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=400&h=300&fit=crop", stock: true, isNew: false, createdAt: Date.now() },
-            { id: 5, name: "Omega-3 Balıq Yağı", category: "Vitamini", price: 28.00, oldPrice: null, desc: "Ürək və beyin sağlamlığı üçün", icon: "fa-pills", image: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400&h=300&fit=crop", stock: true, isNew: false, createdAt: Date.now() },
-            { id: 6, name: "Günəş Qoruyucu SPF50", category: "Kosmetika", price: 15.50, oldPrice: null, desc: "UVA/UVB qorunması, yağsız formul", icon: "fa-sun", image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop", stock: true, isNew: true, createdAt: Date.now() },
-            { id: 7, name: "Bezi Dəyişmə Ləvazimatı", category: "Uşaq", price: 9.90, oldPrice: 14.00, desc: "Həssas dəriyə uyğun, xüsusi dəst", icon: "fa-baby", image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop", stock: true, isNew: false, createdAt: Date.now() },
-            { id: 8, name: "Təzyiq Ölçən Cihaz", category: "Tibbi", price: 45.00, oldPrice: null, desc: "Avtomatik, rəqəmsal ekranlı", icon: "fa-heart-pulse", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop", stock: false, isNew: false, createdAt: Date.now() }
+            { id: 1, name: "Vitamin C 1000mg", category: "Vitamini", price: 12.50, oldPrice: null, desc: "İmmunitet dəstəyi", icon: "fa-pills", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop", stock: true, isNew: false },
+            { id: 2, name: "Nəmləndirici Krem", category: "Kosmetika", price: 24.00, oldPrice: 32.00, desc: "Həssas dəri üçün", icon: "fa-pump-soap", image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=400&fit=crop", stock: true, isNew: false },
+            { id: 3, name: "Uşaq Qatışığı N1", category: "Uşaq", price: 18.90, oldPrice: null, desc: "0-6 ay", icon: "fa-baby-carriage", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=400&fit=crop", stock: true, isNew: true },
+            { id: 4, name: "Rəqəmsal Termometr", category: "Tibbi", price: 8.50, oldPrice: null, desc: "Hərarət ölçən", icon: "fa-kit-medical", image: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=400&h=400&fit=crop", stock: true, isNew: false },
+            { id: 5, name: "Omega-3 Balıq Yağı", category: "Vitamini", price: 28.00, oldPrice: null, desc: "Ürək sağlamlığı", icon: "fa-pills", image: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400&h=400&fit=crop", stock: true, isNew: false },
+                        { id: 6, name: "Günəş Qoruyucu SPF50", category: "Kosmetika", price: 15.50, oldPrice: null, desc: "UVA/UVB qorunması", icon: "fa-sun", image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=400&fit=crop", stock: true, isNew: true },
+            { id: 7, name: "Bezi Dəyişmə Dəsti", category: "Uşaq", price: 9.90, oldPrice: 14.00, desc: "Həssas dəriyə uyğun", icon: "fa-baby", image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=400&fit=crop", stock: true, isNew: false },
+            { id: 8, name: "Təzyiq Ölçən Cihaz", category: "Tibbi", price: 45.00, oldPrice: null, desc: "Avtomatik, rəqəmsal", icon: "fa-heart-pulse", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=400&fit=crop", stock: false, isNew: false }
         ];
 
-        /* ==================== VƏZİYYƏT ==================== */
+        // ============ STATE ============
         const state = {
             products: [],
             cart: [],
@@ -728,185 +896,116 @@
             category: 'all',
             sort: 'default',
             editingId: null,
-            isAdmin: false
+            isAdmin: false,
+            viewingProduct: null
         };
 
-        let pendingImageData = null;
-        let confirmCallback = null;
-        let qvProductId = null;
-        let qvQtyVal = 1;
-        let imageMode = 'file';
+        let pendingImg = null;
+        let confirmCb = null;
+        let qvId = null;
+        let qvQty = 1;
+        let imgMode = 'file';
 
-        /* ==================== KÖMƏKÇİ FUNKSİYALAR ==================== */
-        function formatPrice(num) {
-            return Number(num || 0).toFixed(2) + ' AZN';
-        }
+        // ============ HELPERS ============
+        const $ = id => document.getElementById(id);
+        const fmtPrice = n => Number(n || 0).toFixed(2) + ' AZN';
+        const esc = s => String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-        function escapeHtml(str) {
-            if (str === null || str === undefined) return '';
-            return String(str).replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
-        }
-
-        function toast(message, type) {
-            type = type || 'info';
-            const icons = { 
-                success: 'fa-circle-check text-emerald-600', 
-                error: 'fa-circle-exclamation text-red-600', 
+        function toast(msg, type = 'info') {
+            const icons = {
+                success: 'fa-circle-check text-brand-600',
+                error: 'fa-circle-xmark text-red-500',
                 info: 'fa-circle-info text-gray-400',
                 warning: 'fa-triangle-exclamation text-amber-500'
             };
             const el = document.createElement('div');
-            el.className = 'toast-item flex items-center gap-2.5 bg-white shadow-xl border border-gray-100 rounded-xl px-4 py-3.5 text-sm font-medium text-gray-800 max-w-xs';
-            el.innerHTML = '<i class="fa-solid ' + (icons[type] || icons.info) + ' text-base"></i><span>' + escapeHtml(message) + '</span>';
-            document.getElementById('toastContainer').appendChild(el);
+            el.className = 'toast-premium pointer-events-auto flex items-center gap-3 bg-white dark:bg-stone-900 shadow-2xl border border-gray-100 dark:border-stone-800 rounded-2xl px-5 py-4 text-sm font-medium text-gray-800 dark:text-stone-200 max-w-sm min-w-[280px]';
+            el.innerHTML = `<i class="fa-solid ${icons[type] || icons.info} text-lg"></i><span>${esc(msg)}</span>`;
+            $('toasts').appendChild(el);
             setTimeout(() => {
-                el.classList.add('toast-out');
-                setTimeout(() => el.remove(), 250);
-            }, 3000);
+                el.style.opacity = '0';
+                el.style.transform = 'translateX(100px) scale(0.9)';
+                el.style.transition = 'all 0.3s ease';
+                setTimeout(() => el.remove(), 300);
+            }, 3500);
         }
 
-        function openConfirm(message, onYes) {
-            document.getElementById('confirmMessage').textContent = message;
-            confirmCallback = onYes;
-            const modal = document.getElementById('confirmModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        function openConfirm(msg, cb) {
+            $('confirmMsg').textContent = msg;
+            confirmCb = cb;
+            showModal('confirmModal');
         }
-        function closeConfirm() {
-            const modal = document.getElementById('confirmModal');
-            modal.classList.add('opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }, 300);
-            confirmCallback = null;
-        }
-        function handleConfirmYes() {
-            if (typeof confirmCallback === 'function') confirmCallback();
-            closeConfirm();
-        }
+        function closeConfirm() { hideModal('confirmModal'); confirmCb = null; }
+        function confirmYes() { if (confirmCb) confirmCb(); closeConfirm(); }
 
-        /* ==================== MODAL ANIMATIONS ==================== */
-        function showModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        function showModal(id) {
+            const m = $(id);
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+            setTimeout(() => m.classList.remove('opacity-0'), 10);
             document.body.style.overflow = 'hidden';
         }
-        function hideModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.add('opacity-0');
+        function hideModal(id) {
+            const m = $(id);
+            m.classList.add('opacity-0');
             setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                document.body.style.overflow = '';
+                m.classList.add('hidden');
+                m.classList.remove('flex');
+                if (!document.querySelector('.fixed:not(.hidden)')) document.body.style.overflow = '';
             }, 300);
         }
 
-        /* ==================== SAXLAMA ==================== */
-        function migrateOldData() {
-            if (!localStorage.getItem(CONFIG.storageKeys.products)) {
-                const old = localStorage.getItem('myPharmacyProducts');
-                if (old) {
-                    try {
-                        const parsed = JSON.parse(old);
-                        const migrated = parsed.map(p => ({
-                            id: p.id || (Date.now() + Math.random()),
-                            name: p.name || 'Adsız məhsul',
-                            category: p.category || 'Tibbi',
-                            price: parseFloat(p.price) || 0,
-                            oldPrice: null,
-                            desc: p.desc || '',
-                            icon: p.icon || CATEGORY_ICONS[p.category] || 'fa-capsules',
-                            image: null,
-                            stock: true,
-                            isNew: false,
-                            createdAt: Date.now()
-                        }));
-                        localStorage.setItem(CONFIG.storageKeys.products, JSON.stringify(migrated));
-                    } catch (e) { console.error('Köhnə data köçürülmədi', e); }
-                }
-            }
-        }
-
+        // ============ STORAGE ============
         function loadProducts() {
-            const saved = localStorage.getItem(CONFIG.storageKeys.products);
-            if (saved) {
-                try { state.products = JSON.parse(saved); }
-                catch (e) { state.products = DEFAULT_PRODUCTS.slice(); }
-            } else {
-                state.products = DEFAULT_PRODUCTS.slice();
-                persistProducts();
-            }
+            const s = localStorage.getItem(CONFIG.keys.products);
+            if (s) { try { state.products = JSON.parse(s); } catch(e) { state.products = DEFAULT_PRODUCTS.slice(); } }
+            else { state.products = DEFAULT_PRODUCTS.slice(); saveProducts(); }
         }
-
-        function persistProducts() {
-            try {
-                localStorage.setItem(CONFIG.storageKeys.products, JSON.stringify(state.products));
-            } catch (err) {
-                toast('Yaddaş dolu ola bilər — şəkil ölçüsünü kiçildin və ya köhnə məhsulları silin', 'error');
-                console.error(err);
-            }
+        function saveProducts() {
+            try { localStorage.setItem(CONFIG.keys.products, JSON.stringify(state.products)); }
+            catch(e) { toast('Yaddaş dolu — şəkil ölçüsünü kiçildin', 'error'); }
         }
-
         function loadCart() {
-            const saved = localStorage.getItem(CONFIG.storageKeys.cart);
-            state.cart = saved ? JSON.parse(saved) : [];
+            const s = localStorage.getItem(CONFIG.keys.cart);
+            state.cart = s ? JSON.parse(s) : [];
         }
-        function persistCart() {
-            localStorage.setItem(CONFIG.storageKeys.cart, JSON.stringify(state.cart));
+        function saveCart() { localStorage.setItem(CONFIG.keys.cart, JSON.stringify(state.cart)); }
+
+        // ============ STATUS ============
+        function updateStatus() {
+            const h = new Date().getHours() + new Date().getMinutes() / 60;
+            const open = h >= CONFIG.open && h < CONFIG.close;
+            $('statusText').textContent = open ? 'Hazırda Açığıq' : 'Hazırda Bağlıyıq';
+            $('statusDot').className = `relative inline-flex rounded-full h-2.5 w-2.5 ${open ? 'bg-brand-500' : 'bg-red-400'}`;
+            $('statusPing').className = `animate-ping absolute inline-flex h-full w-full rounded-full ${open ? 'bg-brand-400' : 'bg-red-300'} opacity-75`;
         }
 
-        /* ==================== VAXT / AÇIQ-BAĞLI STATUSU ==================== */
-        function updateOpenStatus() {
-            const now = new Date();
-            const hour = now.getHours() + now.getMinutes() / 60;
-            const isOpen = hour >= CONFIG.openHour && hour < CONFIG.closeHour;
-            const dot = document.getElementById('openStatusDot');
-            const text = document.getElementById('openStatusText');
-            text.textContent = isOpen ? 'Hazırda Açığıq' : 'Hazırda Bağlıyıq';
-            dot.className = isOpen 
-                ? 'w-2 h-2 rounded-full bg-emerald-300 animate-pulse shadow-[0_0_8px_rgba(110,231,183,0.8)]'
-                : 'w-2 h-2 rounded-full bg-red-300 shadow-[0_0_8px_rgba(252,165,165,0.8)]';
-        }
-
-        /* ==================== FİLTR / AXTARIŞ / SIRALAMA ==================== */
-        function handleSearchInput(el) {
+        // ============ SEARCH / FILTER / SORT ============
+        function handleSearch(el) {
             state.search = el.value;
-            const hero = document.getElementById('searchInputHero');
-            const cat = document.getElementById('searchInputCatalog');
-            if (el !== hero) hero.value = el.value;
-            if (el !== cat) cat.value = el.value;
-            if (el.value.trim()) document.getElementById('kataloq').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            $('searchInputHero').value = el.value;
+            $('searchInputCatalog').value = el.value;
+            if (el.value.trim()) $('kataloq').scrollIntoView({ behavior: 'smooth' });
             applyFilters();
         }
-
-        function handleSortChange(el) {
-            state.sort = el.value;
-            applyFilters();
-        }
-
-        function filterCategory(cat, btnEl) {
+        function handleSort(el) { state.sort = el.value; applyFilters(); }
+        function filterCat(cat, btn) {
             state.category = cat;
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-200');
-                btn.classList.add('bg-white', 'text-gray-600', 'border', 'border-gray-200');
+            document.querySelectorAll('.cat-btn').forEach(b => {
+                b.classList.remove('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/25');
+                b.classList.add('bg-white', 'dark:bg-stone-900', 'text-gray-600', 'dark:text-stone-400', 'border', 'border-gray-200', 'dark:border-stone-800');
             });
-            btnEl.classList.remove('bg-white', 'text-gray-600', 'border', 'border-gray-200');
-            btnEl.classList.add('bg-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-200');
+            btn.classList.remove('bg-white', 'dark:bg-stone-900', 'text-gray-600', 'dark:text-stone-400', 'border', 'border-gray-200', 'dark:border-stone-800');
+            btn.classList.add('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/25');
             applyFilters();
         }
-
-        function sortProducts(list) {
-            const arr = list.slice();
-            if (state.sort === 'price-asc') arr.sort((a, b) => a.price - b.price);
-            else if (state.sort === 'price-desc') arr.sort((a, b) => b.price - a.price);
-            else if (state.sort === 'name-asc') arr.sort((a, b) => a.name.localeCompare(b.name, 'az'));
-            return arr;
+        function sortList(list) {
+            const a = list.slice();
+            if (state.sort === 'price-asc') a.sort((x, y) => x.price - y.price);
+            else if (state.sort === 'price-desc') a.sort((x, y) => y.price - x.price);
+            else if (state.sort === 'name-asc') a.sort((x, y) => x.name.localeCompare(y.name, 'az'));
+            return a;
         }
-
         function applyFilters() {
             let list = state.products.slice();
             if (state.category !== 'all') list = list.filter(p => p.category === state.category);
@@ -914,620 +1013,845 @@
                 const q = state.search.trim().toLowerCase();
                 list = list.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || (p.desc || '').toLowerCase().includes(q));
             }
-            list = sortProducts(list);
+            list = sortList(list);
             renderProducts(list);
         }
 
-        /* ==================== MƏHSUL RENDER ==================== */
+        // ============ RENDER PRODUCTS ============
         function renderProducts(list) {
-            const grid = document.getElementById('productGrid');
-            const empty = document.getElementById('emptyState');
-
-            if (list.length === 0) {
-                grid.innerHTML = '';
-                empty.classList.remove('hidden');
-                return;
-            }
+            const grid = $('productGrid');
+            const empty = $('emptyState');
+            if (!list.length) { grid.innerHTML = ''; empty.classList.remove('hidden'); return; }
             empty.classList.add('hidden');
             grid.innerHTML = '';
 
-            list.forEach((product, idx) => {
+            list.forEach((p, i) => {
                 const card = document.createElement('div');
-                card.className = 'card-in product-card bg-white rounded-2xl p-4 shadow-sm border border-gray-100/80 hover:shadow-xl flex flex-col justify-between overflow-hidden';
-                card.style.animationDelay = (idx * 0.05) + 's';
+                card.className = 'product-premium tilt-card group';
+                card.style.animationDelay = (i * 0.05) + 's';
+                card.dataset.tilt;
 
-                const waLink = 'https://wa.me/' + CONFIG.whatsappNumber + '?text=' + encodeURIComponent('Salam, ' + product.name + ' haqqında soruşmaq istəyirəm.');
-                const outOfStock = product.stock === false;
+                const wa = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent('Salam, ' + p.name + ' haqqında məlumat istəyirəm.')}`;
+                const oos = p.stock === false;
 
                 let badges = '';
-                if (product.isNew) badges += '<span class="new-badge text-[9px] text-white px-2 py-0.5 rounded-md font-bold uppercase tracking-wider">Yeni</span>';
-                if (product.oldPrice) {
-                    const pct = Math.round((1 - product.price / product.oldPrice) * 100);
-                    badges += '<span class="premium-badge text-[9px] text-white px-2 py-0.5 rounded-md font-bold uppercase tracking-wider">-' + pct + '%</span>';
+                if (p.isNew) badges += '<span class="badge-new text-[9px] text-white px-2.5 py-1 rounded-lg font-bold uppercase tracking-wider absolute top-3 left-3 z-10">Yeni</span>';
+                if (p.oldPrice) {
+                    const pct = Math.round((1 - p.price / p.oldPrice) * 100);
+                    badges += `<span class="badge-premium text-[9px] text-white px-2.5 py-1 rounded-lg font-bold uppercase tracking-wider absolute top-3 left-3 z-10 ${p.isNew ? 'mt-7' : ''}">-${pct}%</span>`;
                 }
 
-                const imageBlock = product.image
-                    ? '<img src="' + product.image + '" alt="' + escapeHtml(product.name) + '" class="img-zoom w-full h-full object-cover" loading="lazy" onerror="this.parentElement.innerHTML=\'<i class=\\\'fa-solid fa-capsules text-3xl\\\'></i>\'">'
-                    : '<i class="fa-solid ' + (product.icon || 'fa-capsules') + ' text-3xl"></i>';
+                const img = p.image
+                    ? `<div class="img-zoom-container h-48 bg-gradient-to-br from-brand-50/50 to-brand-100/30 dark:from-stone-800 dark:to-stone-900 flex items-center justify-center relative overflow-hidden">
+                        <img src="${p.image}" alt="${esc(p.name)}" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fa-solid fa-capsules text-4xl text-brand-300\\'></i>'">
+                        ${badges}
+                        ${oos ? '<div class="absolute inset-0 bg-white/80 dark:bg-black/60 backdrop-blur-[2px] flex items-center justify-center"><span class="text-xs font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-3 py-1 rounded-full">Stokda Yoxdur</span></div>' : ''}
+                       </div>`
+                    : `<div class="h-48 bg-gradient-to-br from-brand-50 to-brand-100 dark:from-stone-800 dark:to-stone-900 flex items-center justify-center relative">
+                        <i class="fa-solid ${p.icon || 'fa-capsules'} text-4xl text-brand-300"></i>
+                        ${badges}
+                        ${oos ? '<div class="absolute inset-0 bg-white/80 dark:bg-black/60 backdrop-blur-[2px] flex items-center justify-center"><span class="text-xs font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-3 py-1 rounded-full">Stokda Yoxdur</span></div>' : ''}
+                       </div>`;
 
-                const priceBlock = product.oldPrice
-                    ? '<span class="text-gray-400 line-through text-[10px] block">' + formatPrice(product.oldPrice) + '</span><span class="text-emerald-700 font-extrabold text-sm md:text-base">' + formatPrice(product.price) + '</span>'
-                    : '<span class="text-emerald-700 font-extrabold text-sm md:text-base">' + formatPrice(product.price) + '</span>';
+                const price = p.oldPrice
+                    ? `<span class="text-gray-400 line-through text-xs">${fmtPrice(p.oldPrice)}</span><span class="text-brand-700 dark:text-brand-400 font-extrabold text-lg">${fmtPrice(p.price)}</span>`
+                    : `<span class="text-brand-700 dark:text-brand-400 font-extrabold text-lg">${fmtPrice(p.price)}</span>`;
 
                 card.innerHTML = `
-                    <div>
-                        <div class="relative h-36 bg-gradient-to-br from-emerald-50/80 to-teal-50/80 rounded-xl mb-3 flex items-center justify-center text-emerald-600 overflow-hidden">
-                            ${imageBlock}
-                            <div class="absolute top-2 left-2 flex flex-col gap-1">${badges}</div>
-                                                       ${outOfStock ? '<div class="absolute inset-0 bg-white/80 backdrop-blur-[2px] flex items-center justify-center text-[10px] font-bold text-red-500 uppercase tracking-wider">Stokda Yoxdur</div>' : ''}
+                    ${img}
+                    <div class="p-5">
+                        <span class="text-[10px] font-bold text-brand-600 bg-brand-50 dark:bg-brand-900/20 px-2.5 py-1 rounded-md uppercase tracking-wider">${esc(p.category)}</span>
+                        <h3 class="font-display font-bold text-gray-900 dark:text-white mt-2.5 mb-1 text-[15px] leading-snug line-clamp-2 cursor-pointer hover:text-brand-600 transition" onclick="openProductDetail(${p.id})">${esc(p.name)}</h3>
+                        <p class="text-xs text-gray-500 dark:text-stone-500 line-clamp-2 mb-3">${esc(p.desc || '')}</p>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-stone-800">
+                            <div class="flex flex-col">${price}</div>
+                            <div class="flex gap-2">
+                                <button onclick="openProductDetail(${p.id})" class="w-9 h-9 rounded-xl bg-gray-100 dark:bg-stone-800 text-gray-500 dark:text-stone-400 hover:bg-brand-100 dark:hover:bg-brand-900/30 hover:text-brand-600 transition flex items-center justify-center" title="Ətraflı">
+                                    <i class="fa-solid fa-circle-info text-sm"></i>
+                                </button>
+                                <button onclick="addToCart(${p.id})" ${oos ? 'disabled' : ''} class="w-9 h-9 rounded-xl ${oos ? 'bg-gray-100 dark:bg-stone-800 text-gray-300 cursor-not-allowed' : 'bg-brand-600 text-white hover:bg-brand-700 shadow-lg shadow-brand-500/25'} transition flex items-center justify-center">
+                                    <i class="fa-solid fa-plus text-sm"></i>
+                                </button>
+                            </div>
                         </div>
-                        <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md font-bold uppercase tracking-wider">${escapeHtml(product.category)}</span>
-                        <h3 class="product-title font-bold text-gray-900 mt-2 text-sm cursor-pointer hover:text-emerald-700 transition line-clamp-2" onclick="openQuickView(${product.id})">${escapeHtml(product.name)}</h3>
-                        <p class="text-xs text-gray-500 mt-0.5 line-clamp-2">${escapeHtml(product.desc || '')}</p>
-                    </div>
-                    <div class="mt-3">
-                        <div class="flex items-center justify-between pt-2 border-t border-gray-50 mb-2">
-                            <div>${priceBlock}</div>
-                            <a href="${waLink}" target="_blank" class="bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white p-2 rounded-lg transition shadow-sm" aria-label="WhatsApp ilə soruş">
-                                <i class="fa-brands fa-whatsapp text-lg"></i>
-                            </a>
-                        </div>
-                        <button onclick="addToCart(${product.id})" ${outOfStock ? 'disabled' : ''} class="w-full ${outOfStock ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0'} text-xs font-bold py-2.5 rounded-xl transition-all duration-300">
-                            ${outOfStock ? 'Stokda Yoxdur' : 'Səbətə At'}
-                        </button>
                     </div>
                 `;
                 grid.appendChild(card);
             });
+
+            initTilt();
         }
 
-        /* ==================== MƏHSUL ÖN BAXIŞ ==================== */
+        // ============ 3D TILT ============
+        function initTilt() {
+            if (window.matchMedia('(pointer: coarse)').matches) return;
+            document.querySelectorAll('[data-tilt]').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const cx = rect.width / 2;
+                    const cy = rect.height / 2;
+                    const rx = (y - cy) / cy * -8;
+                    const ry = (x - cx) / cx * 8;
+                    card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            });
+        }
+
+        // ============ PRODUCT DETAIL PAGE ============
+        function openProductDetail(id) {
+            const p = state.products.find(x => x.id === id);
+            if (!p) return;
+            state.viewingProduct = p;
+
+            // Create detail view dynamically
+            let detail = $('productDetail');
+            if (!detail) {
+                detail = document.createElement('div');
+                detail.id = 'productDetail';
+                detail.className = 'fixed inset-0 z-[55] hidden';
+                document.body.appendChild(detail);
+            }
+
+            const wa = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent('Salam, ' + p.name + ' haqqında ətraflı məlumat istəyirəm.')}`;
+            const oos = p.stock === false;
+
+            let badges = '';
+            if (p.isNew) badges += '<span class="badge-new text-[10px] text-white px-3 py-1.5 rounded-lg font-bold uppercase tracking-wider">Yeni Məhsul</span>';
+            if (p.oldPrice) {
+                const pct = Math.round((1 - p.price / p.oldPrice) * 100);
+                badges += `<span class="badge-premium text-[10px] text-white px-3 py-1.5 rounded-lg font-bold uppercase tracking-wider">Endirim -${pct}%</span>`;
+            }
+
+            const imgSection = p.image
+                ? `<div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-brand-50 to-brand-100 dark:from-stone-800 dark:to-stone-900 aspect-square">
+                    <img src="${p.image}" alt="${esc(p.name)}" class="w-full h-full object-cover" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\\'flex items-center justify-center h-full\\'><i class=\\'fa-solid fa-capsules text-6xl text-brand-200\\'></i></div>'">
+                    ${badges ? `<div class="absolute top-4 left-4 flex flex-col gap-2">${badges}</div>` : ''}
+                    ${oos ? '<div class="absolute inset-0 bg-white/70 dark:bg-black/50 backdrop-blur-sm flex items-center justify-center"><span class="text-lg font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-4 py-2 rounded-full">Stokda Yoxdur</span></div>' : ''}
+                   </div>`
+                : `<div class="rounded-3xl bg-gradient-to-br from-brand-50 to-brand-100 dark:from-stone-800 dark:to-stone-900 aspect-square flex items-center justify-center relative">
+                    <i class="fa-solid ${p.icon || 'fa-capsules'} text-6xl text-brand-200"></i>
+                    ${badges ? `<div class="absolute top-4 left-4 flex flex-col gap-2">${badges}</div>` : ''}
+                    ${oos ? '<div class="absolute inset-0 bg-white/70 dark:bg-black/50 backdrop-blur-sm flex items-center justify-center"><span class="text-lg font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-4 py-2 rounded-full">Stokda Yoxdur</span></div>' : ''}
+                   </div>`;
+
+            const priceSection = p.oldPrice
+                ? `<div class="flex items-baseline gap-3 mb-2">
+                    <span class="text-3xl font-display font-bold text-brand-700 dark:text-brand-400">${fmtPrice(p.price)}</span>
+                    <span class="text-lg text-gray-400 line-through">${fmtPrice(p.oldPrice)}</span>
+                    <span class="text-xs font-bold text-white bg-red-500 px-2 py-1 rounded-lg">-${Math.round((1-p.price/p.oldPrice)*100)}%</span>
+                   </div>`
+                : `<div class="text-3xl font-display font-bold text-brand-700 dark:text-brand-400 mb-2">${fmtPrice(p.price)}</div>`;
+
+            detail.innerHTML = `
+                <div class="absolute inset-0 bg-black/50 backdrop-blur-md opacity-0 transition-opacity duration-300" onclick="closeProductDetail()"></div>
+                <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+                    <div class="bg-white dark:bg-stone-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl pointer-events-auto transform scale-95 opacity-0 transition-all duration-300" id="detailContent">
+                        <!-- Close -->
+                        <div class="sticky top-0 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl z-10 flex justify-end p-4 rounded-t-3xl">
+                            <button onclick="closeProductDetail()" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-stone-800 flex items-center justify-center text-gray-500 hover:text-gray-900 dark:hover:text-white transition hover:rotate-90 duration-300">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="px-6 pb-8 -mt-4">
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <!-- Image -->
+                                <div class="md:sticky md:top-20 md:self-start">
+                                    ${imgSection}
+                                </div>
+                                
+                                <!-- Info -->
+                                <div class="space-y-6">
+                                    <div>
+                                        <span class="text-xs font-bold text-brand-600 uppercase tracking-widest bg-brand-50 dark:bg-brand-900/20 px-3 py-1 rounded-full">${esc(p.category)}</span>
+                                        <h1 class="text-2xl md:text-3xl font-display font-bold text-gray-900 dark:text-white mt-3 leading-tight">${esc(p.name)}</h1>
+                                    </div>
+                                    
+                                    ${priceSection}
+                                    
+                                    <!-- Stock -->
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-full ${oos ? 'bg-red-500' : 'bg-brand-500'}"></span>
+                                        <span class="text-sm font-medium ${oos ? 'text-red-500' : 'text-brand-600'}">${oos ? 'Stokda yoxdur' : 'Stokda var'}</span>
+                                    </div>
+                                    
+                                    <!-- Description -->
+                                    <div class="bg-gray-50 dark:bg-stone-800/50 rounded-2xl p-5 border border-gray-100 dark:border-stone-800">
+                                        <h3 class="font-display font-bold text-sm text-gray-900 dark:text-white mb-2">Məhsul Haqqında</h3>
+                                        <p class="text-sm text-gray-600 dark:text-stone-400 leading-relaxed">${esc(p.desc || 'Bu məhsul haqqında ətraflı məlumat tezliklə əlavə olunacaq.')}</p>
+                                    </div>
+                                    
+                                    <!-- Features (mock) -->
+                                    <div class="space-y-3">
+                                        <h3 class="font-display font-bold text-sm text-gray-900 dark:text-white">Xüsusiyyətlər</h3>
+                                        <div class="grid grid-cols-2 gap-3">
+                                            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-stone-400">
+                                                <i class="fa-solid fa-check text-brand-500 text-xs"></i>
+                                                <span>Orijinal məhsul</span>
+                                            </div>
+                                            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-stone-400">
+                                                <i class="fa-solid fa-check text-brand-500 text-xs"></i>
+                                                <span>Sertifikatlı</span>
+                                            </div>
+                                            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-stone-400">
+                                                <i class="fa-solid fa-check text-brand-500 text-xs"></i>
+                                                <span>Qaytarma zəmanəti</span>
+                                            </div>
+                                            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-stone-400">
+                                                <i class="fa-solid fa-check text-brand-500 text-xs"></i>
+                                                <span>Pulsuz çatdırılma</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Usage (mock) -->
+                                    <div class="bg-amber-50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-800/30 rounded-2xl p-5">
+                                        <div class="flex items-start gap-3">
+                                            <i class="fa-solid fa-circle-info text-amber-500 mt-0.5"></i>
+                                            <div>
+                                                <h4 class="font-bold text-sm text-amber-800 dark:text-amber-400 mb-1">Məsləhət</h4>
+                                                <p class="text-xs text-amber-700 dark:text-amber-500/80 leading-relaxed">Məhsuldan istifadə etməzdən əvvəl həkim və ya əczaçı məsləhətinə müraciət edin. Dərman vasitələrini təyinatından kənar istifadə etməyin.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Actions -->
+                                    <div class="flex gap-3 pt-2">
+                                        <div class="flex items-center bg-gray-100 dark:bg-stone-800 rounded-xl overflow-hidden">
+                                            <button onclick="detailQty(-1)" class="px-4 py-3 text-gray-600 dark:text-stone-400 hover:text-brand-600 font-bold transition">−</button>
+                                            <span id="detailQty" class="px-4 font-bold text-gray-900 dark:text-white min-w-[2rem] text-center">1</span>
+                                            <button onclick="detailQty(1)" class="px-4 py-3 text-gray-600 dark:text-stone-400 hover:text-brand-600 font-bold transition">+</button>
+                                        </div>
+                                        <button onclick="addDetailToCart()" ${oos ? 'disabled' : ''} class="flex-1 ${oos ? 'bg-gray-100 dark:bg-stone-800 text-gray-400 cursor-not-allowed' : 'bg-brand-600 hover:bg-brand-700 text-white shadow-xl shadow-brand-500/20 hover:shadow-brand-500/30'} font-bold py-3 rounded-xl transition flex items-center justify-center gap-2">
+                                            <i class="fa-solid fa-bag-shopping"></i> ${oos ? 'Stokda Yoxdur' : 'Səbətə At'}
+                                        </button>
+                                    </div>
+                                    
+                                    <a href="${wa}" target="_blank" class="block text-center text-brand-600 dark:text-brand-400 text-sm font-semibold hover:underline py-2">
+                                        <i class="fa-brands fa-whatsapp mr-1"></i> Bu məhsul haqqında soruşun
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            detail.classList.remove('hidden');
+            setTimeout(() => {
+                detail.querySelector('.absolute.inset-0.bg-black').classList.remove('opacity-0');
+                $('detailContent').classList.remove('scale-95', 'opacity-0');
+                $('detailContent').classList.add('scale-100', 'opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductDetail() {
+            const detail = $('productDetail');
+            if (!detail) return;
+            const overlay = detail.querySelector('.absolute.inset-0.bg-black');
+            const content = $('detailContent');
+            if (overlay) overlay.classList.add('opacity-0');
+            if (content) {
+                content.classList.remove('scale-100', 'opacity-100');
+                content.classList.add('scale-95', 'opacity-0');
+            }
+            setTimeout(() => {
+                detail.classList.add('hidden');
+                document.body.style.overflow = '';
+                state.viewingProduct = null;
+            }, 300);
+        }
+
+        let detailQuantity = 1;
+        function detailQty(delta) {
+            detailQuantity = Math.max(1, detailQuantity + delta);
+            const el = $('detailQty');
+            if (el) el.textContent = detailQuantity;
+        }
+        function addDetailToCart() {
+            if (!state.viewingProduct || state.viewingProduct.stock === false) return;
+            addToCart(state.viewingProduct.id, detailQuantity);
+            closeProductDetail();
+        }
+
+        // ============ QUICK VIEW ============
         function openQuickView(id) {
             const p = state.products.find(x => x.id === id);
             if (!p) return;
-            qvProductId = id;
-            qvQtyVal = 1;
-            document.getElementById('qvQty').textContent = qvQtyVal;
-            document.getElementById('qvCategory').textContent = p.category;
-            document.getElementById('qvName').textContent = p.name;
-            document.getElementById('qvDesc').textContent = p.desc || '';
+            qvId = id;
+            qvQty = 1;
+            $('qvQty').textContent = qvQty;
+            $('qvCategory').textContent = p.category;
+            $('qvName').textContent = p.name;
+            $('qvDesc').textContent = p.desc || '';
 
-            const imgWrap = document.getElementById('qvImageWrap');
-            imgWrap.innerHTML = p.image 
-                ? '<img src="' + p.image + '" class="w-full h-full object-cover img-zoom" onerror="this.parentElement.innerHTML=\'<i class=\\\'fa-solid fa-capsules text-5xl\\\'></i>\'">' 
-                : '<i class="fa-solid ' + (p.icon || 'fa-capsules') + '"></i>';
+            const imgWrap = $('qvImage');
+            imgWrap.innerHTML = p.image
+                ? `<img src="${p.image}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<i class=\\'fa-solid fa-capsules text-6xl text-brand-300\\'></i>'">`
+                : `<i class="fa-solid ${p.icon || 'fa-capsules'} text-6xl text-brand-300"></i>`;
 
-            const priceWrap = document.getElementById('qvPriceWrap');
+            const priceWrap = $('qvPrice');
             priceWrap.innerHTML = p.oldPrice
-                ? '<span class="text-gray-400 line-through text-sm">' + formatPrice(p.oldPrice) + '</span><span class="text-emerald-700 font-extrabold text-xl">' + formatPrice(p.price) + '</span>'
-                : '<span class="text-emerald-700 font-extrabold text-xl">' + formatPrice(p.price) + '</span>';
+                ? `<span class="text-gray-400 line-through text-sm">${fmtPrice(p.oldPrice)}</span><span class="text-brand-700 dark:text-brand-400 font-extrabold text-2xl">${fmtPrice(p.price)}</span>`
+                : `<span class="text-brand-700 dark:text-brand-400 font-extrabold text-2xl">${fmtPrice(p.price)}</span>`;
 
-            const stockBadge = document.getElementById('qvStockBadge');
+            const stockBadge = $('qvStock');
             stockBadge.innerHTML = p.stock === false
-                ? '<span class="text-xs font-bold text-red-500 bg-red-50 px-2 py-1 rounded-md">Stokda yoxdur</span>'
-                : '<span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md"><i class="fa-solid fa-check mr-1"></i>Stokda var</span>';
+                ? '<span class="text-xs font-bold text-red-500 bg-red-50 dark:bg-red-900/20 px-3 py-1 rounded-full">Stokda yoxdur</span>'
+                : '<span class="text-xs font-bold text-brand-600 bg-brand-50 dark:bg-brand-900/20 px-3 py-1 rounded-full"><i class="fa-solid fa-check mr-1"></i>Stokda var</span>';
 
-            const addBtn = document.getElementById('qvAddBtn');
+            const addBtn = $('qvAdd');
             addBtn.disabled = p.stock === false;
             addBtn.classList.toggle('opacity-50', p.stock === false);
             addBtn.classList.toggle('cursor-not-allowed', p.stock === false);
             addBtn.textContent = p.stock === false ? 'Stokda Yoxdur' : 'Səbətə At';
 
-            document.getElementById('qvWhatsappLink').href = 'https://wa.me/' + CONFIG.whatsappNumber + '?text=' + encodeURIComponent('Salam, ' + p.name + ' haqqında soruşmaq istəyirəm.');
+            $('qvWhatsappLink')?.setAttribute('href', `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent('Salam, ' + p.name + ' haqqında soruşmaq istəyirəm.')}`);
 
-            showModal('quickViewModal');
+            showModal('quickView');
         }
-        function changeQvQty(delta) {
-            qvQtyVal = Math.max(1, qvQtyVal + delta);
-            document.getElementById('qvQty').textContent = qvQtyVal;
+        function changeQvQty(d) {
+            qvQty = Math.max(1, qvQty + d);
+            $('qvQty').textContent = qvQty;
         }
         function addQvToCart() {
-            if (!qvProductId) return;
-            addToCart(qvProductId, qvQtyVal);
+            if (!qvId) return;
+            addToCart(qvId, qvQty);
             closeQuickView();
         }
-        function closeQuickView() {
-            hideModal('quickViewModal');
-            qvProductId = null;
-            qvQtyVal = 1;
-        }
+        function closeQuickView() { hideModal('quickView'); qvId = null; qvQty = 1; }
 
-        /* ==================== SƏBƏT ==================== */
-        function addToCart(id, qty) {
-            qty = qty || 1;
+        // ============ CART ============
+        function addToCart(id, qty = 1) {
             const p = state.products.find(x => x.id === id);
             if (!p || p.stock === false) return;
-            const existing = state.cart.find(x => x.id === id);
-            if (existing) existing.qty += qty; else state.cart.push({ id: id, qty: qty });
-            persistCart();
+            const ex = state.cart.find(x => x.id === id);
+            if (ex) ex.qty += qty; else state.cart.push({ id, qty });
+            saveCart();
             renderCart();
             toast(p.name + ' səbətə əlavə olundu', 'success');
         }
-
-        function changeCartQty(id, delta) {
+        function changeCartQty(id, d) {
             const item = state.cart.find(x => x.id === id);
             if (!item) return;
-            item.qty += delta;
+            item.qty += d;
             if (item.qty <= 0) state.cart = state.cart.filter(x => x.id !== id);
-            persistCart();
+            saveCart();
             renderCart();
         }
-
-        function removeFromCart(id) {
+        function removeCart(id) {
             state.cart = state.cart.filter(x => x.id !== id);
-            persistCart();
+            saveCart();
             renderCart();
         }
-
         function clearCart() {
-            if (state.cart.length === 0) return;
-            openConfirm('Səbəti tamamilə boşaltmaq istədiyinizə əminsiniz?', function () {
+            if (!state.cart.length) return;
+            openConfirm('Səbəti boşaltmaq istədiyinizə əminsiniz?', () => {
                 state.cart = [];
-                persistCart();
+                saveCart();
                 renderCart();
                 toast('Səbət boşaldıldı', 'info');
             });
         }
-
         function cartTotal() {
             return state.cart.reduce((sum, item) => {
                 const p = state.products.find(x => x.id === item.id);
                 return sum + (p ? p.price * item.qty : 0);
             }, 0);
         }
-
         function renderCart() {
-            const container = document.getElementById('cartItemsContainer');
-            const emptyMsg = document.getElementById('cartEmptyMsg');
+            const container = $('cartItems');
+            const empty = $('cartEmpty');
             const totalQty = state.cart.reduce((s, i) => s + i.qty, 0);
-            const badge = document.getElementById('cartCountBadge');
-            badge.textContent = totalQty;
-            badge.classList.toggle('hidden', totalQty === 0);
+            $('cartCountBadge').textContent = totalQty;
+            $('cartCountBadge').classList.toggle('hidden', totalQty === 0);
+            const mob = $('mobBadge');
+            if (mob) { mob.textContent = totalQty; mob.classList.toggle('hidden', totalQty === 0); }
 
-            if (state.cart.length === 0) {
+            if (!state.cart.length) {
                 container.innerHTML = '';
-                emptyMsg.classList.remove('hidden');
-                document.getElementById('cartSubtotal').textContent = formatPrice(0);
+                empty.classList.remove('hidden');
+                $('cartTotal').textContent = fmtPrice(0);
                 return;
             }
-            emptyMsg.classList.add('hidden');
+            empty.classList.add('hidden');
             container.innerHTML = '';
             state.cart.forEach(item => {
                 const p = state.products.find(x => x.id === item.id);
                 if (!p) return;
                 const row = document.createElement('div');
-                row.className = 'flex items-center gap-3 py-3 border-b border-gray-100 hover:bg-gray-50/50 rounded-lg px-2 transition';
-                const img = p.image 
-                    ? '<img src="' + p.image + '" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML=\'<i class=\\\'fa-solid fa-capsules\\\'></i>\'">' 
-                    : '<i class="fa-solid ' + (p.icon || 'fa-capsules') + '"></i>';
+                row.className = 'flex items-center gap-4 py-4 border-b border-gray-100 dark:border-stone-800 last:border-0';
+                const img = p.image
+                    ? `<img src="${p.image}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<i class=\\'fa-solid fa-capsules\\'></i>'">`
+                    : `<i class="fa-solid ${p.icon || 'fa-capsules'}"></i>`;
                 row.innerHTML = `
-                    <div class="w-14 h-14 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 overflow-hidden shrink-0 shadow-sm">${img}</div>
+                    <div class="w-16 h-16 rounded-xl bg-brand-50 dark:bg-stone-800 flex items-center justify-center text-brand-600 overflow-hidden shrink-0 shadow-sm">${img}</div>
                     <div class="flex-1 min-w-0">
-                        <p class="text-sm font-semibold text-gray-900 truncate">${escapeHtml(p.name)}</p>
-                        <p class="text-xs text-emerald-700 font-bold">${formatPrice(p.price)}</p>
-                        <div class="flex items-center gap-2 mt-1">
-                            <button onclick="changeCartQty(${p.id},-1)" class="w-6 h-6 rounded-md border border-gray-200 text-gray-500 hover:bg-white hover:text-emerald-600 hover:border-emerald-300 transition text-xs">−</button>
-                            <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
-                            <button onclick="changeCartQty(${p.id},1)" class="w-6 h-6 rounded-md border border-gray-200 text-gray-500 hover:bg-white hover:text-emerald-600 hover:border-emerald-300 transition text-xs">+</button>
+                        <p class="font-semibold text-sm text-gray-900 dark:text-white truncate">${esc(p.name)}</p>
+                        <p class="text-xs text-brand-600 font-bold mt-0.5">${fmtPrice(p.price)}</p>
+                        <div class="flex items-center gap-3 mt-2">
+                            <button onclick="changeCartQty(${p.id},-1)" class="w-7 h-7 rounded-lg border border-gray-200 dark:border-stone-700 text-gray-500 hover:border-brand-500 hover:text-brand-600 transition text-xs">−</button>
+                            <span class="text-xs font-bold w-4 text-center text-gray-900 dark:text-white">${item.qty}</span>
+                            <button onclick="changeCartQty(${p.id},1)" class="w-7 h-7 rounded-lg border border-gray-200 dark:border-stone-700 text-gray-500 hover:border-brand-500 hover:text-brand-600 transition text-xs">+</button>
                         </div>
                     </div>
-                    <button onclick="removeFromCart(${p.id})" class="text-gray-300 hover:text-red-500 transition p-1.5 rounded-lg hover:bg-red-50" aria-label="Sil"><i class="fa-solid fa-trash-can"></i></button>
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-gray-900 dark:text-white">${fmtPrice(p.price * item.qty)}</p>
+                        <button onclick="removeCart(${p.id})" class="text-xs text-gray-400 hover:text-red-500 transition mt-1">Sil</button>
+                    </div>
                 `;
                 container.appendChild(row);
             });
-            document.getElementById('cartSubtotal').textContent = formatPrice(cartTotal());
+            $('cartTotal').textContent = fmtPrice(cartTotal());
         }
-
         function openCart() {
-            document.getElementById('cartOverlay').classList.remove('hidden');
-            setTimeout(() => document.getElementById('cartOverlay').classList.remove('opacity-0'), 10);
-            document.getElementById('cartDrawer').classList.remove('translate-x-full');
+            $('cartOverlay').classList.remove('hidden');
+            setTimeout(() => $('cartOverlay').classList.remove('opacity-0'), 10);
+            $('cartDrawer').classList.remove('translate-x-full');
             document.body.style.overflow = 'hidden';
         }
         function closeCart() {
-            document.getElementById('cartOverlay').classList.add('opacity-0');
-            document.getElementById('cartDrawer').classList.add('translate-x-full');
-            setTimeout(() => document.getElementById('cartOverlay').classList.add('hidden'), 300);
+            $('cartOverlay').classList.add('opacity-0');
+            $('cartDrawer').classList.add('translate-x-full');
+            setTimeout(() => $('cartOverlay').classList.add('hidden'), 300);
             document.body.style.overflow = '';
         }
-
-        function buildCartMessage() {
-            const lines = ['Salam, aşağıdakı məhsulları sifariş etmək istəyirəm:', ''];
+        function checkout() {
+            if (!state.cart.length) { toast('Səbət boşdur', 'info'); return; }
+            const lines = ['Salam, sifariş etmək istəyirəm:', ''];
             state.cart.forEach(item => {
                 const p = state.products.find(x => x.id === item.id);
-                if (!p) return;
-                lines.push('• ' + p.name + ' x' + item.qty + ' — ' + formatPrice(p.price * item.qty));
+                if (p) lines.push(`• ${p.name} x${item.qty} — ${fmtPrice(p.price * item.qty)}`);
             });
-            lines.push('');
-            lines.push('Ümumi: ' + formatPrice(cartTotal()));
-            return lines.join('\n');
-        }
-        function checkoutWhatsApp() {
-            if (state.cart.length === 0) { toast('Səbətiniz boşdur', 'info'); return; }
-            const msg = buildCartMessage();
-            window.open('https://wa.me/' + CONFIG.whatsappNumber + '?text=' + encodeURIComponent(msg), '_blank');
+            lines.push('', `Ümumi: ${fmtPrice(cartTotal())}`);
+            window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
         }
 
-        /* ==================== ADMİN GİRİŞ ==================== */
-        function isAdminPasswordSet() { return !!localStorage.getItem(CONFIG.storageKeys.adminPass); }
-
+        // ============ ADMIN ============
+        function isPassSet() { return !!localStorage.getItem(CONFIG.keys.adminPass); }
         function openAdminEntry() {
             if (state.isAdmin) { openAdminPanel(); return; }
-            openAdminLogin();
+            const first = !isPassSet();
+            $('loginTitle').textContent = first ? 'Şifrə Təyin Edin' : 'Admin Girişi';
+            $('loginPass').placeholder = first ? 'Yeni şifrə (min. 4)' : '••••';
+            showModal('adminLogin');
+            setTimeout(() => $('loginPass').focus(), 100);
         }
-        function openAdminLogin() {
-            const firstTime = !isAdminPasswordSet();
-            document.getElementById('adminLoginTitle').textContent = firstTime ? 'Admin Şifrəsi Təyin Edin' : 'Admin Girişi';
-            document.getElementById('adminLoginHint').textContent = firstTime ? 'Bu sayt üçün ilk dəfə admin şifrəsi yaradın (min. 4 simvol).' : '';
-            document.getElementById('adminPassInput').value = '';
-            showModal('adminLoginModal');
-            setTimeout(() => document.getElementById('adminPassInput').focus(), 100);
-        }
-        function closeAdminLogin() {
-            hideModal('adminLoginModal');
-        }
-        function handleAdminLoginSubmit(e) {
+        function handleLogin(e) {
             e.preventDefault();
-            const val = document.getElementById('adminPassInput').value.trim();
-            if (!val) return;
-            if (!isAdminPasswordSet()) {
-                if (val.length < 4) { toast('Şifrə ən azı 4 simvol olmalıdır', 'error'); return; }
-                localStorage.setItem(CONFIG.storageKeys.adminPass, val);
-                toast('Şifrə uğurla yaradıldı', 'success');
+            const v = $('loginPass').value.trim();
+            if (!v) return;
+            if (!isPassSet()) {
+                if (v.length < 4) { toast('Min. 4 simvol', 'error'); return; }
+                localStorage.setItem(CONFIG.keys.adminPass, v);
+                toast('Şifrə yaradıldı', 'success');
                 loginAdmin();
             } else {
-                const saved = localStorage.getItem(CONFIG.storageKeys.adminPass);
-                if (val === saved) { loginAdmin(); }
-                else { toast('Yanlış şifrə', 'error'); }
+                if (v === localStorage.getItem(CONFIG.keys.adminPass)) loginAdmin();
+                else toast('Yanlış şifrə', 'error');
             }
         }
         function loginAdmin() {
             state.isAdmin = true;
-            sessionStorage.setItem(CONFIG.storageKeys.adminSession, '1');
-            closeAdminLogin();
+            sessionStorage.setItem(CONFIG.keys.adminSession, '1');
+            hideModal('adminLogin');
             openAdminPanel();
         }
         function logoutAdmin() {
             state.isAdmin = false;
-            sessionStorage.removeItem(CONFIG.storageKeys.adminSession);
-            closeAdminPanel();
-            toast('Admin paneldən çıxdınız', 'info');
+            sessionStorage.removeItem(CONFIG.keys.adminSession);
+            hideModal('adminPanel');
+            toast('Çıxış edildi', 'info');
         }
-
-        /* ==================== ADMİN PANEL ==================== */
         function openAdminPanel() {
-            renderAdminTable();
-            updateAdminStats();
-            showModal('adminPanelModal');
-        }
-        function closeAdminPanel() {
-            hideModal('adminPanelModal');
+            renderAdmin();
+            updateStats();
+            showModal('adminPanel');
         }
 
-        /* ==================== ŞƏKİL ƏLAVƏ ETMƏ SİSTEMİ ==================== */
-        function setImageMode(mode) {
-            imageMode = mode;
-            const btnFile = document.getElementById('btnModeFile');
-            const btnUrl = document.getElementById('btnModeUrl');
-            const zoneFile = document.getElementById('fileUploadZone');
-            const zoneUrl = document.getElementById('urlInputZone');
-            
-            if (mode === 'file') {
-                btnFile.className = 'text-xs px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-medium transition';
-                btnUrl.className = 'text-xs px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 font-medium transition hover:bg-gray-200';
-                zoneFile.classList.remove('hidden');
-                zoneUrl.classList.add('hidden');
-            } else {
-                btnUrl.className = 'text-xs px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-medium transition';
-                btnFile.className = 'text-xs px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 font-medium transition hover:bg-gray-200';
-                zoneUrl.classList.remove('hidden');
-                zoneFile.classList.add('hidden');
-            }
+        // ============ IMAGE HANDLING ============
+        function setImgMode(mode) {
+            imgMode = mode;
+            $('btnFile').className = mode === 'file' ? 'text-xs px-3 py-1.5 rounded-lg bg-brand-600 text-white font-medium' : 'text-xs px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-stone-800 text-gray-600 dark:text-stone-400 font-medium';
+            $('btnUrl').className = mode === 'url' ? 'text-xs px-3 py-1.5 rounded-lg bg-brand-600 text-white font-medium' : 'text-xs px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-stone-800 text-gray-600 dark:text-stone-400 font-medium';
+            $('zoneFile').classList.toggle('hidden', mode !== 'file');
+            $('zoneUrl').classList.toggle('hidden', mode !== 'url');
         }
-
-        function handleImageInput(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            if (!file.type.startsWith('image/')) { toast('Yalnız şəkil faylı seçin', 'error'); return; }
-            if (file.size > 5 * 1024 * 1024) { toast('Şəkil 5MB-dan kiçik olmalıdır', 'error'); return; }
-            
-            const reader = new FileReader();
-            reader.onload = function (ev) {
+        function handleImgFile(e) {
+            const f = e.target.files[0];
+            if (!f) return;
+            if (!f.type.startsWith('image/')) { toast('Yalnız şəkil', 'error'); return; }
+            if (f.size > 5 * 1024 * 1024) { toast('Max 5MB', 'error'); return; }
+            const r = new FileReader();
+            r.onload = ev => {
                 const img = new Image();
-                img.onload = function () {
-                    const canvas = document.createElement('canvas');
-                    const maxW = 600;
-                    const scale = Math.min(1, maxW / img.width);
-                    canvas.width = img.width * scale;
-                    canvas.height = img.height * scale;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
-                    pendingImageData = dataUrl;
-                    showImagePreview(dataUrl);
+                img.onload = () => {
+                    const c = document.createElement('canvas');
+                    const max = 600;
+                    const s = Math.min(1, max / img.width);
+                    c.width = img.width * s; c.height = img.height * s;
+                    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+                    pendingImg = c.toDataURL('image/jpeg', 0.85);
+                    showPreview(pendingImg);
                 };
-                img.onerror = function() { toast('Şəkil yüklənə bilmədi', 'error'); };
                 img.src = ev.target.result;
             };
-            reader.readAsDataURL(file);
+            r.readAsDataURL(f);
         }
-
-        function handleImageUrlInput(url) {
-            if (!url.trim()) {
-                pendingImageData = null;
-                document.getElementById('pImagePreview').classList.add('hidden');
-                return;
-            }
+        function handleImgUrl(url) {
+            if (!url.trim()) { pendingImg = null; $('pPreview').classList.add('hidden'); return; }
             const img = new Image();
-            img.onload = function() {
-                pendingImageData = url.trim();
-                showImagePreview(url.trim());
-            };
-            img.onerror = function() {
-                toast('URL-dəki şəkil tapılmadı', 'error');
-                pendingImageData = null;
-                document.getElementById('pImagePreview').classList.add('hidden');
-            };
+            img.onload = () => { pendingImg = url.trim(); showPreview(url.trim()); };
+            img.onerror = () => { toast('Şəkil tapılmadı', 'error'); pendingImg = null; $('pPreview').classList.add('hidden'); };
             img.src = url.trim();
         }
-
-        function showImagePreview(src) {
-            const preview = document.getElementById('pImagePreview');
-            preview.src = src;
-            preview.classList.remove('hidden');
+        function showPreview(src) {
+            const p = $('pPreview');
+            p.src = src; p.classList.remove('hidden');
         }
 
-        function handleAdminFormSubmit(e) {
+        // ============ ADMIN FORM ============
+        function handleProductSubmit(e) {
             e.preventDefault();
-            const name = document.getElementById('pName').value.trim();
-            const category = document.getElementById('pCategory').value;
-            const price = parseFloat(document.getElementById('pPrice').value);
-            const oldPriceRaw = document.getElementById('pOldPrice').value.trim();
-            const oldPrice = oldPriceRaw ? parseFloat(oldPriceRaw) : null;
-            const desc = document.getElementById('pDesc').value.trim();
-            const stock = document.getElementById('pStock').checked;
-            const isNew = document.getElementById('pIsNew').checked;
+            const name = $('pName').value.trim();
+            const cat = $('pCategory').value;
+            const price = parseFloat($('pPrice').value);
+            const old = $('pOldPrice').value.trim() ? parseFloat($('pOldPrice').value) : null;
+            const desc = $('pDesc').value.trim();
+            const stock = $('pStock').checked;
+            const isNew = $('pNew').checked;
 
-            if (!name || isNaN(price) || price <= 0) { toast('Zəhmət olmasa məhsul adı və düzgün qiymət daxil edin', 'error'); return; }
-            if (oldPrice !== null && oldPrice <= price) { toast('Endirimdən əvvəlki qiymət əsas qiymətdən yüksək olmalıdır', 'error'); return; }
+            if (!name || isNaN(price) || price <= 0) { toast('Ad və qiymət daxil edin', 'error'); return; }
+            if (old !== null && old <= price) { toast('Endirim qiyməti əsas qiymətdən yüksək olmalıdır', 'error'); return; }
 
             if (state.editingId) {
                 const p = state.products.find(x => x.id === state.editingId);
                 if (p) {
-                    p.name = name; p.category = category; p.price = price; p.oldPrice = oldPrice;
+                    p.name = name; p.category = cat; p.price = price; p.oldPrice = old;
                     p.desc = desc; p.stock = stock; p.isNew = isNew;
-                    if (pendingImageData !== null) p.image = pendingImageData;
+                    if (pendingImg !== null) p.image = pendingImg;
                 }
-                toast('Məhsul yeniləndi', 'success');
+                toast('Yeniləndi', 'success');
             } else {
                 state.products.unshift({
-                    id: Date.now(),
-                    name: name, category: category, price: price, oldPrice: oldPrice, desc: desc,
-                    icon: CATEGORY_ICONS[category] || 'fa-capsules',
-                    image: pendingImageData || null,
-                    stock: stock, isNew: isNew, createdAt: Date.now()
+                    id: Date.now(), name, category: cat, price, oldPrice: old, desc,
+                    icon: ICONS[cat] || 'fa-capsules', image: pendingImg || null,
+                    stock, isNew, createdAt: Date.now()
                 });
-                toast('Yeni məhsul əlavə olundu', 'success');
+                toast('Əlavə olundu', 'success');
             }
-            persistProducts();
-            resetAdminForm();
-            renderAdminTable();
-            updateAdminStats();
+            saveProducts();
+            resetForm();
+            renderAdmin();
+            updateStats();
             applyFilters();
         }
-
-        function resetAdminForm() {
+        function resetForm() {
             state.editingId = null;
-            document.getElementById('adminForm').reset();
-            pendingImageData = null;
-            document.getElementById('pImagePreview').classList.add('hidden');
-            document.getElementById('pStock').checked = true;
-            document.getElementById('adminFormTitle').textContent = 'Yeni Məhsul Əlavə Et';
-            document.getElementById('submitProductBtn').textContent = 'Əlavə Et';
-            document.getElementById('btnCancelEdit').classList.add('hidden');
-            setImageMode('file');
+            $('adminForm')?.reset();
+            pendingImg = null;
+            $('pPreview').classList.add('hidden');
+            $('pStock').checked = true;
+            $('formTitle').textContent = 'Yeni Məhsul Əlavə Et';
+            $('btnSubmit').textContent = 'Əlavə Et';
+            $('btnCancel').classList.add('hidden');
+            setImgMode('file');
         }
-
         function editProduct(id) {
             const p = state.products.find(x => x.id === id);
             if (!p) return;
             state.editingId = id;
-            document.getElementById('pName').value = p.name;
-            document.getElementById('pCategory').value = p.category;
-            document.getElementById('pPrice').value = p.price;
-            document.getElementById('pOldPrice').value = p.oldPrice || '';
-            document.getElementById('pDesc').value = p.desc || '';
-            document.getElementById('pStock').checked = p.stock !== false;
-            document.getElementById('pIsNew').checked = !!p.isNew;
-            
-            pendingImageData = null;
-            const preview = document.getElementById('pImagePreview');
-            if (p.image) { 
-                preview.src = p.image; 
-                preview.classList.remove('hidden');
-                // URL mode-a keçək əgər şəkil URL-dirsə
+            $('pName').value = p.name;
+            $('pCategory').value = p.category;
+            $('pPrice').value = p.price;
+            $('pOldPrice').value = p.oldPrice || '';
+            $('pDesc').value = p.desc || '';
+            $('pStock').checked = p.stock !== false;
+            $('pNew').checked = !!p.isNew;
+            pendingImg = null;
+            if (p.image) {
+                showPreview(p.image);
                 if (p.image.startsWith('http')) {
-                    setImageMode('url');
-                    document.getElementById('pImageUrl').value = p.image;
+                    setImgMode('url');
+                    $('pUrl').value = p.image;
                 }
-            } else { 
-                preview.classList.add('hidden'); 
+            } else {
+                $('pPreview').classList.add('hidden');
             }
-            
-            document.getElementById('adminFormTitle').textContent = 'Məhsulu Redaktə Et';
-            document.getElementById('submitProductBtn').textContent = 'Yenilə';
-            document.getElementById('btnCancelEdit').classList.remove('hidden');
-            document.getElementById('adminFormWrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            $('formTitle').textContent = 'Redaktə Et';
+            $('btnSubmit').textContent = 'Yenilə';
+            $('btnCancel').classList.remove('hidden');
+            $('adminFormWrapper').scrollIntoView({ behavior: 'smooth' });
         }
-
         function deleteProduct(id) {
             const p = state.products.find(x => x.id === id);
             if (!p) return;
-            openConfirm('"' + p.name + '" məhsulunu silmək istədiyinizə əminsiniz?', function () {
+            openConfirm(`"${p.name}" silinsin?`, () => {
                 state.products = state.products.filter(x => x.id !== id);
                 state.cart = state.cart.filter(x => x.id !== id);
-                persistProducts();
-                persistCart();
-                renderAdminTable();
-                updateAdminStats();
-                applyFilters();
-                renderCart();
-                toast('Məhsul silindi', 'success');
+                saveProducts(); saveCart();
+                renderAdmin(); updateStats(); applyFilters(); renderCart();
+                toast('Silindi', 'success');
             });
         }
-
-        function renderAdminTable() {
-            const container = document.getElementById('adminListContainer');
-            const q = document.getElementById('adminSearchInput').value.trim().toLowerCase();
+        function renderAdmin() {
+            const c = $('adminList');
+            const q = $('adminSearch').value.trim().toLowerCase();
             let list = state.products;
             if (q) list = list.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
-
-            if (list.length === 0) {
-                container.innerHTML = '<p class="text-sm text-gray-400 text-center py-6">Məhsul tapılmadı</p>';
-                return;
-            }
-            container.innerHTML = '';
+            if (!list.length) { c.innerHTML = '<p class="text-sm text-gray-400 text-center py-6">Tapılmadı</p>'; return; }
+            c.innerHTML = '';
             list.forEach(p => {
                 const row = document.createElement('div');
-                row.className = 'flex items-center gap-3 p-3 border border-gray-100 rounded-xl hover:bg-gray-50 transition group';
-                const img = p.image 
-                    ? '<img src="' + p.image + '" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML=\'<i class=\\\'fa-solid fa-capsules\\\'></i>\'">' 
-                    : '<i class="fa-solid ' + (p.icon || 'fa-capsules') + '"></i>';
+                row.className = 'flex items-center gap-3 p-3 border border-gray-100 dark:border-stone-800 rounded-xl hover:bg-gray-50 dark:hover:bg-stone-800/50 transition group';
+                const img = p.image
+                    ? `<img src="${p.image}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<i class=\\'fa-solid fa-capsules\\'></i>'">`
+                    : `<i class="fa-solid ${p.icon || 'fa-capsules'}"></i>`;
                 row.innerHTML = `
-                    <div class="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 overflow-hidden shrink-0 shadow-sm">${img}</div>
+                    <div class="w-12 h-12 rounded-lg bg-brand-50 dark:bg-stone-800 flex items-center justify-center text-brand-600 overflow-hidden shrink-0">${img}</div>
                     <div class="flex-1 min-w-0">
-                        <p class="font-semibold text-sm text-gray-900 truncate">${escapeHtml(p.name)}</p>
-                        <p class="text-xs text-gray-400">${escapeHtml(p.category)} · ${formatPrice(p.price)} ${p.stock === false ? '· <span class="text-red-500 font-bold">Stokda yoxdur</span>' : ''}</p>
+                        <p class="font-semibold text-sm text-gray-900 dark:text-white truncate">${esc(p.name)}</p>
+                        <p class="text-xs text-gray-400">${esc(p.category)} · ${fmtPrice(p.price)} ${p.stock === false ? '· <span class="text-red-500 font-bold">Stok yoxdur</span>' : ''}</p>
                     </div>
-                    <button onclick="editProduct(${p.id})" class="p-2 text-gray-400 hover:text-emerald-600 transition rounded-lg hover:bg-emerald-50" aria-label="Redaktə et"><i class="fa-solid fa-pen text-xs"></i></button>
-                    <button onclick="deleteProduct(${p.id})" class="p-2 text-gray-400 hover:text-red-600 transition rounded-lg hover:bg-red-50" aria-label="Sil"><i class="fa-solid fa-trash text-xs"></i></button>
+                    <button onclick="editProduct(${p.id})" class="p-2 text-gray-400 hover:text-brand-600 transition rounded-lg hover:bg-brand-50 dark:hover:bg-brand-900/20"><i class="fa-solid fa-pen text-xs"></i></button>
+                    <button onclick="deleteProduct(${p.id})" class="p-2 text-gray-400 hover:text-red-600 transition rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"><i class="fa-solid fa-trash text-xs"></i></button>
                 `;
-                container.appendChild(row);
+                c.appendChild(row);
+            });
+        }
+        function updateStats() {
+            $('statTotal').textContent = state.products.length;
+            $('statOut').textContent = state.products.filter(p => p.stock === false).length;
+            $('statValue').textContent = state.products.reduce((s, p) => s + p.price, 0).toFixed(2);
+        }
+        function exportData() {
+            const blob = new Blob([JSON.stringify({ products: state.products, exportedAt: new Date().toISOString() }, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `imisli-pharma-backup-${new Date().toISOString().slice(0,10)}.json`;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            toast('Endirildi', 'success');
+        }
+        function importData(e) {
+            const f = e.target.files[0];
+            if (!f) return;
+            const r = new FileReader();
+            r.onload = ev => {
+                try {
+                    const d = JSON.parse(ev.target.result);
+                    const list = Array.isArray(d) ? d : d.products;
+                    if (!Array.isArray(list)) throw new Error('invalid');
+                    openConfirm(`${list.length} məhsul tapıldı. Əvəz olunsun?`, () => {
+                        state.products = list;
+                        saveProducts();
+                        renderAdmin(); updateStats(); applyFilters();
+                        toast('Bərpa edildi', 'success');
+                    });
+                } catch(err) { toast('Fayl səhvdir', 'error'); }
+                e.target.value = '';
+            };
+            r.readAsText(f);
+        }
+        function changePass(e) {
+            e.preventDefault();
+            const cur = $('curPass').value;
+            const nxt = $('newPass').value;
+            const saved = localStorage.getItem(CONFIG.keys.adminPass);
+            if (cur !== saved) { toast('Cari şifrə yanlış', 'error'); return; }
+            if (nxt.length < 4) { toast('Min. 4 simvol', 'error'); return; }
+            localStorage.setItem(CONFIG.keys.adminPass, nxt);
+            toast('Şifrə dəyişdirildi', 'success');
+            $('changePassForm')?.reset();
+        }
+
+        // ============ CURSOR ============
+        function initCursor() {
+            if (window.matchMedia('(pointer: coarse)').matches) return;
+            const c = $('cursor');
+            const d = $('cursorDot');
+            let mx = 0, my = 0, cx = 0, cy = 0, dx = 0, dy = 0;
+
+            document.addEventListener('mousemove', e => {
+                mx = e.clientX; my = e.clientY;
+                d.style.left = mx + 'px'; d.style.top = my + 'px';
+            });
+
+            function animate() {
+                cx += (mx - cx) * 0.15;
+                cy += (my - cy) * 0.15;
+                c.style.left = cx + 'px';
+                c.style.top = cy + 'px';
+                requestAnimationFrame(animate);
+            }
+            animate();
+
+            document.querySelectorAll('a, button, [data-magnetic], input, select, .product-premium').forEach(el => {
+                el.addEventListener('mouseenter', () => c.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => c.classList.remove('hovering'));
             });
         }
 
-        function updateAdminStats() {
-            document.getElementById('adminStatTotal').textContent = state.products.length;
-            document.getElementById('adminStatOut').textContent = state.products.filter(p => p.stock === false).length;
-            const value = state.products.reduce((sum, p) => sum + p.price, 0);
-            document.getElementById('adminStatValue').textContent = value.toFixed(2);
+        // ============ MAGNETIC BUTTONS ============
+        function initMagnetic() {
+            if (window.matchMedia('(pointer: coarse)').matches) return;
+            document.querySelectorAll('[data-magnetic]').forEach(btn => {
+                btn.addEventListener('mousemove', e => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0, 0)';
+                });
+            });
         }
 
-        /* ==================== EHTİYAT NÜSXƏ ==================== */
-        function exportData() {
-            const payload = { products: state.products, exportedAt: new Date().toISOString(), source: 'İMİŞLİ PHARMA' };
-            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            const dateStr = new Date().toISOString().slice(0, 10);
-            a.href = url;
-            a.download = 'imisli-pharma-yedek-' + dateStr + '.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            toast('Ehtiyat nüsxə endirildi', 'success');
-        }
-
-        function handleImportFile(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function (ev) {
-                try {
-                    const data = JSON.parse(ev.target.result);
-                    const list = Array.isArray(data) ? data : data.products;
-                    if (!Array.isArray(list)) throw new Error('invalid');
-                    openConfirm(list.length + ' məhsul tapıldı. Mövcud kataloq bunlarla əvəz olunsun?', function () {
-                        state.products = list;
-                        persistProducts();
-                        renderAdminTable();
-                        updateAdminStats();
-                        applyFilters();
-                        toast('Data uğurla idxal edildi', 'success');
-                    });
-                } catch (err) {
-                    toast('Fayl oxuna bilmədi — düzgün ehtiyat faylı seçin', 'error');
-                }
-                e.target.value = '';
-            };
-            reader.readAsText(file);
-        }
-
-        function handleChangePassword(e) {
-            e.preventDefault();
-            const current = document.getElementById('currentPass').value;
-            const next = document.getElementById('newPass').value;
-            const saved = localStorage.getItem(CONFIG.storageKeys.adminPass);
-            if (current !== saved) { toast('Cari şifrə yanlışdır', 'error'); return; }
-            if (next.length < 4) { toast('Yeni şifrə ən azı 4 simvol olmalıdır', 'error'); return; }
-            localStorage.setItem(CONFIG.storageKeys.adminPass, next);
-            toast('Şifrə uğurla dəyişdirildi', 'success');
-            document.getElementById('changePassForm').reset();
-        }
-
-        /* ==================== SCROLL REVEAL ==================== */
-        function initScrollReveal() {
-            const observer = new IntersectionObserver((entries) => {
+        // ============ SCROLL REVEAL ============
+        function initReveal() {
+            const obs = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
+                        // Counter animation
+                        entry.target.querySelectorAll('.counter-value').forEach(c => {
+                            const target = parseInt(c.dataset.target);
+                            if (!target || c.dataset.animated) return;
+                            c.dataset.animated = '1';
+                            let current = 0;
+                            const inc = target / 50;
+                            const timer = setInterval(() => {
+                                current += inc;
+                                if (current >= target) { current = target; clearInterval(timer); }
+                                c.textContent = Math.floor(current).toLocaleString();
+                            }, 30);
+                        });
+                        obs.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            }, { threshold: 0.1 });
 
-            document.querySelectorAll('.reveal, .stagger-children').forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal-text').forEach((el, i) => {
+                const text = el.innerHTML;
+                el.innerHTML = '';
+                const span = document.createElement('span');
+                span.innerHTML = text;
+                span.style.transitionDelay = (i * 0.1) + 's';
+                el.appendChild(span);
+                setTimeout(() => el.classList.add('visible'), 100 + i * 100);
+            });
+
+            document.querySelectorAll('.stagger-container').forEach(el => obs.observe(el));
         }
 
-        /* ==================== YUXARIYA QAYIT DÜYMƏSİ ==================== */
-        window.addEventListener('scroll', function () {
-            const btn = document.getElementById('btnBackToTop');
-            if (window.scrollY > 500) { 
-                btn.classList.remove('opacity-0', 'pointer-events-none'); 
-            } else { 
-                btn.classList.add('opacity-0', 'pointer-events-none'); 
-            }
-        });
+        // ============ HEADER SCROLL ============
+        function initHeader() {
+            const header = $('header');
+            let last = 0;
+            window.addEventListener('scroll', () => {
+                const y = window.scrollY;
+                if (y > 100) {
+                    header.classList.add('py-2');
+                    header.classList.remove('py-4');
+                } else {
+                    header.classList.add('py-4');
+                    header.classList.remove('py-2');
+                }
+                last = y;
+            });
+        }
 
-        /* ==================== BAŞLANĞIC ==================== */
+        // ============ BACK TO TOP ============
+        function initBackToTop() {
+            const btn = $('backToTop');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 600) {
+                    btn.classList.remove('opacity-0', 'pointer-events-none');
+                } else {
+                    btn.classList.add('opacity-0', 'pointer-events-none');
+                }
+            });
+        }
+
+        // ============ DARK MODE ============
+        function toggleDark() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('pharma_dark', document.documentElement.classList.contains('dark'));
+        }
+        function initDark() {
+            if (localStorage.getItem('pharma_dark') === 'true' || 
+                (!localStorage.getItem('pharma_dark') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+        }
+
+        // ============ KEYBOARD SHORTCUTS ============
+        function initKeyboard() {
+            document.addEventListener('keydown', e => {
+                if (e.ctrlKey && e.key === 'k') {
+                    e.preventDefault();
+                    $('searchInputHero').focus();
+                }
+                if (e.key === 'Escape') {
+                    closeCart();
+                    closeQuickView();
+                    closeProductDetail();
+                    hideModal('adminLogin');
+                    hideModal('adminPanel');
+                    closeConfirm();
+                }
+            });
+        }
+
+        // ============ DRAG & DROP ============
+        function initDropZone() {
+            const zone = $('zoneFile');
+            if (!zone) return;
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(e => {
+                zone.addEventListener(e, ev => { ev.preventDefault(); ev.stopPropagation(); }, false);
+            });
+            ['dragenter', 'dragover'].forEach(e => zone.addEventListener(e, () => zone.classList.add('dragover'), false));
+            ['dragleave', 'drop'].forEach(e => zone.addEventListener(e, () => zone.classList.remove('dragover'), false));
+            zone.addEventListener('drop', e => {
+                const files = e.dataTransfer.files;
+                if (files.length) {
+                    $('pFile').files = files;
+                    handleImgFile({ target: { files } });
+                }
+            });
+        }
+
+        // ============ INIT ============
         function init() {
-            migrateOldData();
+            initDark();
             loadProducts();
             loadCart();
-            state.isAdmin = sessionStorage.getItem(CONFIG.storageKeys.adminSession) === '1';
-
-            document.getElementById('whatsappPrescriptionLink').href = 'https://wa.me/' + CONFIG.whatsappNumber + '?text=' + encodeURIComponent('Salam, dərman barədə məlumat almaq istəyirəm.');
-            document.getElementById('footerWhatsappLink').href = 'https://wa.me/' + CONFIG.whatsappNumber;
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            state.isAdmin = sessionStorage.getItem(CONFIG.keys.adminSession) === '1';
 
             applyFilters();
             renderCart();
-            updateOpenStatus();
-            setInterval(updateOpenStatus, 60000);
-            initScrollReveal();
+            updateStatus();
+            setInterval(updateStatus, 60000);
 
-            // Drag & drop support
-            const dropZone = document.getElementById('fileUploadZone');
-            if (dropZone) {
-                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                    dropZone.addEventListener(eventName, preventDefaults, false);
-                });
-                function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
-                ['dragenter', 'dragover'].forEach(eventName => {
-                    dropZone.addEventListener(eventName, () => dropZone.classList.add('dragover'), false);
-                });
-                ['dragleave', 'drop'].forEach(eventName => {
-                    dropZone.addEventListener(eventName, () => dropZone.classList.remove('dragover'), false);
-                });
-                dropZone.addEventListener('drop', (e) => {
-                    const dt = e.dataTransfer;
-                    const files = dt.files;
-                    if (files.length) {
-                        document.getElementById('pImageInput').files = files;
-                        handleImageInput({ target: { files: files } });
-                    }
-                });
+            initCursor();
+            initMagnetic();
+            initReveal();
+            initHeader();
+            initBackToTop();
+            initKeyboard();
+            initDropZone();
+
+            // Mobile nav padding
+            if (window.innerWidth < 768) {
+                document.body.style.paddingBottom = '80px';
             }
         }
 
