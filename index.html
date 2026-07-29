@@ -24,9 +24,7 @@
                             300: '#6ee7b7', 400: '#34d399', 500: '#10b981',
                             600: '#059669', 700: '#047857', 800: '#065f46', 900: '#064e3b',
                         },
-                        gold: {
-                            400: '#fbbf24', 500: '#f59e0b', 600: '#d97706',
-                        }
+                        gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
                     }
                 }
             }
@@ -39,13 +37,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        :root {
-            --cursor-size: 20px;
-            --cursor-hover-size: 60px;
-        }
-        
+        :root { --cursor-size: 20px; --cursor-hover-size: 60px; }
         * { cursor: none; }
-        @media (pointer: coarse) { * { cursor: auto; } .custom-cursor { display: none; } }
+        @media (pointer: coarse) { * { cursor: auto; } .custom-cursor, .cursor-dot { display: none !important; } }
 
         body {
             font-family: 'Inter', system-ui, sans-serif;
@@ -54,244 +48,182 @@
         }
         body.dark { background: #0c0a09; color: #e7e5e4; }
 
-        /* Custom Cursor */
         .custom-cursor {
-            position: fixed;
-            top: 0; left: 0;
-            width: var(--cursor-size);
-            height: var(--cursor-size);
-            border: 2px solid #059669;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s, transform 0.1s;
+            position: fixed; top: 0; left: 0;
+            width: var(--cursor-size); height: var(--cursor-size);
+            border: 2px solid #059669; border-radius: 50%;
+            pointer-events: none; z-index: 9999;
+            transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
             transform: translate(-50%, -50%);
             mix-blend-mode: difference;
         }
         .custom-cursor.hovering {
-            width: var(--cursor-hover-size);
-            height: var(--cursor-hover-size);
-            background: rgba(5, 150, 105, 0.1);
-            border-color: #059669;
+            width: var(--cursor-hover-size); height: var(--cursor-hover-size);
+            background: rgba(5,150,105,0.1); border-color: #059669;
         }
         .cursor-dot {
-            position: fixed;
-            top: 0; left: 0;
-            width: 6px; height: 6px;
-            background: #059669;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 10000;
+            position: fixed; top: 0; left: 0;
+            width: 6px; height: 6px; background: #059669;
+            border-radius: 50%; pointer-events: none; z-index: 10000;
             transform: translate(-50%, -50%);
         }
 
-        /* Noise texture overlay */
         .noise {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0.03;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9998; opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
 
-        /* Smooth scroll container */
-        .smooth-scroll { scroll-behavior: smooth; }
-
-        /* Premium scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #059669, #047857); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #065f46; }
 
-        /* Glass morphism */
         .glass-premium {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255,255,255,0.35);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.02);
         }
         .dark .glass-premium {
-            background: rgba(28, 25, 23, 0.7);
-            border-color: rgba(255, 255, 255, 0.08);
+            background: rgba(28,25,23,0.75);
+            border-color: rgba(255,255,255,0.08);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
 
-        /* Text reveal animation */
-        .reveal-text {
-            overflow: hidden;
-        }
+        .reveal-text { overflow: hidden; }
         .reveal-text span {
             display: inline-block;
-            transform: translateY(100%);
+            transform: translateY(110%);
             opacity: 0;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s;
+            transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), opacity 0.9s;
         }
-        .reveal-text.visible span {
-            transform: translateY(0);
-            opacity: 1;
-        }
+        .reveal-text.visible span { transform: translateY(0); opacity: 1; }
 
-        /* Magnetic button */
         .magnetic-btn {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative; display: inline-flex;
+            align-items: center; justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.23,1,0.32,1);
         }
         .magnetic-btn::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
+            content: ''; position: absolute; inset: -3px;
             border-radius: inherit;
             background: linear-gradient(135deg, #059669, #10b981);
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: -1;
+            opacity: 0; transition: opacity 0.3s; z-index: -1;
         }
-        .magnetic-btn:hover::before { opacity: 0.3; }
+        .magnetic-btn:hover::before { opacity: 0.25; }
 
-        /* 3D Tilt Card */
         .tilt-card {
             transform-style: preserve-3d;
             transform: perspective(1000px);
-            transition: transform 0.1s ease-out;
-        }
-        .tilt-content {
-            transform: translateZ(30px);
+            transition: transform 0.15s ease-out;
         }
 
-        /* Shimmer loading */
         @keyframes shimmer {
             0% { background-position: -1000px 0; }
             100% { background-position: 1000px 0; }
         }
         .shimmer {
-            background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.4) 50%, transparent 75%);
+            background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.5) 50%, transparent 75%);
             background-size: 1000px 100%;
-            animation: shimmer 2s infinite;
+            animation: shimmer 2.5s infinite;
+        }
+        .dark .shimmer {
+            background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.08) 50%, transparent 75%);
+            background-size: 1000px 100%;
         }
 
-        /* Gradient text */
         .text-gradient {
-            background: linear-gradient(135deg, #059669 0%, #34d399 50%, #059669 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 200% auto;
-            animation: gradientMove 3s linear infinite;
+            background: linear-gradient(135deg, #059669 0%, #34d399 40%, #059669 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; background-size: 200% auto;
+            animation: gradientMove 4s linear infinite;
         }
         @keyframes gradientMove {
             0% { background-position: 0% center; }
             100% { background-position: 200% center; }
         }
 
-        /* Glow effects */
-        .glow-green {
-            box-shadow: 0 0 40px rgba(16, 185, 129, 0.15);
-        }
-        .glow-gold {
-            box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
-        }
+        .glow-green { box-shadow: 0 0 40px rgba(16,185,129,0.15); }
+        .glow-gold { box-shadow: 0 0 30px rgba(245,158,11,0.2); }
 
-        /* Floating animation */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
         }
         .float-anim { animation: float 6s ease-in-out infinite; }
 
-        /* Pulse ring */
         @keyframes pulseRing {
             0% { transform: scale(0.8); opacity: 1; }
-            100% { transform: scale(2); opacity: 0; }
+            100% { transform: scale(2.2); opacity: 0; }
         }
         .pulse-ring::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 2px solid #10b981;
-            animation: pulseRing 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            content: ''; position: absolute; inset: -4px;
+            border-radius: 50%; border: 2px solid #10b981;
+            animation: pulseRing 2.5s cubic-bezier(0.215,0.61,0.355,1) infinite;
         }
 
-        /* Product card premium */
         .product-premium {
-            background: white;
-            border-radius: 24px;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            background: white; border-radius: 24px; overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
             border: 1px solid rgba(0,0,0,0.04);
         }
         .product-premium:hover {
             transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 30px 60px -15px rgba(5, 150, 105, 0.2);
-            border-color: rgba(16, 185, 129, 0.2);
+            box-shadow: 0 30px 60px -15px rgba(5,150,105,0.18);
+            border-color: rgba(16,185,129,0.15);
         }
         .dark .product-premium {
             background: #1c1917;
-            border-color: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.05);
         }
 
-        /* Image zoom container */
         .img-zoom-container { overflow: hidden; }
         .img-zoom-container img {
-            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: transform 0.8s cubic-bezier(0.23,1,0.32,1);
         }
-        .product-premium:hover .img-zoom-container img {
-            transform: scale(1.15);
-        }
+        .product-premium:hover .img-zoom-container img { transform: scale(1.12); }
 
-        /* Badge premium */
         .badge-premium {
             background: linear-gradient(135deg, #f59e0b, #d97706);
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            box-shadow: 0 4px 15px rgba(245,158,11,0.3);
         }
         .badge-new {
             background: linear-gradient(135deg, #059669, #047857);
-            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+            box-shadow: 0 4px 15px rgba(5,150,105,0.3);
         }
 
-        /* Section divider */
         .section-divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, #059669, transparent);
             opacity: 0.2;
         }
 
-        /* Counter animation */
-        .counter-value {
-            font-variant-numeric: tabular-nums;
-        }
+        .counter-value { font-variant-numeric: tabular-nums; }
 
-        /* Toast premium */
         .toast-premium {
-            animation: toastSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: toastSlide 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
         }
         @keyframes toastSlide {
-            from { transform: translateX(100px) scale(0.9); opacity: 0; }
+            from { transform: translateX(120px) scale(0.9); opacity: 0; }
             to { transform: translateX(0) scale(1); opacity: 1; }
         }
 
-        /* Mobile bottom nav */
         @media (max-width: 768px) {
             .mobile-nav {
-                position: fixed;
-                bottom: 0; left: 0; right: 0;
-                z-index: 50;
-                background: rgba(255,255,255,0.9);
+                position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+                background: rgba(255,255,255,0.92);
                 backdrop-filter: blur(20px);
                 border-top: 1px solid rgba(0,0,0,0.05);
-                padding: 12px 24px calc(12px + env(safe-area-inset-bottom));
+                padding: 10px 20px calc(10px + env(safe-area-inset-bottom));
             }
             .dark .mobile-nav {
-                background: rgba(12, 10, 9, 0.9);
+                background: rgba(12,10,9,0.92);
                 border-color: rgba(255,255,255,0.05);
             }
         }
 
-        /* Hero gradient mesh */
         .mesh-gradient {
             background: 
                 radial-gradient(at 0% 0%, hsla(160,80%,35%,1) 0, transparent 50%), 
@@ -306,33 +238,161 @@
             50% { background-position: 100% 50%; }
         }
 
-        /* Line clamp */
         .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            display: -webkit-box; -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical; overflow: hidden;
         }
 
-        /* Hide scrollbar for horizontal scroll */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Focus visible */
         :focus-visible { outline: 2px solid #059669; outline-offset: 3px; border-radius: 8px; }
 
-        /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
             * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
+
+        /* Product Detail Gallery */
+        .gallery-main {
+            position: relative; overflow: hidden; border-radius: 24px;
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+        }
+        .dark .gallery-main { background: linear-gradient(135deg, #1c1917, #292524); }
+        .gallery-main img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.23,1,0.32,1);
+        }
+        .gallery-main:hover img { transform: scale(1.05); }
+
+        .gallery-thumb {
+            width: 72px; height: 72px; border-radius: 16px;
+            overflow: hidden; cursor: pointer; border: 2px solid transparent;
+            transition: all 0.3s ease; opacity: 0.6;
+            background: #f5f5f4;
+        }
+        .dark .gallery-thumb { background: #292524; }
+        .gallery-thumb.active { border-color: #059669; opacity: 1; transform: scale(1.05); }
+        .gallery-thumb:hover { opacity: 1; }
+        .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed; inset: 0; z-index: 100;
+            background: rgba(0,0,0,0.92); backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        }
+        .lightbox.active { opacity: 1; pointer-events: all; }
+        .lightbox img {
+            max-width: 90vw; max-height: 85vh;
+            object-fit: contain; border-radius: 8px;
+            transform: scale(0.9); transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+        }
+        .lightbox.active img { transform: scale(1); }
+
+        /* Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, #f5f5f4 25%, #e7e5e4 50%, #f5f5f4 75%);
+            background-size: 200% 100%; animation: skeleton 1.5s infinite;
+            border-radius: 12px;
+        }
+        .dark .skeleton {
+            background: linear-gradient(90deg, #292524 25%, #44403c 50%, #292524 75%);
+            background-size: 200% 100%;
+        }
+        @keyframes skeleton {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Tab system */
+        .tab-btn {
+            position: relative; padding: 12px 20px;
+            font-size: 13px; font-weight: 600; color: #78716c;
+            transition: color 0.3s; white-space: nowrap;
+        }
+        .dark .tab-btn { color: #a8a29e; }
+        .tab-btn.active { color: #059669; }
+        .tab-btn::after {
+            content: ''; position: absolute; bottom: 0; left: 20px; right: 20px;
+            height: 2px; background: #059669; border-radius: 2px;
+            transform: scaleX(0); transition: transform 0.3s cubic-bezier(0.23,1,0.32,1);
+        }
+        .tab-btn.active::after { transform: scaleX(1); }
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Stock bar */
+        .stock-bar {
+            height: 6px; border-radius: 3px;
+            background: #e7e5e4; overflow: hidden;
+        }
+        .dark .stock-bar { background: #44403c; }
+        .stock-bar-fill {
+            height: 100%; border-radius: 3px;
+            background: linear-gradient(90deg, #059669, #10b981);
+            transition: width 1s cubic-bezier(0.23,1,0.32,1);
+        }
+
+        /* Share buttons */
+        .share-btn {
+            width: 40px; height: 40px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            background: #f5f5f4; color: #57534e;
+            transition: all 0.3s ease;
+        }
+        .dark .share-btn { background: #292524; color: #d6d3d1; }
+        .share-btn:hover { transform: translateY(-3px); }
+        .share-btn.whatsapp:hover { background: #22c55e; color: white; }
+        .share-btn.telegram:hover { background: #0ea5e9; color: white; }
+        .share-btn.facebook:hover { background: #3b82f6; color: white; }
+        .share-btn.copy:hover { background: #059669; color: white; }
+
+        /* Related products horizontal scroll */
+        .related-scroll {
+            display: flex; gap: 16px; overflow-x: auto;
+            scroll-snap-type: x mandatory; padding-bottom: 8px;
+        }
+        .related-scroll > * { scroll-snap-align: start; flex-shrink: 0; }
+
+        /* Sticky mobile add to cart */
+        .sticky-mobile-cart {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0,0,0,0.06); padding: 12px 20px;
+            padding-bottom: calc(12px + env(safe-area-inset-bottom));
+            transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+            z-index: 45; display: flex; align-items: center; gap: 12px;
+        }
+        .dark .sticky-mobile-cart {
+            background: rgba(12,10,9,0.95);
+            border-color: rgba(255,255,255,0.06);
+        }
+        .sticky-mobile-cart.visible { transform: translateY(0); }
+
+        /* Image zoom lens */
+        .zoom-lens {
+            position: absolute; border: 2px solid #059669;
+            width: 120px; height: 120px; border-radius: 50%;
+            pointer-events: none; opacity: 0;
+            transition: opacity 0.3s; background: rgba(5,150,105,0.05);
+            transform: translate(-50%, -50%);
+        }
+        .gallery-main:hover .zoom-lens { opacity: 1; }
+
+        /* Breathing animation for hero */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.1); opacity: 0.25; }
+        }
+        .breathing { animation: breathe 8s ease-in-out infinite; }
     </style>
+<base target="_blank">
 </head>
 <body class="antialiased text-gray-800 dark:text-stone-200">
 
-    <!-- Noise Overlay -->
     <div class="noise"></div>
-
-    <!-- Custom Cursor -->
     <div class="custom-cursor" id="cursor"></div>
     <div class="cursor-dot" id="cursorDot"></div>
 
@@ -340,12 +400,9 @@
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
             <div class="glass-premium rounded-2xl px-5 py-3 flex items-center justify-between gap-4">
-                <!-- Logo -->
                 <a href="#" class="flex items-center gap-3 group magnetic-btn" data-magnetic>
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-brand-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/30 group-hover:shadow-brand-500/50 transition-all duration-500 group-hover:scale-110">
-                        <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
-                            <path d="M38 18h24v24h24v16H62v24H38V58H14V42h24z" fill="white"/>
-                        </svg>
+                        <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M38 18h24v24h24v16H62v24H38V58H14V42h24z" fill="white"/></svg>
                     </div>
                     <div>
                         <span class="text-lg font-display font-bold text-gray-900 dark:text-white tracking-tight">İMİŞLİ <span class="text-brand-600">PHARMA</span></span>
@@ -353,33 +410,24 @@
                     </div>
                 </a>
 
-                <!-- Desktop Nav -->
                 <nav class="hidden lg:flex items-center gap-8">
                     <a href="#kataloq" class="text-sm font-medium text-gray-600 dark:text-stone-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors magnetic-btn" data-magnetic>Kataloq</a>
                     <a href="#haqqimizda" class="text-sm font-medium text-gray-600 dark:text-stone-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors magnetic-btn" data-magnetic>Haqqımızda</a>
                     <a href="#elaqe" class="text-sm font-medium text-gray-600 dark:text-stone-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors magnetic-btn" data-magnetic>Əlaqə</a>
                 </nav>
 
-                <!-- Actions -->
                 <div class="flex items-center gap-3">
-                    <!-- Dark mode toggle -->
                     <button onclick="toggleDark()" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-stone-800 flex items-center justify-center text-gray-600 dark:text-stone-400 hover:bg-gray-200 dark:hover:bg-stone-700 transition magnetic-btn" data-magnetic aria-label="Dark mode">
                         <i class="fa-solid fa-moon dark:hidden"></i>
                         <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
                     </button>
-
-                    <!-- Admin -->
                     <button onclick="openAdminEntry()" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-stone-800 flex items-center justify-center text-gray-500 dark:text-stone-500 hover:bg-gray-200 dark:hover:bg-stone-700 transition magnetic-btn" data-magnetic aria-label="Admin">
                         <i class="fa-solid fa-lock text-sm"></i>
                     </button>
-
-                    <!-- Cart -->
                     <button onclick="openCart()" class="relative w-10 h-10 rounded-xl bg-gray-100 dark:bg-stone-800 flex items-center justify-center text-gray-700 dark:text-stone-300 hover:bg-gray-200 dark:hover:bg-stone-700 transition magnetic-btn" data-magnetic aria-label="Səbət">
                         <i class="fa-solid fa-bag-shopping text-sm"></i>
                         <span id="cartCountBadge" class="hidden absolute -top-1 -right-1 bg-brand-600 text-white text-[9px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-lg shadow-brand-500/40">0</span>
                     </button>
-
-                    <!-- CTA -->
                     <a href="https://wa.me/994516011390" target="_blank" class="hidden sm:flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:-translate-y-0.5 magnetic-btn" data-magnetic>
                         <i class="fa-brands fa-whatsapp text-lg"></i>
                         <span>Resept Göndər</span>
@@ -391,15 +439,12 @@
 
     <!-- ============ HERO ============ -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
-        <!-- Background -->
         <div class="absolute inset-0 mesh-gradient opacity-10 dark:opacity-20"></div>
-        
-        <!-- Floating orbs -->
-        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-400/20 rounded-full blur-3xl float-anim"></div>
+        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-400/20 rounded-full blur-3xl float-anim breathing"></div>
         <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-300/10 rounded-full blur-3xl float-anim" style="animation-delay: -3s;"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-500/5 rounded-full blur-3xl breathing" style="animation-delay: -4s;"></div>
 
         <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
-            <!-- Status pill -->
             <div class="inline-flex items-center gap-2 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl border border-brand-200 dark:border-brand-800/50 px-4 py-2 rounded-full text-xs font-semibold text-brand-700 dark:text-brand-400 mb-8 shadow-lg shadow-brand-500/10">
                 <span class="relative flex h-2.5 w-2.5">
                     <span id="statusPing" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
@@ -408,7 +453,6 @@
                 <span id="statusText">Yüklənir...</span>
             </div>
 
-            <!-- Main heading -->
             <h1 class="text-4xl sm:text-5xl md:text-7xl font-display font-extrabold text-gray-900 dark:text-white leading-[1.1] mb-6 tracking-tight">
                 <span class="reveal-text block"><span>Sağlamlığınız</span></span>
                 <span class="reveal-text block"><span class="text-gradient">Bizim Missiyamızdır</span></span>
@@ -418,7 +462,6 @@
                 <span>Orijinal dərman vasitələri, premium tibbi avadanlıqlar və uşaq qidaları. Keyfiyyətə zəmanət veririk.</span>
             </p>
 
-            <!-- Search -->
             <div class="max-w-xl mx-auto relative group reveal-text">
                 <span>
                     <div class="relative">
@@ -430,7 +473,6 @@
                 </span>
             </div>
 
-            <!-- Stats -->
             <div class="grid grid-cols-3 gap-8 max-w-lg mx-auto mt-16">
                 <div class="text-center">
                     <div class="text-2xl md:text-3xl font-display font-bold text-brand-600 counter-value" data-target="500">0</div>
@@ -447,7 +489,6 @@
             </div>
         </div>
 
-        <!-- Scroll indicator -->
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
             <span class="text-[10px] uppercase tracking-widest text-gray-400">Aşağı sürüşdürün</span>
             <div class="w-5 h-8 border-2 border-gray-300 rounded-full flex justify-center pt-1">
@@ -456,7 +497,6 @@
         </div>
     </section>
 
-    <!-- Divider -->
     <div class="section-divider max-w-4xl mx-auto"></div>
 
     <!-- ============ FEATURES ============ -->
@@ -491,7 +531,6 @@
     <!-- ============ CATALOG ============ -->
     <section id="kataloq" class="py-20 px-4 scroll-mt-24">
         <div class="max-w-7xl mx-auto">
-            <!-- Section header -->
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
                 <div>
                     <span class="text-xs font-bold text-brand-600 uppercase tracking-widest mb-2 block">Kataloq</span>
@@ -512,7 +551,6 @@
                 </div>
             </div>
 
-            <!-- Categories -->
             <div class="flex gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
                 <button onclick="filterCat('all', this)" class="cat-btn active px-5 py-2.5 rounded-xl text-xs font-bold bg-brand-600 text-white shadow-lg shadow-brand-500/25 transition-all duration-300 whitespace-nowrap">Hamısı</button>
                 <button onclick="filterCat('Vitamini', this)" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-stone-900 text-gray-600 dark:text-stone-400 border border-gray-200 dark:border-stone-800 hover:border-brand-500 hover:text-brand-600 transition-all duration-300 whitespace-nowrap">Vitamini</button>
@@ -521,7 +559,6 @@
                 <button onclick="filterCat('Tibbi', this)" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-stone-900 text-gray-600 dark:text-stone-400 border border-gray-200 dark:border-stone-800 hover:border-brand-500 hover:text-brand-600 transition-all duration-300 whitespace-nowrap">Tibbi Ləvazimat</button>
             </div>
 
-            <!-- Empty state -->
             <div id="emptyState" class="hidden text-center py-20">
                 <div class="w-24 h-24 bg-gray-100 dark:bg-stone-800 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fa-solid fa-magnifying-glass text-3xl text-gray-300 dark:text-stone-600"></i>
@@ -529,7 +566,50 @@
                 <p class="text-gray-500 dark:text-stone-500 font-medium">Axtarışa uyğun məhsul tapılmadı</p>
             </div>
 
-            <!-- Product Grid -->
+            <!-- Skeleton Loader -->
+            <div id="skeletonGrid" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="rounded-3xl overflow-hidden bg-white dark:bg-stone-900 border border-gray-100 dark:border-stone-800 p-4">
+                    <div class="skeleton h-48 rounded-2xl mb-4"></div>
+                    <div class="skeleton h-4 w-20 rounded mb-3"></div>
+                    <div class="skeleton h-6 w-full rounded mb-2"></div>
+                    <div class="skeleton h-4 w-3/4 rounded mb-4"></div>
+                    <div class="flex justify-between">
+                        <div class="skeleton h-6 w-16 rounded"></div>
+                        <div class="skeleton h-9 w-9 rounded-xl"></div>
+                    </div>
+                </div>
+                <div class="rounded-3xl overflow-hidden bg-white dark:bg-stone-900 border border-gray-100 dark:border-stone-800 p-4">
+                    <div class="skeleton h-48 rounded-2xl mb-4"></div>
+                    <div class="skeleton h-4 w-20 rounded mb-3"></div>
+                    <div class="skeleton h-6 w-full rounded mb-2"></div>
+                    <div class="skeleton h-4 w-3/4 rounded mb-4"></div>
+                    <div class="flex justify-between">
+                        <div class="skeleton h-6 w-16 rounded"></div>
+                        <div class="skeleton h-9 w-9 rounded-xl"></div>
+                    </div>
+                </div>
+                <div class="rounded-3xl overflow-hidden bg-white dark:bg-stone-900 border border-gray-100 dark:border-stone-800 p-4">
+                    <div class="skeleton h-48 rounded-2xl mb-4"></div>
+                    <div class="skeleton h-4 w-20 rounded mb-3"></div>
+                    <div class="skeleton h-6 w-full rounded mb-2"></div>
+                    <div class="skeleton h-4 w-3/4 rounded mb-4"></div>
+                    <div class="flex justify-between">
+                        <div class="skeleton h-6 w-16 rounded"></div>
+                        <div class="skeleton h-9 w-9 rounded-xl"></div>
+                    </div>
+                </div>
+                <div class="rounded-3xl overflow-hidden bg-white dark:bg-stone-900 border border-gray-100 dark:border-stone-800 p-4">
+                    <div class="skeleton h-48 rounded-2xl mb-4"></div>
+                    <div class="skeleton h-4 w-20 rounded mb-3"></div>
+                    <div class="skeleton h-6 w-full rounded mb-2"></div>
+                    <div class="skeleton h-4 w-3/4 rounded mb-4"></div>
+                    <div class="flex justify-between">
+                        <div class="skeleton h-6 w-16 rounded"></div>
+                        <div class="skeleton h-9 w-9 rounded-xl"></div>
+                    </div>
+                </div>
+            </div>
+
             <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 stagger-container"></div>
         </div>
     </section>
@@ -562,9 +642,7 @@
 
     <!-- ============ FOOTER ============ -->
     <footer id="elaqe" class="bg-gray-900 dark:bg-black text-white pt-20 pb-8 px-4 relative overflow-hidden">
-        <!-- Glow -->
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl"></div>
-        
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                 <div class="md:col-span-2">
@@ -610,6 +688,10 @@
             </div>
         </div>
     </footer>
+        </button>
+        <img id="lightboxImage" src="" alt="">
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2" id="lightboxDots"></div>
+    </div>
 
     <!-- ============ CART DRAWER ============ -->
     <div id="cartOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden z-50 opacity-0 transition-opacity duration-300" onclick="closeCart()"></div>
@@ -644,35 +726,6 @@
         </div>
     </aside>
 
-    <!-- ============ QUICK VIEW ============ -->
-    <div id="quickView" class="fixed inset-0 bg-black/50 backdrop-blur-md hidden items-center justify-center p-4 z-50 opacity-0 transition-opacity duration-300">
-        <div class="modal-content bg-white dark:bg-stone-900 rounded-3xl max-w-lg w-full shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
-            <div class="relative h-72 bg-gradient-to-br from-brand-50 to-brand-100 dark:from-stone-800 dark:to-stone-900 flex items-center justify-center overflow-hidden">
-                <button onclick="closeQuickView()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 dark:bg-black/50 backdrop-blur flex items-center justify-center text-gray-600 dark:text-white hover:scale-110 transition z-10">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-                <div id="qvImage" class="w-full h-full flex items-center justify-center"></div>
-            </div>
-            <div class="p-8">
-                <span id="qvCategory" class="text-[10px] font-bold uppercase tracking-widest text-brand-600 bg-brand-50 dark:bg-brand-900/20 px-3 py-1 rounded-full"></span>
-                <h3 id="qvName" class="font-display font-bold text-2xl text-gray-900 dark:text-white mt-3 mb-2"></h3>
-                <p id="qvDesc" class="text-sm text-gray-500 dark:text-stone-400 leading-relaxed mb-5"></p>
-                <div class="flex items-center justify-between mb-6">
-                    <div id="qvPrice" class="flex items-baseline gap-2"></div>
-                    <span id="qvStock"></span>
-                </div>
-                <div class="flex gap-3">
-                    <div class="flex items-center bg-gray-100 dark:bg-stone-800 rounded-xl overflow-hidden">
-                        <button onclick="changeQvQty(-1)" class="px-4 py-3 text-gray-600 dark:text-stone-400 hover:text-brand-600 font-bold transition">−</button>
-                        <span id="qvQty" class="px-4 font-bold text-gray-900 dark:text-white min-w-[2rem] text-center">1</span>
-                        <button onclick="changeQvQty(1)" class="px-4 py-3 text-gray-600 dark:text-stone-400 hover:text-brand-600 font-bold transition">+</button>
-                    </div>
-                    <button id="qvAdd" onclick="addQvToCart()" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-brand-500/20">Səbətə At</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- ============ ADMIN LOGIN ============ -->
     <div id="adminLogin" class="fixed inset-0 bg-black/50 backdrop-blur-md hidden items-center justify-center p-4 z-50 opacity-0 transition-opacity duration-300">
         <div class="modal-content bg-white dark:bg-stone-900 rounded-3xl p-8 max-w-sm w-full shadow-2xl">
@@ -701,7 +754,6 @@
                 </div>
             </div>
             <div class="p-5 space-y-6">
-                <!-- Stats -->
                 <div class="grid grid-cols-3 gap-3">
                     <div class="bg-gradient-to-br from-brand-50 to-brand-100 dark:from-brand-900/20 dark:to-brand-800/20 rounded-2xl p-4 text-center border border-brand-100 dark:border-brand-800/30">
                         <p id="statTotal" class="text-2xl font-display font-bold text-brand-700 dark:text-brand-400">0</p>
@@ -717,10 +769,9 @@
                     </div>
                 </div>
 
-                <!-- Form -->
-                <div class="bg-gray-50/50 dark:bg-stone-800/50 rounded-2xl p-5 border border-gray-100 dark:border-stone-800">
+                <div id="adminFormWrapper" class="bg-gray-50/50 dark:bg-stone-800/50 rounded-2xl p-5 border border-gray-100 dark:border-stone-800">
                     <h4 id="formTitle" class="font-display font-bold text-sm text-gray-900 dark:text-white mb-4">Yeni Məhsul Əlavə Et</h4>
-                    <form onsubmit="handleProductSubmit(event)" class="space-y-3">
+                    <form id="adminForm" onsubmit="handleProductSubmit(event)" class="space-y-3">
                         <div class="grid grid-cols-2 gap-3">
                             <div class="col-span-2">
                                 <label class="block text-xs font-semibold text-gray-600 dark:text-stone-400 mb-1">Məhsul Adı</label>
@@ -748,20 +799,21 @@
                                 <input type="text" id="pDesc" class="w-full bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 rounded-xl p-2.5 text-sm focus:outline-none focus:border-brand-500 dark:text-white">
                             </div>
                             <div class="col-span-2">
-                                <label class="block text-xs font-semibold text-gray-600 dark:text-stone-400 mb-1">Şəkil</label>
+                                <label class="block text-xs font-semibold text-gray-600 dark:text-stone-400 mb-1">Şəkillər (1 və ya daha çox)</label>
                                 <div class="flex gap-2 mb-2">
                                     <button type="button" onclick="setImgMode('file')" id="btnFile" class="text-xs px-3 py-1.5 rounded-lg bg-brand-600 text-white font-medium">Fayl</button>
                                     <button type="button" onclick="setImgMode('url')" id="btnUrl" class="text-xs px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-stone-800 text-gray-600 dark:text-stone-400 font-medium">URL</button>
                                 </div>
                                 <div id="zoneFile" class="border-2 border-dashed border-gray-300 dark:border-stone-700 rounded-xl p-4 text-center relative hover:border-brand-500 transition cursor-pointer">
-                                    <input type="file" id="pFile" accept="image/*" onchange="handleImgFile(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                    <input type="file" id="pFile" accept="image/*" multiple onchange="handleImgFile(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                                     <i class="fa-solid fa-cloud-arrow-up text-2xl text-gray-300 mb-1"></i>
-                                    <p class="text-xs text-gray-400">Sürükləyin və ya klikləyin</p>
+                                    <p class="text-xs text-gray-400">Sürükləyin və ya klikləyin (birdən çox)</p>
                                 </div>
-                                <div id="zoneUrl" class="hidden">
+                                <div id="zoneUrl" class="hidden space-y-2">
                                     <input type="url" id="pUrl" onchange="handleImgUrl(this.value)" placeholder="https://..." class="w-full bg-white dark:bg-stone-900 border border-gray-200 dark:border-stone-700 rounded-xl p-2.5 text-sm focus:outline-none focus:border-brand-500 dark:text-white">
+                                    <p class="text-[10px] text-gray-400">Birdən çox URL üçün vergüllə ayırın</p>
                                 </div>
-                                <img id="pPreview" class="hidden mt-2 w-16 h-16 object-cover rounded-lg border border-gray-200 dark:border-stone-700">
+                                <div id="pPreviewContainer" class="hidden mt-3 flex gap-2 flex-wrap"></div>
                             </div>
                             <label class="flex items-center gap-2 text-xs font-semibold text-gray-600 dark:text-stone-400 cursor-pointer">
                                 <input type="checkbox" id="pStock" checked class="rounded text-brand-600 focus:ring-brand-500 w-4 h-4"> Stokda var
@@ -777,7 +829,6 @@
                     </form>
                 </div>
 
-                <!-- List -->
                 <div>
                     <div class="flex justify-between items-center mb-3">
                         <h4 class="font-display font-bold text-sm text-gray-900 dark:text-white">Məhsullar</h4>
@@ -786,7 +837,6 @@
                     <div id="adminList" class="space-y-2 max-h-64 overflow-y-auto pr-1"></div>
                 </div>
 
-                <!-- Backup -->
                 <div class="border-t border-gray-100 dark:border-stone-800 pt-5">
                     <h4 class="font-display font-bold text-sm text-gray-900 dark:text-white mb-3">Ehtiyat Nüsxə</h4>
                     <div class="flex gap-2">
@@ -800,7 +850,6 @@
                     </div>
                 </div>
 
-                <!-- Password -->
                 <div class="border-t border-gray-100 dark:border-stone-800 pt-5">
                     <h4 class="font-display font-bold text-sm text-gray-900 dark:text-white mb-3">Şifrəni Dəyiş</h4>
                     <form onsubmit="changePass(event)" class="grid grid-cols-2 gap-2">
@@ -856,17 +905,27 @@
         </a>
     </nav>
 
-    <!-- ============ JAVASCRIPT ============ -->
+    <!-- ============ STICKY MOBILE ADD TO CART ============ -->
+    <div id="stickyMobileCart" class="sticky-mobile-cart md:hidden">
+        <div class="flex-1">
+            <p id="stickyMobileName" class="text-sm font-bold text-gray-900 dark:text-white truncate"></p>
+            <p id="stickyMobilePrice" class="text-xs text-brand-600 font-bold"></p>
+        </div>
+        <button onclick="addDetailToCart()" id="stickyMobileBtn" class="bg-brand-600 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-brand-500/20">
+            Səbətə At
+        </button>
+    </div>
+
     <script>
         // ============ CONFIG ============
         const CONFIG = {
             whatsapp: '994516011390',
             open: 8, close: 22,
             keys: {
-                products: 'pharma_products_v3',
-                cart: 'pharma_cart_v2',
-                adminPass: 'pharma_admin',
-                adminSession: 'pharma_session'
+                products: 'pharma_products_v4',
+                cart: 'pharma_cart_v3',
+                adminPass: 'pharma_admin_v2',
+                adminSession: 'pharma_session_v2'
             }
         };
 
@@ -878,14 +937,87 @@
         };
 
         const DEFAULT_PRODUCTS = [
-            { id: 1, name: "Vitamin C 1000mg", category: "Vitamini", price: 12.50, oldPrice: null, desc: "İmmunitet dəstəyi", icon: "fa-pills", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop", stock: true, isNew: false },
-            { id: 2, name: "Nəmləndirici Krem", category: "Kosmetika", price: 24.00, oldPrice: 32.00, desc: "Həssas dəri üçün", icon: "fa-pump-soap", image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=400&fit=crop", stock: true, isNew: false },
-            { id: 3, name: "Uşaq Qatışığı N1", category: "Uşaq", price: 18.90, oldPrice: null, desc: "0-6 ay", icon: "fa-baby-carriage", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=400&fit=crop", stock: true, isNew: true },
-            { id: 4, name: "Rəqəmsal Termometr", category: "Tibbi", price: 8.50, oldPrice: null, desc: "Hərarət ölçən", icon: "fa-kit-medical", image: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=400&h=400&fit=crop", stock: true, isNew: false },
-            { id: 5, name: "Omega-3 Balıq Yağı", category: "Vitamini", price: 28.00, oldPrice: null, desc: "Ürək sağlamlığı", icon: "fa-pills", image: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400&h=400&fit=crop", stock: true, isNew: false },
-                        { id: 6, name: "Günəş Qoruyucu SPF50", category: "Kosmetika", price: 15.50, oldPrice: null, desc: "UVA/UVB qorunması", icon: "fa-sun", image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=400&fit=crop", stock: true, isNew: true },
-            { id: 7, name: "Bezi Dəyişmə Dəsti", category: "Uşaq", price: 9.90, oldPrice: 14.00, desc: "Həssas dəriyə uyğun", icon: "fa-baby", image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=400&fit=crop", stock: true, isNew: false },
-            { id: 8, name: "Təzyiq Ölçən Cihaz", category: "Tibbi", price: 45.00, oldPrice: null, desc: "Avtomatik, rəqəmsal", icon: "fa-heart-pulse", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=400&fit=crop", stock: false, isNew: false }
+            { 
+                id: 1, name: "Vitamin C 1000mg", category: "Vitamini", price: 12.50, oldPrice: null, 
+                desc: "İmmunitet dəstəyi üçün yüksək dozalı Vitamin C. Gündəlik istifadə üçün ideal. Antioksidant təsir göstərir, dəri sağlamlığını dəstəkləyir.", 
+                icon: "fa-pills", 
+                images: [
+                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=600&h=600&fit=crop"
+                ], 
+                stock: true, isNew: false 
+            },
+            { 
+                id: 2, name: "Nəmləndirici Krem", category: "Kosmetika", price: 24.00, oldPrice: 32.00, 
+                desc: "Həssas dəri üçün nəmləndirici krem. 24 saat davamlı nəmlik. Paraben və sülfatsız formul.", 
+                icon: "fa-pump-soap", 
+                images: [
+                    "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1570194065650-d99fb4b38b15?w=600&h=600&fit=crop"
+                ], 
+                stock: true, isNew: false 
+            },
+            { 
+                id: 3, name: "Uşaq Qatışığı N1", category: "Uşaq", price: 18.90, oldPrice: null, 
+                desc: "0-6 aylıq körpələr üçün xüsusi qatışıq. Bütün zəruri vitamin və minerallarla zənginləşdirilib. Həzm sisteminə rahatlıq.", 
+                icon: "fa-baby-carriage", 
+                images: [
+                    "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=600&fit=crop"
+                ], 
+                stock: true, isNew: true 
+            },
+            { 
+                id: 4, name: "Rəqəmsal Termometr", category: "Tibbi", price: 8.50, oldPrice: null, 
+                desc: "Dəqiq hərarət ölçən rəqəmsal termometr. 1 saniyədə nəticə. Yaddaş funksiyası. LCD ekran.", 
+                icon: "fa-kit-medical", 
+                images: [
+                    "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=600&fit=crop"
+                ], 
+                stock: true, isNew: false 
+            },
+            { 
+                id: 5, name: "Omega-3 Balıq Yağı", category: "Vitamini", price: 28.00, oldPrice: null, 
+                desc: "Ürək və beyin sağlamlığı üçün Omega-3. EPA və DHA ilə zəngin. Gündəlik 2 kapsul.", 
+                icon: "fa-pills", 
+                images: [
+                    "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop"
+                ], 
+                stock: true, isNew: false 
+            },
+            { 
+                id: 6, name: "Günəş Qoruyucu SPF50", category: "Kosmetika", price: 15.50, oldPrice: null, 
+                desc: "UVA/UVB qorunması ilə yüksək keyfiyyətli günəş kremi. Su davamlı. Bütün dəri tipləri üçün uyğun.", 
+                icon: "fa-sun", 
+                images: [
+                    "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1570194065650-d99fb4b38b15?w=600&h=600&fit=crop"
+                ], 
+                stock: true, isNew: true 
+            },
+            { 
+                id: 7, name: "Bezi Dəyişmə Dəsti", category: "Uşaq", price: 9.90, oldPrice: 14.00, 
+                desc: "Həssas körpə dərisi üçün bezi dəyişmə dəsti. Ekoloji təmiz materiallar. Antibakterial təsir.", 
+                icon: "fa-baby", 
+                images: [
+                    "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&h=600&fit=crop"
+                ], 
+                stock: true, isNew: false 
+            },
+            { 
+                id: 8, name: "Təzyiq Ölçən Cihaz", category: "Tibbi", price: 45.00, oldPrice: null, 
+                desc: "Avtomatik, rəqəmsal təzyiq ölçən cihaz. Böyük LCD ekran. 2 istifadəçi yaddaşı. Ürək ritmi detektoru.", 
+                icon: "fa-heart-pulse", 
+                images: [
+                    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&h=600&fit=crop"
+                ], 
+                stock: false, isNew: false 
+            }
         ];
 
         // ============ STATE ============
@@ -897,13 +1029,14 @@
             sort: 'default',
             editingId: null,
             isAdmin: false,
-            viewingProduct: null
+            viewingProduct: null,
+            detailQty: 1,
+            currentImageIndex: 0,
+            lightboxIndex: 0
         };
 
-        let pendingImg = null;
+        let pendingImages = [];
         let confirmCb = null;
-        let qvId = null;
-        let qvQty = 1;
         let imgMode = 'file';
 
         // ============ HELPERS ============
@@ -924,7 +1057,7 @@
             $('toasts').appendChild(el);
             setTimeout(() => {
                 el.style.opacity = '0';
-                el.style.transform = 'translateX(100px) scale(0.9)';
+                el.style.transform = 'translateX(120px) scale(0.9)';
                 el.style.transition = 'all 0.3s ease';
                 setTimeout(() => el.remove(), 300);
             }, 3500);
@@ -956,10 +1089,35 @@
         }
 
         // ============ STORAGE ============
+        function migrateOldData() {
+            const old = localStorage.getItem('pharma_products_v3');
+            if (old) {
+                try {
+                    const prods = JSON.parse(old);
+                    prods.forEach(p => {
+                        if (!p.images && p.image) p.images = [p.image];
+                        else if (!p.images) p.images = [];
+                    });
+                    localStorage.setItem(CONFIG.keys.products, JSON.stringify(prods));
+                    localStorage.removeItem('pharma_products_v3');
+                } catch(e) {}
+            }
+        }
+
         function loadProducts() {
+            migrateOldData();
             const s = localStorage.getItem(CONFIG.keys.products);
-            if (s) { try { state.products = JSON.parse(s); } catch(e) { state.products = DEFAULT_PRODUCTS.slice(); } }
-            else { state.products = DEFAULT_PRODUCTS.slice(); saveProducts(); }
+            if (s) { 
+                try { 
+                    state.products = JSON.parse(s); 
+                } catch(e) { 
+                    state.products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)); 
+                } 
+            }
+            else { 
+                state.products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)); 
+                saveProducts(); 
+            }
         }
         function saveProducts() {
             try { localStorage.setItem(CONFIG.keys.products, JSON.stringify(state.products)); }
@@ -1031,8 +1189,8 @@
                 card.style.animationDelay = (i * 0.05) + 's';
                 card.dataset.tilt;
 
-                const wa = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent('Salam, ' + p.name + ' haqqında məlumat istəyirəm.')}`;
                 const oos = p.stock === false;
+                const mainImg = p.images && p.images.length ? p.images[0] : null;
 
                 let badges = '';
                 if (p.isNew) badges += '<span class="badge-new text-[9px] text-white px-2.5 py-1 rounded-lg font-bold uppercase tracking-wider absolute top-3 left-3 z-10">Yeni</span>';
@@ -1041,13 +1199,13 @@
                     badges += `<span class="badge-premium text-[9px] text-white px-2.5 py-1 rounded-lg font-bold uppercase tracking-wider absolute top-3 left-3 z-10 ${p.isNew ? 'mt-7' : ''}">-${pct}%</span>`;
                 }
 
-                const img = p.image
-                    ? `<div class="img-zoom-container h-48 bg-gradient-to-br from-brand-50/50 to-brand-100/30 dark:from-stone-800 dark:to-stone-900 flex items-center justify-center relative overflow-hidden">
-                        <img src="${p.image}" alt="${esc(p.name)}" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fa-solid fa-capsules text-4xl text-brand-300\\'></i>'">
+                const img = mainImg
+                    ? `<div class="img-zoom-container h-52 bg-gradient-to-br from-brand-50/50 to-brand-100/30 dark:from-stone-800 dark:to-stone-900 flex items-center justify-center relative overflow-hidden">
+                        <img src="${mainImg}" alt="${esc(p.name)}" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fa-solid fa-capsules text-4xl text-brand-300\'></i>'">
                         ${badges}
                         ${oos ? '<div class="absolute inset-0 bg-white/80 dark:bg-black/60 backdrop-blur-[2px] flex items-center justify-center"><span class="text-xs font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-3 py-1 rounded-full">Stokda Yoxdur</span></div>' : ''}
                        </div>`
-                    : `<div class="h-48 bg-gradient-to-br from-brand-50 to-brand-100 dark:from-stone-800 dark:to-stone-900 flex items-center justify-center relative">
+                    : `<div class="h-52 bg-gradient-to-br from-brand-50 to-brand-100 dark:from-stone-800 dark:to-stone-900 flex items-center justify-center relative">
                         <i class="fa-solid ${p.icon || 'fa-capsules'} text-4xl text-brand-300"></i>
                         ${badges}
                         ${oos ? '<div class="absolute inset-0 bg-white/80 dark:bg-black/60 backdrop-blur-[2px] flex items-center justify-center"><span class="text-xs font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-3 py-1 rounded-full">Stokda Yoxdur</span></div>' : ''}
@@ -1102,230 +1260,276 @@
             });
         }
 
-        // ============ PRODUCT DETAIL PAGE ============
+        // ============ PRODUCT DETAIL (FIXED - STATIC MODAL) ============
         function openProductDetail(id) {
             const p = state.products.find(x => x.id === id);
             if (!p) return;
             state.viewingProduct = p;
+            state.detailQty = 1;
+            state.currentImageIndex = 0;
 
-            // Create detail view dynamically
-            let detail = $('productDetail');
-            if (!detail) {
-                detail = document.createElement('div');
-                detail.id = 'productDetail';
-                detail.className = 'fixed inset-0 z-[55] hidden';
-                document.body.appendChild(detail);
-            }
+            // Breadcrumb
+            $('detailBreadcrumbName').textContent = p.name;
+            $('detailBreadcrumbCat').textContent = p.category;
 
-            const wa = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent('Salam, ' + p.name + ' haqqında ətraflı məlumat istəyirəm.')}`;
-            const oos = p.stock === false;
+            // Basic info
+            $('detailCategory').textContent = p.category;
+            $('detailName').textContent = p.name;
+            $('detailDesc').textContent = p.desc || 'Bu məhsul haqqında ətraflı məlumat tezliklə əlavə olunacaq.';
 
-            let badges = '';
-            if (p.isNew) badges += '<span class="badge-new text-[10px] text-white px-3 py-1.5 rounded-lg font-bold uppercase tracking-wider">Yeni Məhsul</span>';
+            // Price
+            const priceSection = $('detailPriceSection');
             if (p.oldPrice) {
                 const pct = Math.round((1 - p.price / p.oldPrice) * 100);
-                badges += `<span class="badge-premium text-[10px] text-white px-3 py-1.5 rounded-lg font-bold uppercase tracking-wider">Endirim -${pct}%</span>`;
-            }
-
-            const imgSection = p.image
-                ? `<div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-brand-50 to-brand-100 dark:from-stone-800 dark:to-stone-900 aspect-square">
-                    <img src="${p.image}" alt="${esc(p.name)}" class="w-full h-full object-cover" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\\'flex items-center justify-center h-full\\'><i class=\\'fa-solid fa-capsules text-6xl text-brand-200\\'></i></div>'">
-                    ${badges ? `<div class="absolute top-4 left-4 flex flex-col gap-2">${badges}</div>` : ''}
-                    ${oos ? '<div class="absolute inset-0 bg-white/70 dark:bg-black/50 backdrop-blur-sm flex items-center justify-center"><span class="text-lg font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-4 py-2 rounded-full">Stokda Yoxdur</span></div>' : ''}
-                   </div>`
-                : `<div class="rounded-3xl bg-gradient-to-br from-brand-50 to-brand-100 dark:from-stone-800 dark:to-stone-900 aspect-square flex items-center justify-center relative">
-                    <i class="fa-solid ${p.icon || 'fa-capsules'} text-6xl text-brand-200"></i>
-                    ${badges ? `<div class="absolute top-4 left-4 flex flex-col gap-2">${badges}</div>` : ''}
-                    ${oos ? '<div class="absolute inset-0 bg-white/70 dark:bg-black/50 backdrop-blur-sm flex items-center justify-center"><span class="text-lg font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-4 py-2 rounded-full">Stokda Yoxdur</span></div>' : ''}
-                   </div>`;
-
-            const priceSection = p.oldPrice
-                ? `<div class="flex items-baseline gap-3 mb-2">
+                priceSection.innerHTML = `
                     <span class="text-3xl font-display font-bold text-brand-700 dark:text-brand-400">${fmtPrice(p.price)}</span>
                     <span class="text-lg text-gray-400 line-through">${fmtPrice(p.oldPrice)}</span>
-                    <span class="text-xs font-bold text-white bg-red-500 px-2 py-1 rounded-lg">-${Math.round((1-p.price/p.oldPrice)*100)}%</span>
-                   </div>`
-                : `<div class="text-3xl font-display font-bold text-brand-700 dark:text-brand-400 mb-2">${fmtPrice(p.price)}</div>`;
+                    <span class="text-xs font-bold text-white bg-red-500 px-2 py-1 rounded-lg">-${pct}%</span>
+                `;
+            } else {
+                priceSection.innerHTML = `<span class="text-3xl font-display font-bold text-brand-700 dark:text-brand-400">${fmtPrice(p.price)}</span>`;
+            }
 
-            detail.innerHTML = `
-                <div class="absolute inset-0 bg-black/50 backdrop-blur-md opacity-0 transition-opacity duration-300" onclick="closeProductDetail()"></div>
-                <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
-                    <div class="bg-white dark:bg-stone-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl pointer-events-auto transform scale-95 opacity-0 transition-all duration-300" id="detailContent">
-                        <!-- Close -->
-                        <div class="sticky top-0 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl z-10 flex justify-end p-4 rounded-t-3xl">
-                            <button onclick="closeProductDetail()" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-stone-800 flex items-center justify-center text-gray-500 hover:text-gray-900 dark:hover:text-white transition hover:rotate-90 duration-300">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
-                        
-                        <div class="px-6 pb-8 -mt-4">
-                            <div class="grid md:grid-cols-2 gap-8">
-                                <!-- Image -->
-                                <div class="md:sticky md:top-20 md:self-start">
-                                    ${imgSection}
-                                </div>
-                                
-                                <!-- Info -->
-                                <div class="space-y-6">
-                                    <div>
-                                        <span class="text-xs font-bold text-brand-600 uppercase tracking-widest bg-brand-50 dark:bg-brand-900/20 px-3 py-1 rounded-full">${esc(p.category)}</span>
-                                        <h1 class="text-2xl md:text-3xl font-display font-bold text-gray-900 dark:text-white mt-3 leading-tight">${esc(p.name)}</h1>
-                                    </div>
-                                    
-                                    ${priceSection}
-                                    
-                                    <!-- Stock -->
-                                    <div class="flex items-center gap-2">
-                                        <span class="w-2.5 h-2.5 rounded-full ${oos ? 'bg-red-500' : 'bg-brand-500'}"></span>
-                                        <span class="text-sm font-medium ${oos ? 'text-red-500' : 'text-brand-600'}">${oos ? 'Stokda yoxdur' : 'Stokda var'}</span>
-                                    </div>
-                                    
-                                    <!-- Description -->
-                                    <div class="bg-gray-50 dark:bg-stone-800/50 rounded-2xl p-5 border border-gray-100 dark:border-stone-800">
-                                        <h3 class="font-display font-bold text-sm text-gray-900 dark:text-white mb-2">Məhsul Haqqında</h3>
-                                        <p class="text-sm text-gray-600 dark:text-stone-400 leading-relaxed">${esc(p.desc || 'Bu məhsul haqqında ətraflı məlumat tezliklə əlavə olunacaq.')}</p>
-                                    </div>
-                                    
-                                    <!-- Features (mock) -->
-                                    <div class="space-y-3">
-                                        <h3 class="font-display font-bold text-sm text-gray-900 dark:text-white">Xüsusiyyətlər</h3>
-                                        <div class="grid grid-cols-2 gap-3">
-                                            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-stone-400">
-                                                <i class="fa-solid fa-check text-brand-500 text-xs"></i>
-                                                <span>Orijinal məhsul</span>
-                                            </div>
-                                            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-stone-400">
-                                                <i class="fa-solid fa-check text-brand-500 text-xs"></i>
-                                                <span>Sertifikatlı</span>
-                                            </div>
-                                            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-stone-400">
-                                                <i class="fa-solid fa-check text-brand-500 text-xs"></i>
-                                                <span>Qaytarma zəmanəti</span>
-                                            </div>
-                                            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-stone-400">
-                                                <i class="fa-solid fa-check text-brand-500 text-xs"></i>
-                                                <span>Pulsuz çatdırılma</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Usage (mock) -->
-                                    <div class="bg-amber-50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-800/30 rounded-2xl p-5">
-                                        <div class="flex items-start gap-3">
-                                            <i class="fa-solid fa-circle-info text-amber-500 mt-0.5"></i>
-                                            <div>
-                                                <h4 class="font-bold text-sm text-amber-800 dark:text-amber-400 mb-1">Məsləhət</h4>
-                                                <p class="text-xs text-amber-700 dark:text-amber-500/80 leading-relaxed">Məhsuldan istifadə etməzdən əvvəl həkim və ya əczaçı məsləhətinə müraciət edin. Dərman vasitələrini təyinatından kənar istifadə etməyin.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Actions -->
-                                    <div class="flex gap-3 pt-2">
-                                        <div class="flex items-center bg-gray-100 dark:bg-stone-800 rounded-xl overflow-hidden">
-                                            <button onclick="detailQty(-1)" class="px-4 py-3 text-gray-600 dark:text-stone-400 hover:text-brand-600 font-bold transition">−</button>
-                                            <span id="detailQty" class="px-4 font-bold text-gray-900 dark:text-white min-w-[2rem] text-center">1</span>
-                                            <button onclick="detailQty(1)" class="px-4 py-3 text-gray-600 dark:text-stone-400 hover:text-brand-600 font-bold transition">+</button>
-                                        </div>
-                                        <button onclick="addDetailToCart()" ${oos ? 'disabled' : ''} class="flex-1 ${oos ? 'bg-gray-100 dark:bg-stone-800 text-gray-400 cursor-not-allowed' : 'bg-brand-600 hover:bg-brand-700 text-white shadow-xl shadow-brand-500/20 hover:shadow-brand-500/30'} font-bold py-3 rounded-xl transition flex items-center justify-center gap-2">
-                                            <i class="fa-solid fa-bag-shopping"></i> ${oos ? 'Stokda Yoxdur' : 'Səbətə At'}
-                                        </button>
-                                    </div>
-                                    
-                                    <a href="${wa}" target="_blank" class="block text-center text-brand-600 dark:text-brand-400 text-sm font-semibold hover:underline py-2">
-                                        <i class="fa-brands fa-whatsapp mr-1"></i> Bu məhsul haqqında soruşun
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+            // Stock
+            const oos = p.stock === false;
+            $('detailStockText').innerHTML = oos 
+                ? '<span class="text-red-500 font-bold">Stokda yoxdur</span>' 
+                : '<span class="text-brand-600 font-bold"><i class="fa-solid fa-check mr-1"></i>Stokda var</span>';
+            $('stockBarContainer').style.display = oos ? 'none' : 'block';
+            if (!oos) {
+                const stockPct = 60 + (p.id * 7) % 40; // Fake stock percentage
+                $('stockPercentText').textContent = stockPct + '% qalıb';
+                $('stockBarFill').style.width = stockPct + '%';
+            }
 
-            detail.classList.remove('hidden');
+            // Badges
+            const badges = $('detailBadges');
+            badges.innerHTML = '';
+            if (p.isNew) badges.innerHTML += '<span class="badge-new text-[10px] text-white px-3 py-1.5 rounded-lg font-bold uppercase tracking-wider">Yeni Məhsul</span>';
+            if (p.oldPrice) {
+                const pct = Math.round((1 - p.price / p.oldPrice) * 100);
+                badges.innerHTML += `<span class="badge-premium text-[10px] text-white px-3 py-1.5 rounded-lg font-bold uppercase tracking-wider">Endirim -${pct}%</span>`;
+            }
+
+            // Stock overlay
+            $('detailStockOverlay').classList.toggle('hidden', !oos);
+
+            // Images & Gallery
+            const mainImg = $('detailMainImage');
+            const thumbs = $('detailThumbnails');
+
+            if (p.images && p.images.length) {
+                mainImg.src = p.images[0];
+                mainImg.alt = p.name;
+                mainImg.style.display = 'block';
+
+                thumbs.innerHTML = '';
+                p.images.forEach((img, idx) => {
+                    const thumb = document.createElement('div');
+                    thumb.className = 'gallery-thumb ' + (idx === 0 ? 'active' : '');
+                    thumb.innerHTML = `<img src="${img}" alt="" onerror="this.parentElement.style.display='none'">`;
+                    thumb.onclick = () => selectGalleryImage(idx);
+                    thumbs.appendChild(thumb);
+                });
+            } else {
+                mainImg.style.display = 'none';
+                thumbs.innerHTML = `<div class="w-full h-20 bg-gradient-to-br from-brand-50 to-brand-100 dark:from-stone-800 dark:to-stone-900 rounded-2xl flex items-center justify-center text-brand-300"><i class="fa-solid ${p.icon || 'fa-capsules'} text-2xl"></i></div>`;
+            }
+
+            // Qty
+            $('detailQty').textContent = state.detailQty;
+
+            // Add button
+            const addBtn = $('detailAddBtn');
+            const addText = $('detailAddText');
+            if (oos) {
+                addBtn.disabled = true;
+                addBtn.className = 'flex-1 bg-gray-100 dark:bg-stone-800 text-gray-400 cursor-not-allowed font-bold py-3 rounded-xl transition flex items-center justify-center gap-2';
+                addText.textContent = 'Stokda Yoxdur';
+            } else {
+                addBtn.disabled = false;
+                addBtn.className = 'flex-1 bg-brand-600 hover:bg-brand-700 text-white shadow-xl shadow-brand-500/20 hover:shadow-brand-500/30 font-bold py-3 rounded-xl transition flex items-center justify-center gap-2';
+                addText.textContent = 'Səbətə At';
+            }
+
+            // WhatsApp
+            $('detailWhatsapp').href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent('Salam, ' + p.name + ' haqqında ətraflı məlumat istəyirəm.')}`;
+
+            // Related products
+            renderRelatedProducts(p);
+
+            // Sticky mobile
+            $('stickyMobileName').textContent = p.name;
+            $('stickyMobilePrice').textContent = fmtPrice(p.price);
+            $('stickyMobileBtn').disabled = oos;
+            $('stickyMobileBtn').className = oos 
+                ? 'bg-gray-300 text-gray-500 px-6 py-3 rounded-xl font-bold text-sm cursor-not-allowed'
+                : 'bg-brand-600 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-brand-500/20';
+            $('stickyMobileBtn').textContent = oos ? 'Stokda Yoxdur' : 'Səbətə At';
+
+            // Show modal
+            const modal = $('productDetailModal');
+            modal.classList.remove('hidden');
             setTimeout(() => {
-                detail.querySelector('.absolute.inset-0.bg-black').classList.remove('opacity-0');
+                $('detailOverlay').classList.remove('opacity-0');
                 $('detailContent').classList.remove('scale-95', 'opacity-0');
                 $('detailContent').classList.add('scale-100', 'opacity-100');
             }, 10);
             document.body.style.overflow = 'hidden';
+
+            // Show sticky mobile cart on mobile
+            if (window.innerWidth < 768 && !oos) {
+                $('stickyMobileCart').classList.add('visible');
+            }
         }
 
         function closeProductDetail() {
-            const detail = $('productDetail');
-            if (!detail) return;
-            const overlay = detail.querySelector('.absolute.inset-0.bg-black');
-            const content = $('detailContent');
-            if (overlay) overlay.classList.add('opacity-0');
-            if (content) {
-                content.classList.remove('scale-100', 'opacity-100');
-                content.classList.add('scale-95', 'opacity-0');
-            }
+            const modal = $('productDetailModal');
+            if (modal.classList.contains('hidden')) return;
+
+            $('detailOverlay').classList.add('opacity-0');
+            $('detailContent').classList.remove('scale-100', 'opacity-100');
+            $('detailContent').classList.add('scale-95', 'opacity-0');
+
             setTimeout(() => {
-                detail.classList.add('hidden');
+                modal.classList.add('hidden');
                 document.body.style.overflow = '';
                 state.viewingProduct = null;
             }, 300);
+
+            $('stickyMobileCart').classList.remove('visible');
         }
 
-        let detailQuantity = 1;
-        function detailQty(delta) {
-            detailQuantity = Math.max(1, detailQuantity + delta);
-            const el = $('detailQty');
-            if (el) el.textContent = detailQuantity;
+        function selectGalleryImage(idx) {
+            state.currentImageIndex = idx;
+            const p = state.viewingProduct;
+            if (!p || !p.images) return;
+            $('detailMainImage').src = p.images[idx];
+            document.querySelectorAll('.gallery-thumb').forEach((t, i) => {
+                t.classList.toggle('active', i === idx);
+            });
         }
+
+        function detailQty(delta) {
+            if (!state.viewingProduct || state.viewingProduct.stock === false) return;
+            state.detailQty = Math.max(1, state.detailQty + delta);
+            $('detailQty').textContent = state.detailQty;
+        }
+
         function addDetailToCart() {
             if (!state.viewingProduct || state.viewingProduct.stock === false) return;
-            addToCart(state.viewingProduct.id, detailQuantity);
-            closeProductDetail();
+            addToCart(state.viewingProduct.id, state.detailQty);
+            // Don't close modal, just show toast
         }
 
-        // ============ QUICK VIEW ============
-        function openQuickView(id) {
-            const p = state.products.find(x => x.id === id);
+        function renderRelatedProducts(current) {
+            const container = $('relatedProducts');
+            const related = state.products
+                .filter(p => p.category === current.category && p.id !== current.id)
+                .slice(0, 6);
+
+            if (!related.length) {
+                container.innerHTML = '<p class="text-sm text-gray-400 py-4">Oxşar məhsul tapılmadı</p>';
+                return;
+            }
+
+            container.innerHTML = '';
+            related.forEach(p => {
+                const img = p.images && p.images.length ? p.images[0] : null;
+                const card = document.createElement('div');
+                card.className = 'w-40 bg-white dark:bg-stone-900 rounded-2xl border border-gray-100 dark:border-stone-800 overflow-hidden shrink-0 cursor-pointer hover:shadow-lg transition';
+                card.onclick = () => { closeProductDetail(); setTimeout(() => openProductDetail(p.id), 350); };
+                card.innerHTML = `
+                    <div class="h-32 bg-gradient-to-br from-brand-50 to-brand-100 dark:from-stone-800 dark:to-stone-900 relative overflow-hidden">
+                        ${img ? `<img src="${img}" class="w-full h-full object-cover" loading="lazy">` : `<div class="flex items-center justify-center h-full text-brand-300"><i class="fa-solid ${p.icon || 'fa-capsules'} text-2xl"></i></div>`}
+                    </div>
+                    <div class="p-3">
+                        <p class="text-xs font-bold text-gray-900 dark:text-white truncate">${esc(p.name)}</p>
+                        <p class="text-xs text-brand-600 font-bold mt-1">${fmtPrice(p.price)}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // ============ TABS ============
+        function switchTab(btn, tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            $(tabId).classList.add('active');
+        }
+
+        // ============ LIGHTBOX ============
+        function openLightbox() {
+            const p = state.viewingProduct;
+            if (!p || !p.images || !p.images.length) return;
+            state.lightboxIndex = state.currentImageIndex;
+            updateLightbox();
+            $('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            $('lightbox').classList.remove('active');
+            if (!$('productDetailModal').classList.contains('hidden')) {
+                document.body.style.overflow = 'hidden'; // keep detail modal locked
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+        function updateLightbox() {
+            const p = state.viewingProduct;
+            if (!p || !p.images) return;
+            $('lightboxImage').src = p.images[state.lightboxIndex];
+            const dots = $('lightboxDots');
+            dots.innerHTML = '';
+            p.images.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = `w-2 h-2 rounded-full transition ${i === state.lightboxIndex ? 'bg-white' : 'bg-white/40'}`;
+                dots.appendChild(dot);
+            });
+        }
+        function nextLightboxImage() {
+            const p = state.viewingProduct;
+            if (!p || !p.images) return;
+            state.lightboxIndex = (state.lightboxIndex + 1) % p.images.length;
+            updateLightbox();
+        }
+        function prevLightboxImage() {
+            const p = state.viewingProduct;
+            if (!p || !p.images) return;
+            state.lightboxIndex = (state.lightboxIndex - 1 + p.images.length) % p.images.length;
+            updateLightbox();
+        }
+
+        // ============ SHARE ============
+        function shareProduct() {
+            const p = state.viewingProduct;
             if (!p) return;
-            qvId = id;
-            qvQty = 1;
-            $('qvQty').textContent = qvQty;
-            $('qvCategory').textContent = p.category;
-            $('qvName').textContent = p.name;
-            $('qvDesc').textContent = p.desc || '';
-
-            const imgWrap = $('qvImage');
-            imgWrap.innerHTML = p.image
-                ? `<img src="${p.image}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<i class=\\'fa-solid fa-capsules text-6xl text-brand-300\\'></i>'">`
-                : `<i class="fa-solid ${p.icon || 'fa-capsules'} text-6xl text-brand-300"></i>`;
-
-            const priceWrap = $('qvPrice');
-            priceWrap.innerHTML = p.oldPrice
-                ? `<span class="text-gray-400 line-through text-sm">${fmtPrice(p.oldPrice)}</span><span class="text-brand-700 dark:text-brand-400 font-extrabold text-2xl">${fmtPrice(p.price)}</span>`
-                : `<span class="text-brand-700 dark:text-brand-400 font-extrabold text-2xl">${fmtPrice(p.price)}</span>`;
-
-            const stockBadge = $('qvStock');
-            stockBadge.innerHTML = p.stock === false
-                ? '<span class="text-xs font-bold text-red-500 bg-red-50 dark:bg-red-900/20 px-3 py-1 rounded-full">Stokda yoxdur</span>'
-                : '<span class="text-xs font-bold text-brand-600 bg-brand-50 dark:bg-brand-900/20 px-3 py-1 rounded-full"><i class="fa-solid fa-check mr-1"></i>Stokda var</span>';
-
-            const addBtn = $('qvAdd');
-            addBtn.disabled = p.stock === false;
-            addBtn.classList.toggle('opacity-50', p.stock === false);
-            addBtn.classList.toggle('cursor-not-allowed', p.stock === false);
-            addBtn.textContent = p.stock === false ? 'Stokda Yoxdur' : 'Səbətə At';
-
-            $('qvWhatsappLink')?.setAttribute('href', `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent('Salam, ' + p.name + ' haqqında soruşmaq istəyirəm.')}`);
-
-            showModal('quickView');
+            if (navigator.share) {
+                navigator.share({
+                    title: p.name + ' — İMİŞLİ PHARMA',
+                    text: p.desc,
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                toast('Paylaşma paneli açıldı', 'info');
+            }
         }
-        function changeQvQty(d) {
-            qvQty = Math.max(1, qvQty + d);
-            $('qvQty').textContent = qvQty;
+        function shareTo(platform) {
+            const p = state.viewingProduct;
+            if (!p) return;
+            const text = encodeURIComponent('İMİŞLİ PHARMA — ' + p.name + ': ' + fmtPrice(p.price));
+            const url = encodeURIComponent(window.location.href);
+            let link = '';
+            if (platform === 'whatsapp') link = `https://wa.me/?text=${text}%20${url}`;
+            else if (platform === 'telegram') link = `https://t.me/share/url?url=${url}&text=${text}`;
+            else if (platform === 'facebook') link = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            if (link) window.open(link, '_blank');
         }
-        function addQvToCart() {
-            if (!qvId) return;
-            addToCart(qvId, qvQty);
-            closeQuickView();
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => toast('Link kopyalandı', 'success'));
         }
-        function closeQuickView() { hideModal('quickView'); qvId = null; qvQty = 1; }
 
         // ============ CART ============
         function addToCart(id, qty = 1) {
@@ -1387,8 +1591,8 @@
                 if (!p) return;
                 const row = document.createElement('div');
                 row.className = 'flex items-center gap-4 py-4 border-b border-gray-100 dark:border-stone-800 last:border-0';
-                const img = p.image
-                    ? `<img src="${p.image}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<i class=\\'fa-solid fa-capsules\\'></i>'">`
+                const img = p.images && p.images.length
+                    ? `<img src="${p.images[0]}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<i class=\'fa-solid fa-capsules\'></i>'">`
                     : `<i class="fa-solid ${p.icon || 'fa-capsules'}"></i>`;
                 row.innerHTML = `
                     <div class="w-16 h-16 rounded-xl bg-brand-50 dark:bg-stone-800 flex items-center justify-center text-brand-600 overflow-hidden shrink-0 shadow-sm">${img}</div>
@@ -1475,7 +1679,7 @@
             showModal('adminPanel');
         }
 
-        // ============ IMAGE HANDLING ============
+        // ============ IMAGE HANDLING (MULTIPLE) ============
         function setImgMode(mode) {
             imgMode = mode;
             $('btnFile').className = mode === 'file' ? 'text-xs px-3 py-1.5 rounded-lg bg-brand-600 text-white font-medium' : 'text-xs px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-stone-800 text-gray-600 dark:text-stone-400 font-medium';
@@ -1484,36 +1688,52 @@
             $('zoneUrl').classList.toggle('hidden', mode !== 'url');
         }
         function handleImgFile(e) {
-            const f = e.target.files[0];
-            if (!f) return;
-            if (!f.type.startsWith('image/')) { toast('Yalnız şəkil', 'error'); return; }
-            if (f.size > 5 * 1024 * 1024) { toast('Max 5MB', 'error'); return; }
-            const r = new FileReader();
-            r.onload = ev => {
-                const img = new Image();
-                img.onload = () => {
-                    const c = document.createElement('canvas');
-                    const max = 600;
-                    const s = Math.min(1, max / img.width);
-                    c.width = img.width * s; c.height = img.height * s;
-                    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-                    pendingImg = c.toDataURL('image/jpeg', 0.85);
-                    showPreview(pendingImg);
+            const files = Array.from(e.target.files || []);
+            if (!files.length) return;
+            pendingImages = [];
+            let processed = 0;
+            files.forEach(f => {
+                if (!f.type.startsWith('image/')) return;
+                if (f.size > 5 * 1024 * 1024) { toast('Max 5MB', 'error'); return; }
+                const r = new FileReader();
+                r.onload = ev => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const c = document.createElement('canvas');
+                        const max = 600;
+                        const s = Math.min(1, max / img.width);
+                        c.width = img.width * s; c.height = img.height * s;
+                        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+                        pendingImages.push(c.toDataURL('image/jpeg', 0.85));
+                        processed++;
+                        if (processed >= files.length) showPreviews();
+                    };
+                    img.src = ev.target.result;
                 };
-                img.src = ev.target.result;
-            };
-            r.readAsDataURL(f);
+                r.readAsDataURL(f);
+            });
         }
         function handleImgUrl(url) {
-            if (!url.trim()) { pendingImg = null; $('pPreview').classList.add('hidden'); return; }
-            const img = new Image();
-            img.onload = () => { pendingImg = url.trim(); showPreview(url.trim()); };
-            img.onerror = () => { toast('Şəkil tapılmadı', 'error'); pendingImg = null; $('pPreview').classList.add('hidden'); };
-            img.src = url.trim();
+            if (!url.trim()) { pendingImages = []; showPreviews(); return; }
+            const urls = url.split(',').map(u => u.trim()).filter(u => u);
+            pendingImages = [];
+            let loaded = 0;
+            urls.forEach(u => {
+                const img = new Image();
+                img.onload = () => { pendingImages.push(u); loaded++; if (loaded >= urls.length) showPreviews(); };
+                img.onerror = () => { loaded++; if (loaded >= urls.length) showPreviews(); };
+                img.src = u;
+            });
         }
-        function showPreview(src) {
-            const p = $('pPreview');
-            p.src = src; p.classList.remove('hidden');
+        function showPreviews() {
+            const c = $('pPreviewContainer');
+            c.innerHTML = '';
+            c.classList.toggle('hidden', !pendingImages.length);
+            pendingImages.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src; img.className = 'w-16 h-16 object-cover rounded-lg border border-gray-200 dark:border-stone-700';
+                c.appendChild(img);
+            });
         }
 
         // ============ ADMIN FORM ============
@@ -1535,13 +1755,13 @@
                 if (p) {
                     p.name = name; p.category = cat; p.price = price; p.oldPrice = old;
                     p.desc = desc; p.stock = stock; p.isNew = isNew;
-                    if (pendingImg !== null) p.image = pendingImg;
+                    if (pendingImages.length) p.images = pendingImages;
                 }
                 toast('Yeniləndi', 'success');
             } else {
                 state.products.unshift({
                     id: Date.now(), name, category: cat, price, oldPrice: old, desc,
-                    icon: ICONS[cat] || 'fa-capsules', image: pendingImg || null,
+                    icon: ICONS[cat] || 'fa-capsules', images: pendingImages.length ? pendingImages : [],
                     stock, isNew, createdAt: Date.now()
                 });
                 toast('Əlavə olundu', 'success');
@@ -1554,9 +1774,10 @@
         }
         function resetForm() {
             state.editingId = null;
-            $('adminForm')?.reset();
-            pendingImg = null;
-            $('pPreview').classList.add('hidden');
+            $('adminForm').reset();
+            pendingImages = [];
+            $('pPreviewContainer').innerHTML = '';
+            $('pPreviewContainer').classList.add('hidden');
             $('pStock').checked = true;
             $('formTitle').textContent = 'Yeni Məhsul Əlavə Et';
             $('btnSubmit').textContent = 'Əlavə Et';
@@ -1574,15 +1795,11 @@
             $('pDesc').value = p.desc || '';
             $('pStock').checked = p.stock !== false;
             $('pNew').checked = !!p.isNew;
-            pendingImg = null;
-            if (p.image) {
-                showPreview(p.image);
-                if (p.image.startsWith('http')) {
-                    setImgMode('url');
-                    $('pUrl').value = p.image;
-                }
-            } else {
-                $('pPreview').classList.add('hidden');
+            pendingImages = p.images ? [...p.images] : [];
+            showPreviews();
+            if (p.images && p.images.length && p.images[0].startsWith('http')) {
+                setImgMode('url');
+                $('pUrl').value = p.images.join(', ');
             }
             $('formTitle').textContent = 'Redaktə Et';
             $('btnSubmit').textContent = 'Yenilə';
@@ -1610,8 +1827,8 @@
             list.forEach(p => {
                 const row = document.createElement('div');
                 row.className = 'flex items-center gap-3 p-3 border border-gray-100 dark:border-stone-800 rounded-xl hover:bg-gray-50 dark:hover:bg-stone-800/50 transition group';
-                const img = p.image
-                    ? `<img src="${p.image}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<i class=\\'fa-solid fa-capsules\\'></i>'">`
+                const img = p.images && p.images.length
+                    ? `<img src="${p.images[0]}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<i class=\'fa-solid fa-capsules\'></i>'">`
                     : `<i class="fa-solid ${p.icon || 'fa-capsules'}"></i>`;
                 row.innerHTML = `
                     <div class="w-12 h-12 rounded-lg bg-brand-50 dark:bg-stone-800 flex items-center justify-center text-brand-600 overflow-hidden shrink-0">${img}</div>
@@ -1677,7 +1894,7 @@
             if (window.matchMedia('(pointer: coarse)').matches) return;
             const c = $('cursor');
             const d = $('cursorDot');
-            let mx = 0, my = 0, cx = 0, cy = 0, dx = 0, dy = 0;
+            let mx = 0, my = 0, cx = 0, cy = 0;
 
             document.addEventListener('mousemove', e => {
                 mx = e.clientX; my = e.clientY;
@@ -1693,7 +1910,7 @@
             }
             animate();
 
-            document.querySelectorAll('a, button, [data-magnetic], input, select, .product-premium').forEach(el => {
+            document.querySelectorAll('a, button, [data-magnetic], input, select, .product-premium, .gallery-main').forEach(el => {
                 el.addEventListener('mouseenter', () => c.classList.add('hovering'));
                 el.addEventListener('mouseleave', () => c.classList.remove('hovering'));
             });
@@ -1721,7 +1938,6 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        // Counter animation
                         entry.target.querySelectorAll('.counter-value').forEach(c => {
                             const target = parseInt(c.dataset.target);
                             if (!target || c.dataset.animated) return;
@@ -1755,7 +1971,6 @@
         // ============ HEADER SCROLL ============
         function initHeader() {
             const header = $('header');
-            let last = 0;
             window.addEventListener('scroll', () => {
                 const y = window.scrollY;
                 if (y > 100) {
@@ -1765,7 +1980,6 @@
                     header.classList.add('py-4');
                     header.classList.remove('py-2');
                 }
-                last = y;
             });
         }
 
@@ -1802,11 +2016,15 @@
                 }
                 if (e.key === 'Escape') {
                     closeCart();
-                    closeQuickView();
                     closeProductDetail();
+                    closeLightbox();
                     hideModal('adminLogin');
                     hideModal('adminPanel');
                     closeConfirm();
+                }
+                if ($('lightbox').classList.contains('active')) {
+                    if (e.key === 'ArrowRight') nextLightboxImage();
+                    if (e.key === 'ArrowLeft') prevLightboxImage();
                 }
             });
         }
@@ -1818,14 +2036,30 @@
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(e => {
                 zone.addEventListener(e, ev => { ev.preventDefault(); ev.stopPropagation(); }, false);
             });
-            ['dragenter', 'dragover'].forEach(e => zone.addEventListener(e, () => zone.classList.add('dragover'), false));
-            ['dragleave', 'drop'].forEach(e => zone.addEventListener(e, () => zone.classList.remove('dragover'), false));
+            ['dragenter', 'dragover'].forEach(e => zone.addEventListener(e, () => zone.classList.add('border-brand-500', 'bg-brand-50', 'dark:bg-brand-900/10'), false));
+            ['dragleave', 'drop'].forEach(e => zone.addEventListener(e, () => zone.classList.remove('border-brand-500', 'bg-brand-50', 'dark:bg-brand-900/10'), false));
             zone.addEventListener('drop', e => {
                 const files = e.dataTransfer.files;
                 if (files.length) {
                     $('pFile').files = files;
                     handleImgFile({ target: { files } });
                 }
+            });
+        }
+
+        // ============ GALLERY ZOOM LENS ============
+        function initZoomLens() {
+            const gallery = $('galleryMain');
+            const lens = $('zoomLens');
+            const img = $('detailMainImage');
+            if (!gallery || !lens || !img) return;
+
+            gallery.addEventListener('mousemove', e => {
+                const rect = gallery.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                lens.style.left = x + 'px';
+                lens.style.top = y + 'px';
             });
         }
 
@@ -1848,8 +2082,8 @@
             initBackToTop();
             initKeyboard();
             initDropZone();
+            initZoomLens();
 
-            // Mobile nav padding
             if (window.innerWidth < 768) {
                 document.body.style.paddingBottom = '80px';
             }
