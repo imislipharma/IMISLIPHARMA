@@ -155,6 +155,15 @@
     }
     body { padding-bottom: 70px; }
   }
+  .preview-img-wrap { position: relative; width: 64px; height: 64px; flex-shrink: 0; }
+  .preview-img-wrap img { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; }
+  .preview-img-wrap .del-btn {
+    position: absolute; top: -6px; right: -6px; width: 18px; height: 18px;
+    background: #ef4444; color: white; border-radius: 50%; font-size: 10px;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .preview-img-wrap .del-btn:hover { background: #dc2626; }
 </style>
 <base target="_blank">
 <base target="_blank">
@@ -279,9 +288,7 @@
         </select>
       </div>
     </div>
-    <div id="categoryFilters" class="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide">
-      <button onclick="filterCategory('all', this)" class="category-pill active">Hamısı</button>
-    </div>
+    <div id="categoryFilters" class="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide"></div>
     <div id="emptyState" class="hidden text-center py-16">
       <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-magnifying-glass text-2xl text-slate-300"></i></div>
       <p class="text-slate-500 font-medium">Axtarışa uyğun məhsul tapılmadı</p>
@@ -441,7 +448,6 @@
     </div>
     <div class="p-6">
       <div class="grid lg:grid-cols-2 gap-8">
-        <!-- Gallery -->
         <div class="space-y-4">
           <div class="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 relative cursor-pointer" onclick="openLightbox()">
             <img id="detailMainImg" src="" alt="" class="w-full h-full object-cover" style="display:none">
@@ -453,7 +459,6 @@
           </div>
           <div id="detailThumbs" class="flex gap-3 overflow-x-auto scrollbar-hide pb-1"></div>
         </div>
-        <!-- Info -->
         <div class="space-y-5">
           <div>
             <span id="detailCategory" class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full"></span>
@@ -472,7 +477,6 @@
             <div class="stock-bar"><div class="stock-fill" id="stockFill" style="width:85%"></div></div>
           </div>
           <div id="detailPrice" class="flex items-baseline gap-3"></div>
-          <!-- Tabs -->
           <div class="border-b border-slate-100">
             <div class="flex gap-1">
               <button onclick="switchTab(this,'desc')" class="tab-btn tab-active px-4 py-3 text-sm font-semibold text-slate-500">Təsvir</button>
@@ -500,7 +504,6 @@
               <div class="flex items-center gap-2 text-sm text-slate-600 bg-slate-50 p-3 rounded-xl"><i class="fa-solid fa-check text-emerald-500 text-xs"></i><span>Pulsuz çatdırılma</span></div>
             </div>
           </div>
-          <!-- Actions -->
           <div class="flex gap-3 pt-2">
             <div class="flex items-center bg-slate-100 rounded-xl overflow-hidden border border-slate-200">
               <button onclick="detailQty(-1)" class="px-4 py-3 text-slate-600 hover:text-emerald-600 font-bold transition">−</button>
@@ -514,7 +517,6 @@
           <a id="detailWA" href="#" target="_blank" rel="noopener" class="block text-center text-emerald-600 text-sm font-semibold hover:underline py-1">
             <i class="fa-brands fa-whatsapp mr-1"></i> Bu məhsul haqqında soruşun
           </a>
-          <!-- Share -->
           <div class="pt-4 border-t border-slate-100">
             <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Paylaş</p>
             <div class="flex gap-2">
@@ -526,7 +528,6 @@
           </div>
         </div>
       </div>
-      <!-- Related -->
       <div class="mt-8 pt-6 border-t border-slate-100">
         <h3 class="font-bold text-slate-900 mb-4">Oxşar Məhsullar</h3>
         <div class="flex gap-4 overflow-x-auto scrollbar-hide pb-2" id="relatedList"></div>
@@ -722,6 +723,7 @@
 </nav>
 
 <script>
+
 // ============ CONFIG ============
 const CONFIG = {
   whatsapp: '994516011390',
@@ -804,13 +806,17 @@ let confirmCb = null;
 let imgMode = 'file';
 
 // ============ HELPERS ============
-const $ = id => document.getElementById(id);
-const fmtPrice = n => Number(n || 0).toFixed(2) + ' AZN';
-const esc = s => String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function $(id) { return document.getElementById(id); }
+function fmtPrice(n) { return Number(n || 0).toFixed(2) + ' AZN'; }
+function esc(s) {
+  var div = document.createElement('div');
+  div.textContent = String(s || '');
+  return div.innerHTML;
+}
 
 function toast(msg, type) {
   type = type || 'info';
-  const icons = {
+  var icons = {
     success: 'fa-circle-check text-emerald-600',
     error: 'fa-circle-xmark text-red-500',
     info: 'fa-circle-info text-slate-400',
@@ -967,8 +973,7 @@ function handleSort(el) {
 
 function filterCategory(cat, btn) {
   state.category = cat;
-  document.querySelectorAll('.category-pill').forEach(function(b) { b.classList.remove('active'); });
-  if (btn) btn.classList.add('active');
+  renderCategoryFilters();
   applyFilters();
 }
 
@@ -991,7 +996,51 @@ function applyFilters() {
   renderProducts(list);
 }
 
-// ============ RENDER PRODUCTS ============
+// ============ DYNAMIC CATEGORIES ============
+function getCategories() {
+  var cats = new Set();
+  state.products.forEach(function(p) { if (p.category) cats.add(p.category); });
+  return Array.from(cats).sort();
+}
+
+function getCategoryIcon(cat) {
+  return ICONS[cat] || 'fa-capsules';
+}
+
+function renderCategoryFilters() {
+  var container = $('categoryFilters');
+  if (!container) return;
+  container.innerHTML = '';
+
+  var allBtn = document.createElement('button');
+  allBtn.className = 'category-pill' + (state.category === 'all' ? ' active' : '');
+  allBtn.textContent = 'Hamısı';
+  allBtn.onclick = function() { filterCategory('all', this); };
+  container.appendChild(allBtn);
+
+  var cats = getCategories();
+  cats.forEach(function(cat) {
+    var btn = document.createElement('button');
+    btn.className = 'category-pill' + (state.category === cat ? ' active' : '');
+    btn.textContent = cat;
+    btn.onclick = function() { filterCategory(cat, this); };
+    container.appendChild(btn);
+  });
+}
+
+function updateCategoryDatalist() {
+  var list = $('categoryList');
+  if (!list) return;
+  list.innerHTML = '';
+  var cats = getCategories();
+  cats.forEach(function(cat) {
+    var opt = document.createElement('option');
+    opt.value = cat;
+    list.appendChild(opt);
+  });
+}
+
+// ============ RENDER PRODUCTS (DOM API) ============
 function renderProducts(list) {
   var grid = $('productGrid');
   var empty = $('emptyState');
@@ -1011,42 +1060,107 @@ function renderProducts(list) {
     var oos = p.stock === false;
     var mainImg = p.images && p.images.length ? p.images[0] : null;
 
-    var badges = '';
-    if (p.isNew) badges += '<span class="badge-green absolute top-3 left-3 z-10">Yeni</span>';
-    if (p.oldPrice) {
-      var pct = Math.round((1 - p.price / p.oldPrice) * 100);
-      badges += '<span class="badge-amber absolute top-3 ' + (p.isNew ? 'left-3 mt-7' : 'left-3') + ' z-10">-' + pct + '%</span>';
+    var imgWrap = document.createElement('div');
+    imgWrap.className = 'h-52 bg-gradient-to-br from-emerald-50/50 to-teal-50/30 flex items-center justify-center relative overflow-hidden';
+
+    if (mainImg) {
+      var img = document.createElement('img');
+      img.src = mainImg;
+      img.alt = p.name;
+      img.className = 'w-full h-full object-cover';
+      img.loading = 'lazy';
+      imgWrap.appendChild(img);
+    } else {
+      var icon = document.createElement('i');
+      icon.className = 'fa-solid ' + (p.icon || getCategoryIcon(p.category) || 'fa-capsules') + ' text-4xl text-emerald-200';
+      imgWrap.appendChild(icon);
     }
 
-    var img = mainImg
-      ? '<div class="h-52 bg-gradient-to-br from-emerald-50/50 to-teal-50/30 flex items-center justify-center relative overflow-hidden">'
-        + '<img src="' + mainImg + '" alt="' + esc(p.name) + '" class="w-full h-full object-cover" loading="lazy">'
-        + badges
-        + (oos ? '<div class="absolute inset-0 bg-white/80 flex items-center justify-center"><span class="text-xs font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-3 py-1 rounded-full">Stokda Yoxdur</span></div>' : '')
-        + '</div>'
-      : '<div class="h-52 bg-gradient-to-br from-emerald-50 to-teal-50 flex items-center justify-center relative">'
-        + '<i class="fa-solid ' + (p.icon || getCategoryIcon(p.category) || 'fa-capsules') + ' text-4xl text-emerald-200"></i>'
-        + badges
-        + (oos ? '<div class="absolute inset-0 bg-white/80 flex items-center justify-center"><span class="text-xs font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-3 py-1 rounded-full">Stokda Yoxdur</span></div>' : '')
-        + '</div>';
+    if (p.isNew) {
+      var newBadge = document.createElement('span');
+      newBadge.className = 'badge-green absolute top-3 left-3 z-10';
+      newBadge.textContent = 'Yeni';
+      imgWrap.appendChild(newBadge);
+    }
+    if (p.oldPrice) {
+      var pct = Math.round((1 - p.price / p.oldPrice) * 100);
+      var saleBadge = document.createElement('span');
+      saleBadge.className = 'badge-amber absolute top-3 ' + (p.isNew ? 'left-3 mt-7' : 'left-3') + ' z-10';
+      saleBadge.textContent = '-' + pct + '%';
+      imgWrap.appendChild(saleBadge);
+    }
+    if (oos) {
+      var oosOverlay = document.createElement('div');
+      oosOverlay.className = 'absolute inset-0 bg-white/80 flex items-center justify-center';
+      var oosText = document.createElement('span');
+      oosText.className = 'text-xs font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-3 py-1 rounded-full';
+      oosText.textContent = 'Stokda Yoxdur';
+      oosOverlay.appendChild(oosText);
+      imgWrap.appendChild(oosOverlay);
+    }
 
-    var price = p.oldPrice
-      ? '<span class="text-slate-400 line-through text-xs">' + fmtPrice(p.oldPrice) + '</span><span class="text-emerald-700 font-extrabold text-lg">' + fmtPrice(p.price) + '</span>'
-      : '<span class="text-emerald-700 font-extrabold text-lg">' + fmtPrice(p.price) + '</span>';
+    card.appendChild(imgWrap);
 
-    card.innerHTML = img +
-      '<div class="p-5">' +
-        '<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md uppercase tracking-wider">' + esc(p.category) + '</span>' +
-        '<h3 class="font-bold text-slate-900 mt-2.5 mb-1 text-[15px] leading-snug line-clamp-2 cursor-pointer hover:text-emerald-600 transition" onclick="openDetail(' + p.id + ')">' + esc(p.name) + '</h3>' +
-        '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' + esc(p.desc || '') + '</p>' +
-        '<div class="flex items-center justify-between pt-3 border-t border-slate-100">' +
-          '<div class="flex flex-col">' + price + '</div>' +
-          '<div class="flex gap-2">' +
-            '<button onclick="openDetail(' + p.id + ')" class="w-9 h-9 rounded-xl bg-slate-100 text-slate-500 hover:bg-emerald-100 hover:text-emerald-600 transition flex items-center justify-center" title="Ətraflı"><i class="fa-solid fa-circle-info text-sm"></i></button>' +
-            '<button onclick="addToCart(' + p.id + ')" ' + (oos ? 'disabled' : '') + ' class="w-9 h-9 rounded-xl ' + (oos ? 'bg-slate-100 text-slate-300 cursor-not-allowed' : 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-500/25') + ' transition flex items-center justify-center"><i class="fa-solid fa-plus text-sm"></i></button>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
+    var content = document.createElement('div');
+    content.className = 'p-5';
+
+    var catSpan = document.createElement('span');
+    catSpan.className = 'text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md uppercase tracking-wider';
+    catSpan.textContent = p.category;
+    content.appendChild(catSpan);
+
+    var nameH3 = document.createElement('h3');
+    nameH3.className = 'font-bold text-slate-900 mt-2.5 mb-1 text-[15px] leading-snug line-clamp-2 cursor-pointer hover:text-emerald-600 transition';
+    nameH3.textContent = p.name;
+    nameH3.onclick = function() { openDetail(p.id); };
+    content.appendChild(nameH3);
+
+    var descP = document.createElement('p');
+    descP.className = 'text-xs text-slate-500 line-clamp-2 mb-3';
+    descP.textContent = p.desc || '';
+    content.appendChild(descP);
+
+    var priceRow = document.createElement('div');
+    priceRow.className = 'flex items-center justify-between pt-3 border-t border-slate-100';
+
+    var priceCol = document.createElement('div');
+    priceCol.className = 'flex flex-col';
+    if (p.oldPrice) {
+      var oldSpan = document.createElement('span');
+      oldSpan.className = 'text-slate-400 line-through text-xs';
+      oldSpan.textContent = fmtPrice(p.oldPrice);
+      priceCol.appendChild(oldSpan);
+    }
+    var priceSpan = document.createElement('span');
+    priceSpan.className = 'text-emerald-700 font-extrabold text-lg';
+    priceSpan.textContent = fmtPrice(p.price);
+    priceCol.appendChild(priceSpan);
+    priceRow.appendChild(priceCol);
+
+    var btnCol = document.createElement('div');
+    btnCol.className = 'flex gap-2';
+
+    var detailBtn = document.createElement('button');
+    detailBtn.className = 'w-9 h-9 rounded-xl bg-slate-100 text-slate-500 hover:bg-emerald-100 hover:text-emerald-600 transition flex items-center justify-center';
+    detailBtn.title = 'Ətraflı';
+    detailBtn.innerHTML = '<i class="fa-solid fa-circle-info text-sm"></i>';
+    detailBtn.onclick = function() { openDetail(p.id); };
+    btnCol.appendChild(detailBtn);
+
+    var addBtn = document.createElement('button');
+    addBtn.className = 'w-9 h-9 rounded-xl ' + (oos ? 'bg-slate-100 text-slate-300 cursor-not-allowed' : 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-500/25') + ' transition flex items-center justify-center';
+    addBtn.innerHTML = '<i class="fa-solid fa-plus text-sm"></i>';
+    if (!oos) {
+      addBtn.onclick = function() { addToCart(p.id); };
+    } else {
+      addBtn.disabled = true;
+    }
+    btnCol.appendChild(addBtn);
+
+    priceRow.appendChild(btnCol);
+    content.appendChild(priceRow);
+    card.appendChild(content);
+
     grid.appendChild(card);
   });
 }
@@ -1082,6 +1196,7 @@ function openDetail(id) {
   if (detailDesc) detailDesc.textContent = p.desc || 'Bu məhsul haqqında ətraflı məlumat tezliklə əlavə olunacaq.';
 
   if (detailPrice) {
+    detailPrice.innerHTML = '';
     if (p.oldPrice) {
       var pct = Math.round((1 - p.price / p.oldPrice) * 100);
       detailPrice.innerHTML = '<span class="text-3xl font-bold text-emerald-700">' + fmtPrice(p.price) + '</span><span class="text-lg text-slate-400 line-through">' + fmtPrice(p.oldPrice) + '</span><span class="text-xs font-bold text-white bg-red-500 px-2 py-1 rounded-lg">-' + pct + '%</span>';
@@ -1105,10 +1220,18 @@ function openDetail(id) {
 
   if (detailBadges) {
     detailBadges.innerHTML = '';
-    if (p.isNew) detailBadges.innerHTML += '<span class="badge-green">Yeni Məhsul</span>';
+    if (p.isNew) {
+      var nb = document.createElement('span');
+      nb.className = 'badge-green';
+      nb.textContent = 'Yeni Məhsul';
+      detailBadges.appendChild(nb);
+    }
     if (p.oldPrice) {
       var pct2 = Math.round((1 - p.price / p.oldPrice) * 100);
-      detailBadges.innerHTML += '<span class="badge-amber">Endirim -' + pct2 + '%</span>';
+      var sb = document.createElement('span');
+      sb.className = 'badge-amber';
+      sb.textContent = 'Endirim -' + pct2 + '%';
+      detailBadges.appendChild(sb);
     }
   }
 
@@ -1124,7 +1247,11 @@ function openDetail(id) {
       p.images.forEach(function(img, idx) {
         var thumb = document.createElement('div');
         thumb.className = 'gallery-thumb ' + (idx === 0 ? 'active' : '');
-        thumb.innerHTML = '<img src="' + img + '" alt="" onerror="this.style.display=\'none\'">';
+        var timg = document.createElement('img');
+        timg.src = img;
+        timg.alt = '';
+        timg.onerror = function() { this.style.display = 'none'; };
+        thumb.appendChild(timg);
         thumb.onclick = function() { selectGalleryImage(idx); };
         detailThumbs.appendChild(thumb);
       });
@@ -1196,16 +1323,47 @@ function renderRelated(current) {
   var container = $('relatedList');
   if (!container) return;
   var related = state.products.filter(function(p) { return p.category === current.category && p.id !== current.id; }).slice(0, 6);
-  if (!related.length) { container.innerHTML = '<p class="text-sm text-slate-400 py-4">Oxşar məhsul tapılmadı</p>'; return; }
   container.innerHTML = '';
+  if (!related.length) {
+    var empty = document.createElement('p');
+    empty.className = 'text-sm text-slate-400 py-4';
+    empty.textContent = 'Oxşar məhsul tapılmadı';
+    container.appendChild(empty);
+    return;
+  }
   related.forEach(function(p) {
-    var img = p.images && p.images.length ? p.images[0] : null;
     var card = document.createElement('div');
     card.className = 'w-40 bg-white rounded-2xl border border-slate-100 overflow-hidden shrink-0 cursor-pointer hover:shadow-lg transition';
     card.onclick = function() { closeDetail(); setTimeout(function() { openDetail(p.id); }, 350); };
-    card.innerHTML = '<div class="h-32 bg-gradient-to-br from-emerald-50 to-teal-50 relative overflow-hidden">'
-      + (img ? '<img src="' + img + '" class="w-full h-full object-cover" loading="lazy">' : '<div class="flex items-center justify-center h-full text-emerald-300"><i class="fa-solid ' + (p.icon || getCategoryIcon(p.category) || 'fa-capsules') + ' text-2xl"></i></div>')
-      + '</div><div class="p-3"><p class="text-xs font-bold text-slate-900 truncate">' + esc(p.name) + '</p><p class="text-xs text-emerald-600 font-bold mt-1">' + fmtPrice(p.price) + '</p></div>';
+
+    var imgWrap = document.createElement('div');
+    imgWrap.className = 'h-32 bg-gradient-to-br from-emerald-50 to-teal-50 relative overflow-hidden';
+    if (p.images && p.images.length) {
+      var img = document.createElement('img');
+      img.src = p.images[0];
+      img.className = 'w-full h-full object-cover';
+      img.loading = 'lazy';
+      imgWrap.appendChild(img);
+    } else {
+      var icon = document.createElement('div');
+      icon.className = 'flex items-center justify-center h-full text-emerald-300';
+      icon.innerHTML = '<i class="fa-solid ' + (p.icon || getCategoryIcon(p.category) || 'fa-capsules') + ' text-2xl"></i>';
+      imgWrap.appendChild(icon);
+    }
+    card.appendChild(imgWrap);
+
+    var info = document.createElement('div');
+    info.className = 'p-3';
+    var name = document.createElement('p');
+    name.className = 'text-xs font-bold text-slate-900 truncate';
+    name.textContent = p.name;
+    info.appendChild(name);
+    var price = document.createElement('p');
+    price.className = 'text-xs text-emerald-600 font-bold mt-1';
+    price.textContent = fmtPrice(p.price);
+    info.appendChild(price);
+    card.appendChild(info);
+
     container.appendChild(card);
   });
 }
@@ -1311,6 +1469,7 @@ function cartTotal() {
     return sum + (p ? p.price * item.qty : 0);
   }, 0);
 }
+
 function renderCart() {
   var container = $('cartList');
   var empty = $('cartEmpty');
@@ -1332,33 +1491,85 @@ function renderCart() {
   }
   if (empty) empty.classList.add('hidden');
   if (container) container.innerHTML = '';
+
   state.cart.forEach(function(item) {
     var p = state.products.find(function(x) { return x.id === item.id; });
     if (!p || !container) return;
+
     var row = document.createElement('div');
     row.className = 'flex items-center gap-4 py-4 border-b border-slate-100 last:border-0';
-    var img = p.images && p.images.length
-      ? '<img src="' + p.images[0] + '" class="w-full h-full object-cover" onerror="this.style.display=\'none\'">'
-      : '<i class="fa-solid ' + (p.icon || getCategoryIcon(p.category) || 'fa-capsules') + '"></i>';
-    row.innerHTML = '<div class="w-16 h-16 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 overflow-hidden shrink-0 shadow-sm">' + img + '</div>' +
-      '<div class="flex-1 min-w-0">' +
-        '<p class="font-semibold text-sm text-slate-900 truncate">' + esc(p.name) + '</p>' +
-        '<p class="text-xs text-emerald-600 font-bold mt-0.5">' + fmtPrice(p.price) + '</p>' +
-        '<div class="flex items-center gap-3 mt-2">' +
-          '<button onclick="changeCartQty(' + p.id + ',-1)" class="w-7 h-7 rounded-lg border border-slate-200 text-slate-500 hover:border-emerald-500 hover:text-emerald-600 transition text-xs">−</button>' +
-          '<span class="text-xs font-bold w-4 text-center text-slate-900">' + item.qty + '</span>' +
-          '<button onclick="changeCartQty(' + p.id + ',1)" class="w-7 h-7 rounded-lg border border-slate-200 text-slate-500 hover:border-emerald-500 hover:text-emerald-600 transition text-xs">+</button>' +
-        '</div>' +
-      '</div>' +
-      '<div class="text-right">' +
-        '<p class="text-sm font-bold text-slate-900">' + fmtPrice(p.price * item.qty) + '</p>' +
-        '<button onclick="removeCart(' + p.id + ')" class="text-xs text-slate-400 hover:text-red-500 transition mt-1">Sil</button>' +
-      '</div>';
+
+    var imgWrap = document.createElement('div');
+    imgWrap.className = 'w-16 h-16 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 overflow-hidden shrink-0 shadow-sm';
+    if (p.images && p.images.length) {
+      var img = document.createElement('img');
+      img.src = p.images[0];
+      img.className = 'w-full h-full object-cover';
+      img.onerror = function() { this.style.display = 'none'; };
+      imgWrap.appendChild(img);
+    } else {
+      imgWrap.innerHTML = '<i class="fa-solid ' + (p.icon || getCategoryIcon(p.category) || 'fa-capsules') + '"></i>';
+    }
+    row.appendChild(imgWrap);
+
+    var info = document.createElement('div');
+    info.className = 'flex-1 min-w-0';
+
+    var name = document.createElement('p');
+    name.className = 'font-semibold text-sm text-slate-900 truncate';
+    name.textContent = p.name;
+    info.appendChild(name);
+
+    var price = document.createElement('p');
+    price.className = 'text-xs text-emerald-600 font-bold mt-0.5';
+    price.textContent = fmtPrice(p.price);
+    info.appendChild(price);
+
+    var qtyWrap = document.createElement('div');
+    qtyWrap.className = 'flex items-center gap-3 mt-2';
+
+    var minusBtn = document.createElement('button');
+    minusBtn.className = 'w-7 h-7 rounded-lg border border-slate-200 text-slate-500 hover:border-emerald-500 hover:text-emerald-600 transition text-xs';
+    minusBtn.textContent = '−';
+    minusBtn.onclick = function() { changeCartQty(p.id, -1); };
+    qtyWrap.appendChild(minusBtn);
+
+    var qtySpan = document.createElement('span');
+    qtySpan.className = 'text-xs font-bold w-4 text-center text-slate-900';
+    qtySpan.textContent = item.qty;
+    qtyWrap.appendChild(qtySpan);
+
+    var plusBtn = document.createElement('button');
+    plusBtn.className = 'w-7 h-7 rounded-lg border border-slate-200 text-slate-500 hover:border-emerald-500 hover:text-emerald-600 transition text-xs';
+    plusBtn.textContent = '+';
+    plusBtn.onclick = function() { changeCartQty(p.id, 1); };
+    qtyWrap.appendChild(plusBtn);
+
+    info.appendChild(qtyWrap);
+    row.appendChild(info);
+
+    var right = document.createElement('div');
+    right.className = 'text-right';
+
+    var total = document.createElement('p');
+    total.className = 'text-sm font-bold text-slate-900';
+    total.textContent = fmtPrice(p.price * item.qty);
+    right.appendChild(total);
+
+    var delBtn = document.createElement('button');
+    delBtn.className = 'text-xs text-slate-400 hover:text-red-500 transition mt-1';
+    delBtn.textContent = 'Sil';
+    delBtn.onclick = function() { removeCart(p.id); };
+    right.appendChild(delBtn);
+
+    row.appendChild(right);
     container.appendChild(row);
   });
+
   var cartTotalEl = $('cartTotal');
   if (cartTotalEl) cartTotalEl.textContent = fmtPrice(cartTotal());
 }
+
 function openCart() {
   var overlay = $('cartOverlay');
   var drawer = $('cartDrawer');
@@ -1452,6 +1663,11 @@ function openAdminPanel() {
   showModal('adminPanel');
 }
 
+function showSyncNotice() {
+  var box = $('syncNotice');
+  if (box) box.style.display = 'block';
+}
+
 // ============ IMAGE HANDLING ============
 function setImgMode(mode) {
   imgMode = mode;
@@ -1514,19 +1730,20 @@ function showPreviews() {
   c.classList.toggle('hidden', !pendingImages.length);
   pendingImages.forEach(function(src, idx) {
     var wrap = document.createElement('div');
-    wrap.className = 'relative w-16 h-16 shrink-0';
+    wrap.className = 'preview-img-wrap';
     var img = document.createElement('img');
-    img.src = src; img.className = 'w-16 h-16 object-cover rounded-lg border border-slate-200';
+    img.src = src;
+    wrap.appendChild(img);
     var del = document.createElement('button');
     del.type = 'button';
-    del.className = 'absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] flex items-center justify-center shadow-sm hover:bg-red-600 transition';
+    del.className = 'del-btn';
     del.innerHTML = '<i class="fa-solid fa-xmark"></i>';
     del.onclick = function() { removePreview(idx); };
-    wrap.appendChild(img);
     wrap.appendChild(del);
     c.appendChild(wrap);
   });
 }
+
 function removePreview(idx) {
   pendingImages.splice(idx, 1);
   showPreviews();
@@ -1546,7 +1763,7 @@ function handleProductSubmit(e) {
   if (!pName || !pCategory || !pPrice) return;
 
   var name = pName.value.trim();
-  var cat = pCategory.value;
+  var cat = pCategory.value.trim();
   var price = parseFloat(pPrice.value);
   var old = pOldPrice && pOldPrice.value.trim() ? parseFloat(pOldPrice.value) : null;
   var desc = pDesc ? pDesc.value.trim() : '';
@@ -1654,21 +1871,59 @@ function renderAdmin() {
   var q = adminSearch ? adminSearch.value.trim().toLowerCase() : '';
   var list = state.products;
   if (q) list = list.filter(function(p) { return p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q); });
-  if (!list.length) { c.innerHTML = '<p class="text-sm text-slate-400 text-center py-6">Tapılmadı</p>'; return; }
+
   c.innerHTML = '';
+  if (!list.length) {
+    var empty = document.createElement('p');
+    empty.className = 'text-sm text-slate-400 text-center py-6';
+    empty.textContent = 'Tapılmadı';
+    c.appendChild(empty);
+    return;
+  }
+
   list.forEach(function(p) {
     var row = document.createElement('div');
     row.className = 'flex items-center gap-3 p-3 border border-slate-100 rounded-xl hover:bg-slate-50 transition';
-    var img = p.images && p.images.length
-      ? '<img src="' + p.images[0] + '" class="w-full h-full object-cover" onerror="this.style.display=\'none\'">'
-      : '<i class="fa-solid ' + (p.icon || getCategoryIcon(p.category) || 'fa-capsules') + '"></i>';
-    row.innerHTML = '<div class="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 overflow-hidden shrink-0">' + img + '</div>' +
-      '<div class="flex-1 min-w-0">' +
-        '<p class="font-semibold text-sm text-slate-900 truncate">' + esc(p.name) + '</p>' +
-        '<p class="text-xs text-slate-400">' + esc(p.category) + ' · ' + fmtPrice(p.price) + (p.stock === false ? ' · <span class="text-red-500 font-bold">Stok yoxdur</span>' : '') + '</p>' +
-      '</div>' +
-      '<button onclick="editProduct(' + p.id + ')" class="p-2 text-slate-400 hover:text-emerald-600 transition rounded-lg hover:bg-emerald-50"><i class="fa-solid fa-pen text-xs"></i></button>' +
-      '<button onclick="deleteProduct(' + p.id + ')" class="p-2 text-slate-400 hover:text-red-600 transition rounded-lg hover:bg-red-50"><i class="fa-solid fa-trash text-xs"></i></button>';
+
+    var imgWrap = document.createElement('div');
+    imgWrap.className = 'w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 overflow-hidden shrink-0';
+    if (p.images && p.images.length) {
+      var img = document.createElement('img');
+      img.src = p.images[0];
+      img.className = 'w-full h-full object-cover';
+      img.onerror = function() { this.style.display = 'none'; };
+      imgWrap.appendChild(img);
+    } else {
+      imgWrap.innerHTML = '<i class="fa-solid ' + (p.icon || getCategoryIcon(p.category) || 'fa-capsules') + '"></i>';
+    }
+    row.appendChild(imgWrap);
+
+    var info = document.createElement('div');
+    info.className = 'flex-1 min-w-0';
+
+    var name = document.createElement('p');
+    name.className = 'font-semibold text-sm text-slate-900 truncate';
+    name.textContent = p.name;
+    info.appendChild(name);
+
+    var meta = document.createElement('p');
+    meta.className = 'text-xs text-slate-400';
+    meta.innerHTML = esc(p.category) + ' &middot; ' + fmtPrice(p.price) + (p.stock === false ? ' &middot; <span class="text-red-500 font-bold">Stok yoxdur</span>' : '');
+    info.appendChild(meta);
+    row.appendChild(info);
+
+    var editBtn = document.createElement('button');
+    editBtn.className = 'p-2 text-slate-400 hover:text-emerald-600 transition rounded-lg hover:bg-emerald-50';
+    editBtn.innerHTML = '<i class="fa-solid fa-pen text-xs"></i>';
+    editBtn.onclick = function() { editProduct(p.id); };
+    row.appendChild(editBtn);
+
+    var delBtn = document.createElement('button');
+    delBtn.className = 'p-2 text-slate-400 hover:text-red-600 transition rounded-lg hover:bg-red-50';
+    delBtn.innerHTML = '<i class="fa-solid fa-trash text-xs"></i>';
+    delBtn.onclick = function() { deleteProduct(p.id); };
+    row.appendChild(delBtn);
+
     c.appendChild(row);
   });
 }
@@ -1750,48 +2005,6 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowLeft') prevLightbox();
   }
 });
-
-
-// ============ DYNAMIC CATEGORIES ============
-function getCategories() {
-  var cats = new Set();
-  state.products.forEach(function(p) { if (p.category) cats.add(p.category); });
-  return Array.from(cats).sort();
-}
-
-function getCategoryIcon(cat) {
-  return ICONS[cat] || 'fa-capsules';
-}
-
-function renderCategoryFilters() {
-  var container = $('categoryFilters');
-  if (!container) return;
-  var cats = getCategories();
-  var html = '<button onclick="filterCategory(&#39;all&#39;, this)" class="category-pill ' + (state.category === 'all' ? 'active' : '') + '">Hamısı</button>';
-  cats.forEach(function(cat) {
-    html += '<button onclick="filterCategory(&#39;' + esc(cat) + '&#39;, this)" class="category-pill ' + (state.category === cat ? 'active' : '') + '">' + esc(cat) + '</button>';
-  });
-  container.innerHTML = html;
-}
-
-function updateCategoryDatalist() {
-  var list = $('categoryList');
-  if (!list) return;
-  var cats = getCategories();
-  list.innerHTML = '';
-  cats.forEach(function(cat) {
-    var opt = document.createElement('option');
-    opt.value = cat;
-    list.appendChild(opt);
-  });
-}
-
-// ============ SYNC NOTICE ============
-function showSyncNotice() {
-  var box = document.getElementById('syncNotice');
-  if (!box) return;
-  box.style.display = 'block';
-}
 
 // ============ INIT ============
 function init() {
