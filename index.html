@@ -146,13 +146,6 @@
   .category-pill:hover { border-color: #059669; color: #059669; }
   .category-pill.active { background: #059669; color: white; border-color: #059669; box-shadow: 0 4px 12px rgba(5,150,105,0.25); }
   .mobile-nav { display: none; }
-  .img-preview-wrap { position: relative; display: inline-block; }
-  .img-preview-wrap .del-img {
-    position: absolute; top: -6px; right: -6px; width: 18px; height: 18px;
-    background: #ef4444; color: white; border-radius: 50%; font-size: 10px;
-    display: flex; align-items: center; justify-content: center; cursor: pointer;
-    border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
   @media (max-width: 768px) {
     .mobile-nav {
       display: flex; position: fixed; bottom: 0; left: 0; right: 0;
@@ -163,7 +156,6 @@
     body { padding-bottom: 70px; }
   }
 </style>
-<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -286,8 +278,12 @@
         </select>
       </div>
     </div>
-    <div class="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide" id="categoryPills">
+    <div class="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide">
       <button onclick="filterCategory('all', this)" class="category-pill active">Hamısı</button>
+      <button onclick="filterCategory('Vitamini', this)" class="category-pill">Vitamini</button>
+      <button onclick="filterCategory('Kosmetika', this)" class="category-pill">Kosmetika</button>
+      <button onclick="filterCategory('Uşaq', this)" class="category-pill">Uşaq Qidaları</button>
+      <button onclick="filterCategory('Tibbi', this)" class="category-pill">Tibbi Ləvazimat</button>
     </div>
     <div id="emptyState" class="hidden text-center py-16">
       <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-magnifying-glass text-2xl text-slate-300"></i></div>
@@ -409,7 +405,7 @@
       </div>
       <div>
         <h4 class="font-bold text-sm uppercase tracking-wider text-slate-300 mb-4">Kateqoriyalar</h4>
-        <ul class="space-y-2 text-sm text-slate-400" id="footerCategories">
+        <ul class="space-y-2 text-sm text-slate-400">
           <li><a href="#kataloq" class="hover:text-emerald-400 transition">Vitamini & Qida Əlavələri</a></li>
           <li><a href="#kataloq" class="hover:text-emerald-400 transition">Qulluq & Kosmetika</a></li>
           <li><a href="#kataloq" class="hover:text-emerald-400 transition">Uşaq Məhsulları</a></li>
@@ -616,17 +612,6 @@
           <p class="text-[10px] font-bold uppercase tracking-wider text-slate-500 mt-1">Dəyər (AZN)</p>
         </div>
       </div>
-
-      <!-- CATEGORIES MANAGEMENT -->
-      <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
-        <h4 class="font-bold text-sm text-slate-900 mb-4">Kateqoriyaları İdarə Et</h4>
-        <div id="adminCategoryList" class="flex flex-wrap gap-2 mb-3"></div>
-        <div class="flex gap-2">
-          <input type="text" id="newCategoryInput" placeholder="Yeni kateqoriya adı..." class="flex-1 bg-white border border-slate-200 rounded-xl p-2.5 text-sm">
-          <button onclick="addCategory()" class="bg-emerald-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-emerald-700 transition">Əlavə Et</button>
-        </div>
-      </div>
-
       <div id="adminFormBox" class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
         <h4 id="formTitle" class="font-bold text-sm text-slate-900 mb-4">Yeni Məhsul Əlavə Et</h4>
         <form id="adminForm" onsubmit="handleProductSubmit(event)" class="space-y-3">
@@ -638,7 +623,10 @@
             <div>
               <label class="block text-xs font-semibold text-slate-500 mb-1">Kateqoriya</label>
               <select id="pCategory" class="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-sm">
-                <!-- Dinamik doldurulur -->
+                <option value="Vitamini">Vitamini</option>
+                <option value="Kosmetika">Kosmetika</option>
+                <option value="Uşaq">Uşaq Qidaları</option>
+                <option value="Tibbi">Tibbi Ləvazimat</option>
               </select>
             </div>
             <div>
@@ -662,7 +650,7 @@
               <div id="zoneFile" class="border-2 border-dashed border-slate-300 rounded-xl p-4 text-center relative hover:border-emerald-500 transition cursor-pointer">
                 <input type="file" id="pFile" accept="image/*" multiple onchange="handleImgFile(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                 <i class="fa-solid fa-cloud-arrow-up text-2xl text-slate-300 mb-1"></i>
-                <p class="text-xs text-slate-400">Birdən çox şəkil seçin (köhnə şəkillər qalacaq)</p>
+                <p class="text-xs text-slate-400">Birdən çox şəkil seçin</p>
               </div>
               <div id="zoneUrl" class="hidden">
                 <textarea id="pUrl" onchange="handleImgUrl(this.value)" placeholder="https://... (hər sətirdə bir URL)" rows="3" class="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-sm resize-none"></textarea>
@@ -732,54 +720,65 @@
 </nav>
 
 <script>
-
 // ============ CONFIG ============
 const CONFIG = {
   whatsapp: '994516011390',
   open: 8, close: 22,
   keys: {
-    products: 'pharma_products_v6',
-    cart: 'pharma_cart_v5',
-    adminPass: 'pharma_admin_v4',
-    adminSession: 'pharma_session_v4',
-    categories: 'pharma_categories_v1'
+    products: 'pharma_products_v5',
+    cart: 'pharma_cart_v4',
+    adminPass: 'pharma_admin_v3',
+    adminSession: 'pharma_session_v3'
   }
 };
 
-const DEFAULT_CATEGORIES = ['Vitamini', 'Kosmetika', 'Uşaq', 'Tibbi'];
+const ICONS = {
+  Vitamini: 'fa-pills',
+  Kosmetika: 'fa-pump-soap',
+  Uşaq: 'fa-baby-carriage',
+  Tibbi: 'fa-kit-medical'
+};
 
 const DEFAULT_PRODUCTS = [
   { id: 1, name: "Vitamin C 1000mg", category: "Vitamini", price: 12.50, oldPrice: null, 
     desc: "İmmunitet dəstəyi üçün yüksək dozalı Vitamin C. Gündəlik istifadə üçün ideal. Antioksidant təsir göstərir, dəri sağlamlığını dəstəkləyir.", 
-    images: ["https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=600&fit=crop"], 
+    icon: "fa-pills", 
+    images: ["https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=600&h=600&fit=crop"], 
     stock: true, isNew: false },
   { id: 2, name: "Nəmləndirici Krem", category: "Kosmetika", price: 24.00, oldPrice: 32.00, 
     desc: "Həssas dəri üçün nəmləndirici krem. 24 saat davamlı nəmlik. Paraben və sülfatsız formul.", 
-    images: ["https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop"], 
+    icon: "fa-pump-soap", 
+    images: ["https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1570194065650-d99fb4b38b15?w=600&h=600&fit=crop"], 
     stock: true, isNew: false },
   { id: 3, name: "Uşaq Qatışığı N1", category: "Uşaq", price: 18.90, oldPrice: null, 
     desc: "0-6 aylıq körpələr üçün xüsusi qatışıq. Bütün zəruri vitamin və minerallarla zənginləşdirilib.", 
-    images: ["https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&h=600&fit=crop"], 
+    icon: "fa-baby-carriage", 
+    images: ["https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=600&fit=crop"], 
     stock: true, isNew: true },
   { id: 4, name: "Rəqəmsal Termometr", category: "Tibbi", price: 8.50, oldPrice: null, 
     desc: "Dəqiq hərarət ölçən rəqəmsal termometr. 1 saniyədə nəticə. Yaddaş funksiyası. LCD ekran.", 
-    images: ["https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&h=600&fit=crop"], 
+    icon: "fa-kit-medical", 
+    images: ["https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=600&fit=crop"], 
     stock: true, isNew: false },
   { id: 5, name: "Omega-3 Balıq Yağı", category: "Vitamini", price: 28.00, oldPrice: null, 
     desc: "Ürək və beyin sağlamlığı üçün Omega-3. EPA və DHA ilə zəngin. Gündəlik 2 kapsul.", 
-    images: ["https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=600&fit=crop"], 
+    icon: "fa-pills", 
+    images: ["https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop"], 
     stock: true, isNew: false },
   { id: 6, name: "Günəş Qoruyucu SPF50", category: "Kosmetika", price: 15.50, oldPrice: null, 
     desc: "UVA/UVB qorunması ilə yüksək keyfiyyətli günəş kremi. Su davamlı. Bütün dəri tipləri üçün uyğun.", 
-    images: ["https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop"], 
+    icon: "fa-sun", 
+    images: ["https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1570194065650-d99fb4b38b15?w=600&h=600&fit=crop"], 
     stock: true, isNew: true },
   { id: 7, name: "Bezi Dəyişmə Dəsti", category: "Uşaq", price: 9.90, oldPrice: 14.00, 
     desc: "Həssas körpə dərisi üçün bezi dəyişmə dəsti. Ekoloji təmiz materiallar.", 
-    images: ["https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=600&fit=crop"], 
+    icon: "fa-baby", 
+    images: ["https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&h=600&fit=crop"], 
     stock: true, isNew: false },
   { id: 8, name: "Təzyiq Ölçən Cihaz", category: "Tibbi", price: 45.00, oldPrice: null, 
     desc: "Avtomatik, rəqəmsal təzyiq ölçən cihaz. Böyük LCD ekran. 2 istifadəçi yaddaşı.", 
-    images: ["https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=600&fit=crop"], 
+    icon: "fa-heart-pulse", 
+    images: ["https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=600&fit=crop","https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&h=600&fit=crop"], 
     stock: false, isNew: false }
 ];
 
@@ -787,7 +786,6 @@ const DEFAULT_PRODUCTS = [
 const state = {
   products: [],
   cart: [],
-  categories: [],
   search: '',
   category: 'all',
   sort: 'default',
@@ -807,11 +805,6 @@ let imgMode = 'file';
 const $ = id => document.getElementById(id);
 const fmtPrice = n => Number(n || 0).toFixed(2) + ' AZN';
 const esc = s => String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-function getIcon(category) {
-  var map = { 'Vitamini': 'fa-pills', 'Kosmetika': 'fa-pump-soap', 'Uşaq': 'fa-baby-carriage', 'Tibbi': 'fa-kit-medical' };
-  return map[category] || 'fa-capsules';
-}
 
 function toast(msg, type) {
   type = type || 'info';
@@ -865,122 +858,18 @@ function hideModal(id) {
   }
 }
 
-// ============ CATEGORIES ============
-function loadCategories() {
-  var cats = null;
-  try {
-    var s = localStorage.getItem(CONFIG.keys.categories);
-    if (s) cats = JSON.parse(s);
-  } catch(e) {}
-  if (Array.isArray(cats) && cats.length > 0) {
-    state.categories = cats;
-  } else {
-    state.categories = DEFAULT_CATEGORIES.slice();
-    saveCategories();
-  }
-}
-
-function saveCategories() {
-  try {
-    localStorage.setItem(CONFIG.keys.categories, JSON.stringify(state.categories));
-  } catch(e) { toast('Kateqoriyalar saxlanılmadı', 'error'); }
-}
-
-function renderCategoryPills() {
-  var container = $('categoryPills');
-  if (!container) return;
-  container.innerHTML = '<button onclick="filterCategory('all', this)" class="category-pill ' + (state.category === 'all' ? 'active' : '') + '">Hamısı</button>';
-  state.categories.forEach(function(cat) {
-    var btn = document.createElement('button');
-    btn.className = 'category-pill ' + (state.category === cat ? 'active' : '');
-    btn.textContent = cat;
-    btn.onclick = function() { filterCategory(cat, this); };
-    container.appendChild(btn);
-  });
-}
-
-function renderCategorySelect() {
-  var sel = $('pCategory');
-  if (!sel) return;
-  sel.innerHTML = '';
-  state.categories.forEach(function(cat) {
-    var opt = document.createElement('option');
-    opt.value = cat;
-    opt.textContent = cat;
-    sel.appendChild(opt);
-  });
-  var optNew = document.createElement('option');
-  optNew.value = '__new__';
-  optNew.textContent = '+ Yeni Kateqoriya';
-  sel.appendChild(optNew);
-}
-
-function renderAdminCategories() {
-  var container = $('adminCategoryList');
-  if (!container) return;
-  container.innerHTML = '';
-  state.categories.forEach(function(cat) {
-    var tag = document.createElement('span');
-    tag.className = 'inline-flex items-center gap-1 bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700';
-    var hasProducts = state.products.some(function(p) { return p.category === cat; });
-    tag.innerHTML = esc(cat) + (hasProducts ? '' : ' <i class="fa-solid fa-xmark text-red-400 cursor-pointer hover:text-red-600 ml-1" onclick="deleteCategory('' + cat + '')"></i>');
-    container.appendChild(tag);
-  });
-}
-
-function addCategory() {
-  var input = $('newCategoryInput');
-  if (!input) return;
-  var name = input.value.trim();
-  if (!name) { toast('Kateqoriya adı daxil edin', 'error'); return; }
-  if (state.categories.includes(name)) { toast('Bu kateqoriya artıq var', 'warning'); return; }
-  state.categories.push(name);
-  saveCategories();
-  renderCategoryPills();
-  renderCategorySelect();
-  renderAdminCategories();
-  renderFooterCategories();
-  input.value = '';
-  toast('Kateqoriya əlavə edildi', 'success');
-}
-
-function deleteCategory(cat) {
-  openConfirm('"' + cat + '" kateqoriyası silinsin?', function() {
-    state.categories = state.categories.filter(function(c) { return c !== cat; });
-    saveCategories();
-    renderCategoryPills();
-    renderCategorySelect();
-    renderAdminCategories();
-    renderFooterCategories();
-    toast('Kateqoriya silindi', 'info');
-  });
-}
-
-function renderFooterCategories() {
-  var ul = $('footerCategories');
-  if (!ul) return;
-  ul.innerHTML = '';
-  state.categories.forEach(function(cat) {
-    var li = document.createElement('li');
-    li.innerHTML = '<a href="#kataloq" class="hover:text-emerald-400 transition">' + esc(cat) + '</a>';
-    ul.appendChild(li);
-  });
-}
-
 // ============ STORAGE ============
 function migrateData() {
   try {
-    var old = localStorage.getItem('pharma_products_v5') || localStorage.getItem('pharma_products_v4') || localStorage.getItem('pharma_products_v3');
+    var old = localStorage.getItem('pharma_products_v4') || localStorage.getItem('pharma_products_v3');
     if (old) {
       var prods = JSON.parse(old);
       if (Array.isArray(prods)) {
         prods.forEach(function(p) { 
           if (!p.images && p.image) p.images = [p.image]; 
           else if (!p.images) p.images = []; 
-          delete p.icon;
         });
         localStorage.setItem(CONFIG.keys.products, JSON.stringify(prods));
-        localStorage.removeItem('pharma_products_v5');
         localStorage.removeItem('pharma_products_v4');
         localStorage.removeItem('pharma_products_v3');
       }
@@ -1074,7 +963,8 @@ function handleSort(el) {
 
 function filterCategory(cat, btn) {
   state.category = cat;
-  renderCategoryPills();
+  document.querySelectorAll('.category-pill').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
   applyFilters();
 }
 
@@ -1131,7 +1021,7 @@ function renderProducts(list) {
         + (oos ? '<div class="absolute inset-0 bg-white/80 flex items-center justify-center"><span class="text-xs font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-3 py-1 rounded-full">Stokda Yoxdur</span></div>' : '')
         + '</div>'
       : '<div class="h-52 bg-gradient-to-br from-emerald-50 to-teal-50 flex items-center justify-center relative">'
-        + '<i class="fa-solid ' + getIcon(p.category) + ' text-4xl text-emerald-200"></i>'
+        + '<i class="fa-solid ' + (p.icon || 'fa-capsules') + ' text-4xl text-emerald-200"></i>'
         + badges
         + (oos ? '<div class="absolute inset-0 bg-white/80 flex items-center justify-center"><span class="text-xs font-bold text-red-500 uppercase tracking-widest border-2 border-red-500 px-3 py-1 rounded-full">Stokda Yoxdur</span></div>' : '')
         + '</div>';
@@ -1237,7 +1127,7 @@ function openDetail(id) {
     } else {
       detailMainImg.style.display = 'none';
       detailNoImg.classList.remove('hidden');
-      detailNoImg.innerHTML = '<i class="fa-solid ' + getIcon(p.category) + ' text-6xl"></i>';
+      detailNoImg.innerHTML = '<i class="fa-solid ' + (p.icon || 'fa-capsules') + ' text-6xl"></i>';
       detailThumbs.innerHTML = '';
     }
   }
@@ -1310,7 +1200,7 @@ function renderRelated(current) {
     card.className = 'w-40 bg-white rounded-2xl border border-slate-100 overflow-hidden shrink-0 cursor-pointer hover:shadow-lg transition';
     card.onclick = function() { closeDetail(); setTimeout(function() { openDetail(p.id); }, 350); };
     card.innerHTML = '<div class="h-32 bg-gradient-to-br from-emerald-50 to-teal-50 relative overflow-hidden">'
-      + (img ? '<img src="' + img + '" class="w-full h-full object-cover" loading="lazy">' : '<div class="flex items-center justify-center h-full text-emerald-300"><i class="fa-solid ' + getIcon(p.category) + ' text-2xl"></i></div>')
+      + (img ? '<img src="' + img + '" class="w-full h-full object-cover" loading="lazy">' : '<div class="flex items-center justify-center h-full text-emerald-300"><i class="fa-solid ' + (p.icon || 'fa-capsules') + ' text-2xl"></i></div>')
       + '</div><div class="p-3"><p class="text-xs font-bold text-slate-900 truncate">' + esc(p.name) + '</p><p class="text-xs text-emerald-600 font-bold mt-1">' + fmtPrice(p.price) + '</p></div>';
     container.appendChild(card);
   });
@@ -1445,7 +1335,7 @@ function renderCart() {
     row.className = 'flex items-center gap-4 py-4 border-b border-slate-100 last:border-0';
     var img = p.images && p.images.length
       ? '<img src="' + p.images[0] + '" class="w-full h-full object-cover" onerror="this.style.display=\'none\'">'
-      : '<i class="fa-solid ' + getIcon(p.category) + '"></i>';
+      : '<i class="fa-solid ' + (p.icon || 'fa-capsules') + '"></i>';
     row.innerHTML = '<div class="w-16 h-16 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 overflow-hidden shrink-0 shadow-sm">' + img + '</div>' +
       '<div class="flex-1 min-w-0">' +
         '<p class="font-semibold text-sm text-slate-900 truncate">' + esc(p.name) + '</p>' +
@@ -1501,10 +1391,7 @@ function handleContact(e) {
   var phone = cPhone.value.trim();
   var msg = cMessage.value.trim();
   if (!name || !phone || !msg) return;
-  var text = encodeURIComponent('Yeni mesaj:
-Ad: ' + name + '
-Telefon: ' + phone + '
-Mesaj: ' + msg);
+  var text = encodeURIComponent('Yeni mesaj:\nAd: ' + name + '\nTelefon: ' + phone + '\nMesaj: ' + msg);
   window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + text, '_blank');
   toast('Mesajınız göndərildi', 'success');
   e.target.reset();
@@ -1556,8 +1443,6 @@ function logoutAdmin() {
 }
 
 function openAdminPanel() {
-  renderCategorySelect();
-  renderAdminCategories();
   renderAdmin();
   updateStats();
   showModal('adminPanel');
@@ -1579,11 +1464,11 @@ function setImgMode(mode) {
 function handleImgFile(e) {
   var files = Array.from(e.target.files || []);
   if (!files.length) return;
-  // pendingImages = []; // SİLİNDİ - əvvəlki şəkillər qalsın
+  pendingImages = [];
+  var processed = 0;
   var validFiles = files.filter(function(f) { return f.type.startsWith('image/'); });
   if (!validFiles.length) { toast('Yalnız şəkil faylları', 'error'); return; }
 
-  var processed = 0;
   validFiles.forEach(function(f) {
     if (f.size > 5 * 1024 * 1024) { toast('Max 5MB: ' + f.name, 'error'); processed++; return; }
     var r = new FileReader();
@@ -1591,12 +1476,11 @@ function handleImgFile(e) {
       var img = new Image();
       img.onload = function() {
         var c = document.createElement('canvas');
-        var max = 600;
+        var max = 800;
         var s = Math.min(1, max / Math.max(img.width, img.height));
-        c.width = Math.round(img.width * s); 
-        c.height = Math.round(img.height * s);
+        c.width = img.width * s; c.height = img.height * s;
         c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-        pendingImages.push(c.toDataURL('image/jpeg', 0.7));
+        pendingImages.push(c.toDataURL('image/jpeg', 0.85));
         processed++;
         if (processed >= validFiles.length) showPreviews();
       };
@@ -1608,10 +1492,10 @@ function handleImgFile(e) {
 }
 
 function handleImgUrl(val) {
-  if (!val.trim()) { showPreviews(); return; }
+  if (!val.trim()) { pendingImages = []; showPreviews(); return; }
   var urls = val.split('\n').map(function(u) { return u.trim(); }).filter(function(u) { return u && u.startsWith('http'); });
+  pendingImages = [];
   if (!urls.length) { showPreviews(); return; }
-  // pendingImages = []; // SİLİNDİ
   var loaded = 0;
   urls.forEach(function(u) {
     var img = new Image();
@@ -1621,31 +1505,15 @@ function handleImgUrl(val) {
   });
 }
 
-function removeImage(idx) {
-  if (idx >= 0 && idx < pendingImages.length) {
-    pendingImages.splice(idx, 1);
-    showPreviews();
-  }
-}
-
 function showPreviews() {
   var c = $('pPreviewBox');
   if (!c) return;
   c.innerHTML = '';
   c.classList.toggle('hidden', !pendingImages.length);
-  pendingImages.forEach(function(src, idx) {
-    var wrap = document.createElement('div');
-    wrap.className = 'img-preview-wrap';
+  pendingImages.forEach(function(src) {
     var img = document.createElement('img');
-    img.src = src; 
-    img.className = 'w-16 h-16 object-cover rounded-lg border border-slate-200';
-    var del = document.createElement('span');
-    del.className = 'del-img';
-    del.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-    del.onclick = function(e) { e.preventDefault(); removeImage(idx); };
-    wrap.appendChild(img);
-    wrap.appendChild(del);
-    c.appendChild(wrap);
+    img.src = src; img.className = 'w-16 h-16 object-cover rounded-lg border border-slate-200';
+    c.appendChild(img);
   });
 }
 
@@ -1664,22 +1532,6 @@ function handleProductSubmit(e) {
 
   var name = pName.value.trim();
   var cat = pCategory.value;
-
-  // Yeni kateqoriya yoxlanışı
-  if (cat === '__new__') {
-    var newCat = prompt('Yeni kateqoriya adı daxil edin:');
-    if (!newCat || !newCat.trim()) { toast('Kateqoriya adı daxil edilmədi', 'error'); return; }
-    cat = newCat.trim();
-    if (!state.categories.includes(cat)) {
-      state.categories.push(cat);
-      saveCategories();
-      renderCategoryPills();
-      renderCategorySelect();
-      renderAdminCategories();
-      renderFooterCategories();
-    }
-  }
-
   var price = parseFloat(pPrice.value);
   var old = pOldPrice && pOldPrice.value.trim() ? parseFloat(pOldPrice.value) : null;
   var desc = pDesc ? pDesc.value.trim() : '';
@@ -1694,13 +1546,13 @@ function handleProductSubmit(e) {
     if (p) {
       p.name = name; p.category = cat; p.price = price; p.oldPrice = old;
       p.desc = desc; p.stock = stock; p.isNew = isNew;
-      if (pendingImages.length) p.images = pendingImages.slice();
+      if (pendingImages.length) p.images = pendingImages;
     }
     toast('Yeniləndi', 'success');
   } else {
     state.products.unshift({
       id: Date.now(), name: name, category: cat, price: price, oldPrice: old, desc: desc,
-      images: pendingImages.length ? pendingImages.slice() : [],
+      icon: ICONS[cat] || 'fa-capsules', images: pendingImages.length ? pendingImages : [],
       stock: stock, isNew: isNew, createdAt: Date.now()
     });
     toast('Əlavə olundu', 'success');
@@ -1755,9 +1607,6 @@ function editProduct(id) {
   if (p.images && p.images.length && p.images[0].startsWith('http')) {
     setImgMode('url');
     if (pUrl) pUrl.value = p.images.join('\n');
-  } else {
-    setImgMode('file');
-    if (pUrl) pUrl.value = '';
   }
   var formTitle = $('formTitle');
   if (formTitle) formTitle.textContent = 'Redaktə Et';
@@ -1795,7 +1644,7 @@ function renderAdmin() {
     row.className = 'flex items-center gap-3 p-3 border border-slate-100 rounded-xl hover:bg-slate-50 transition';
     var img = p.images && p.images.length
       ? '<img src="' + p.images[0] + '" class="w-full h-full object-cover" onerror="this.style.display=\'none\'">'
-      : '<i class="fa-solid ' + getIcon(p.category) + '"></i>';
+      : '<i class="fa-solid ' + (p.icon || 'fa-capsules') + '"></i>';
     row.innerHTML = '<div class="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 overflow-hidden shrink-0">' + img + '</div>' +
       '<div class="flex-1 min-w-0">' +
         '<p class="font-semibold text-sm text-slate-900 truncate">' + esc(p.name) + '</p>' +
@@ -1817,7 +1666,7 @@ function updateStats() {
 }
 
 function exportData() {
-  var blob = new Blob([JSON.stringify({ products: state.products, categories: state.categories, exportedAt: new Date().toISOString() }, null, 2)], { type: 'application/json' });
+  var blob = new Blob([JSON.stringify({ products: state.products, exportedAt: new Date().toISOString() }, null, 2)], { type: 'application/json' });
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a');
   a.href = url;
@@ -1835,19 +1684,10 @@ function importData(e) {
     try {
       var d = JSON.parse(ev.target.result);
       var list = Array.isArray(d) ? d : d.products;
-      var cats = d.categories;
       if (!Array.isArray(list)) throw new Error('invalid');
       openConfirm(list.length + ' məhsul tapıldı. Əvəz olunsun?', function() {
         state.products = list;
         saveProducts();
-        if (cats && Array.isArray(cats)) {
-          state.categories = cats;
-          saveCategories();
-          renderCategoryPills();
-          renderCategorySelect();
-          renderAdminCategories();
-          renderFooterCategories();
-        }
         renderAdmin(); updateStats(); applyFilters();
         toast('Bərpa edildi', 'success');
       });
@@ -1896,12 +1736,9 @@ document.addEventListener('keydown', function(e) {
 
 // ============ INIT ============
 function init() {
-  loadCategories();
   loadProducts();
   loadCart();
   state.isAdmin = sessionStorage.getItem(CONFIG.keys.adminSession) === '1';
-  renderCategoryPills();
-  renderFooterCategories();
   applyFilters();
   renderCart();
   updateStatus();
