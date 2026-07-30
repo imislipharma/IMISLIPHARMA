@@ -7,6 +7,16 @@
 <meta name="description" content="İMİŞLİ PHARMA — İmişli şəhərində premium keyfiyyətli dərman vasitələri, vitaminlər, kosmetika və tibbi ləvazimatlar.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23059669'/%3E%3Cpath d='M38 18h24v24h24v16H62v24H38V58H14V42h24z' fill='white'/%3E%3C/svg%3E">
 
+<script>
+  (function(){
+    var ow = console.warn;
+    console.warn = function(){
+      for(var i=0;i<arguments.length;i++)
+        if(typeof arguments[i]==='string' && arguments[i].indexOf('cdn.tailwindcss.com')!==-1) return;
+      ow.apply(console, arguments);
+    };
+  })();
+</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
