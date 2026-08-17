@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mağaza - Onlayn Sifariş</title>
+  <title>Mağaza - Onlayn Sifariş | İmişli</title>
   <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
   <!-- Font Awesome İkonlar -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script>
@@ -29,6 +30,15 @@
   <style>
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    /* Sifariş bildiriş animasiyası */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up { animation: fadeInUp 0.5s ease-out; }
+    /* Məhsul kartı hover effekti */
+    .product-card { transition: all 0.3s ease; }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans min-h-screen flex flex-col justify-between">
@@ -40,6 +50,12 @@
         <i class="fa-solid fa-shop"></i>
         <span>MAĞAZA</span>
       </a>
+      <!-- Axtarış (Yeni) -->
+      <div class="hidden md:flex items-center bg-brand-900/60 rounded-lg px-3 py-2 mx-4 flex-1 max-w-xs border border-brand-800">
+        <i class="fa-solid fa-magnifying-glass text-emerald-400 mr-2"></i>
+        <input type="text" id="search-input" placeholder="Məhsul axtar..." 
+               class="bg-transparent border-none outline-none text-sm text-white placeholder-emerald-300/50 w-full">
+      </div>
       <div class="flex items-center gap-3">
         <a href="https://wa.me/994516011390" target="_blank" 
            class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold px-3 py-2 rounded-lg flex items-center gap-2 transition">
@@ -48,24 +64,39 @@
         </a>
       </div>
     </div>
+    <!-- Mobil Axtarış -->
+    <div class="md:hidden px-4 pb-3 pt-1 bg-brand-950">
+      <div class="flex items-center bg-brand-900/60 rounded-lg px-3 py-2 border border-brand-800">
+        <i class="fa-solid fa-magnifying-glass text-emerald-400 mr-2"></i>
+        <input type="text" id="search-input-mobile" placeholder="Məhsul axtar..." 
+               class="bg-transparent border-none outline-none text-sm text-white placeholder-emerald-300/50 w-full">
+      </div>
+    </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 py-6 w-full">
+  <main class="max-w-6xl mx-auto px-4 py-6 w-full flex-1">
 
-    <!-- Əsas Məlumatlar Paneli -->
+    <!-- Hero və Məlumat Paneli -->
     <section class="bg-brand-950 text-white rounded-2xl shadow-xl p-6 mb-8 border border-brand-800">
       
-      <div class="text-center mb-6 border-b border-brand-800 pb-4">
+      <!-- Xoş gəlmisiniz və əsas mesaj -->
+      <div class="text-center mb-6">
         <h1 class="text-2xl sm:text-3xl font-extrabold text-emerald-400">Xoş Gəlmisiniz!</h1>
-        <p class="text-emerald-200 text-sm mt-1">Ən keyfiyyətli məhsullar və sürətli xidmət</p>
+        <p class="text-emerald-200 text-sm mt-2">İmişlidə ən keyfiyyətli məhsullar və sürətli çatdırılma</p>
+        <!-- Etibarlılıq nişanları (Yeni) -->
+        <div class="flex justify-center gap-2 mt-3 text-[10px] sm:text-xs">
+          <span class="bg-brand-900/70 text-emerald-300 px-2 py-1 rounded-full border border-brand-700">✓ Təzə məhsullar</span>
+          <span class="bg-brand-900/70 text-emerald-300 px-2 py-1 rounded-full border border-brand-700">✓ Ekspress çatdırılma</span>
+          <span class="bg-brand-900/70 text-emerald-300 px-2 py-1 rounded-full border border-brand-700">✓ 7/24 dəstək</span>
+        </div>
       </div>
 
       <!-- Qrid Bloklar -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         
         <!-- Ünvan -->
-        <div class="bg-brand-900/80 p-4 rounded-xl border border-brand-800 flex items-start gap-4">
-          <div class="p-3 bg-brand-800 text-emerald-300 rounded-lg">
+        <div class="bg-brand-900/80 p-4 rounded-xl border border-brand-800 flex items-start gap-3 hover:bg-brand-900 transition">
+          <div class="p-3 bg-brand-800 text-emerald-300 rounded-lg shrink-0">
             <i class="fa-solid fa-location-dot text-xl"></i>
           </div>
           <div>
@@ -76,8 +107,8 @@
         </div>
 
         <!-- İş Saatları -->
-        <div class="bg-brand-900/80 p-4 rounded-xl border border-brand-800 flex items-start gap-4">
-          <div class="p-3 bg-brand-800 text-emerald-300 rounded-lg">
+        <div class="bg-brand-900/80 p-4 rounded-xl border border-brand-800 flex items-start gap-3 hover:bg-brand-900 transition">
+          <div class="p-3 bg-brand-800 text-emerald-300 rounded-lg shrink-0">
             <i class="fa-solid fa-clock text-xl"></i>
           </div>
           <div>
@@ -88,8 +119,8 @@
         </div>
 
         <!-- Çatdırılma -->
-        <div class="bg-brand-900/80 p-4 rounded-xl border border-brand-800 flex items-start gap-4">
-          <div class="p-3 bg-brand-800 text-emerald-300 rounded-lg">
+        <div class="bg-brand-900/80 p-4 rounded-xl border border-brand-800 flex items-start gap-3 hover:bg-brand-900 transition">
+          <div class="p-3 bg-brand-800 text-emerald-300 rounded-lg shrink-0">
             <i class="fa-solid fa-truck-fast text-xl"></i>
           </div>
           <div>
@@ -103,60 +134,73 @@
       </div>
 
       <!-- WhatsApp Keçidləri -->
-      <div class="mt-8 pt-6 border-t border-brand-800 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <div class="mt-6 pt-6 border-t border-brand-800 flex flex-col sm:flex-row items-center justify-center gap-4">
         
         <a href="https://wa.me/994516011390?text=Salam,%20sifari%C5%9F%20vermk%20ist%C9%99yir%C9%99m" 
            target="_blank" 
-           class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-3 transition shadow-lg">
+           class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-3 transition shadow-lg hover:shadow-emerald-500/30">
           <i class="fa-brands fa-whatsapp text-2xl"></i>
-          <span>WhatsApp İlə Əlaqə (051 601 13 90)</span>
+          <span>WhatsApp İlə Əlaqə</span>
         </a>
 
         <a href="https://whatsapp.com/channel/0029VbDddS80bIdqWp3iWl47" 
            target="_blank" 
            class="w-full sm:w-auto bg-brand-900 hover:bg-brand-800 text-emerald-300 border border-emerald-700 font-semibold py-3 px-6 rounded-xl flex items-center justify-center gap-3 transition">
           <i class="fa-solid fa-bullhorn text-lg"></i>
-          <span>WhatsApp Kanalımıza Qoşulun</span>
+          <span>WhatsApp Kanalımız</span>
         </a>
 
       </div>
 
     </section>
 
-    <!-- Məhsullar və Kateqoriya Süzgəcləri Bölməsi -->
+    <!-- Məhsullar Bölməsi -->
     <section>
-      <div class="flex items-center justify-between mb-3">
+      <div class="flex items-center justify-between mb-4">
         <h2 class="text-xl font-bold text-brand-950">Məhsullarımız</h2>
+        <span id="product-count" class="text-xs text-gray-500 font-medium"></span>
       </div>
 
       <!-- Kateqoriya Süzgəc Düymələri -->
       <div id="category-filters" class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 no-scrollbar">
       </div>
 
+      <!-- Yüklənmə / Xəta mesajı üçün konteyner -->
+      <div id="status-message" class="text-center py-6 hidden"></div>
+
       <!-- Dinamik Məhsul Siyahısı -->
-      <div id="product-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
+      <div id="product-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-5">
+      </div>
+
+      <!-- Boş nəticə üçün (gizli) -->
+      <div id="empty-state" class="hidden text-center py-16">
+        <i class="fa-regular fa-face-frown text-5xl text-gray-300 mb-4"></i>
+        <h3 class="text-lg font-semibold text-gray-600">Heç bir məhsul tapılmadı</h3>
+        <p class="text-sm text-gray-400 mt-1">Zəhmət olmasa fərqli açar söz və ya kateqoriya seçin.</p>
       </div>
     </section>
 
   </main>
 
   <!-- Footer -->
-  <footer class="bg-brand-950 text-emerald-200/80 py-6 border-t border-brand-800 text-center text-sm">
+  <footer class="bg-brand-950 text-emerald-200/80 py-6 border-t border-brand-800 text-center text-sm mt-auto">
     <div class="max-w-6xl mx-auto px-4">
-      <p>© Bütün hüquqlar qorunur. Ünvan: İmişli şəh., Şəhriyar küç. ("Şəfalı əllər" yaxınlığı)</p>
+      <p>© 2024 Mağaza | Bütün hüquqlar qorunur | İmişli şəh., Şəhriyar küç. ("Şəfalı əllər" yaxınlığı)</p>
       <p class="text-xs text-emerald-400/60 mt-1">İş saatları: 08:00 – 23:00 | Tel / WhatsApp: 051 601 13 90</p>
     </div>
   </footer>
 
-  <!-- Google Sheets & Süzgəc İnteqrasiyası -->
+  <!-- Google Sheets & Dinamik Süzgəc İnteqrasiyası -->
   <script>
     // Google Sheet ID-nizi aşağıdakı tırnaq arasına yerləşdirin
     const SHEET_ID = 'YOUR_GOOGLE_SHEET_ID_HERE'; 
     const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
     let allProducts = [];
+    let currentCategory = 'Hamısı';
+    let searchQuery = '';
 
-    // Nümunə test məhsulları (Google Sheet hələ qoşulmadıqda görsənir)
+    // Nümunə test məhsulları (Google Sheet qoşulmadıqda görsənir)
     const demoProducts = [
       {
         title: "Nümunə Məhsul 1",
@@ -171,30 +215,43 @@
         image: "https://via.placeholder.com/300?text=Məhsul+2",
         desc: "Ən çox satılan məhsullarımızdan biri.",
         category: "Ümumi"
+      },
+      {
+        title: "Nümunə Məhsul 3",
+        price: "8",
+        image: "https://via.placeholder.com/300?text=Məhsul+3",
+        desc: "Gündəlik tələbat üçün ideal seçim.",
+        category: "Endirim"
+      },
+      {
+        title: "Nümunə Məhsul 4",
+        price: "45",
+        image: "https://via.placeholder.com/300?text=Məhsul+4",
+        desc: "Premium keyfiyyət, xüsusi müştərilər üçün.",
+        category: "Xüsusi"
       }
     ];
 
     async function loadProducts() {
       const container = document.getElementById('product-list');
+      const statusMsg = document.getElementById('status-message');
       if (!container) return;
       
-      container.innerHTML = `
-        <div class="col-span-full text-center py-12 text-brand-900">
-          <i class="fa-solid fa-spinner fa-spin text-4xl text-emerald-600 mb-3"></i>
-          <p class="font-medium text-gray-600">Məhsullar yüklənir...</p>
-        </div>
-      `;
+      showStatus('loading', 'Məhsullar yüklənir...');
 
       // Əgər Sheet ID hələ yazılmayıbsa, demo məhsulları çıxarırıq
       if (!SHEET_ID || SHEET_ID === 'YOUR_GOOGLE_SHEET_ID_HERE') {
+        console.warn('Google Sheet ID qeyd edilməyib. Demo məhsullar göstərilir.');
         allProducts = demoProducts;
-        renderCategoryButtons(['Ümumi']);
-        renderProducts(allProducts);
+        renderCategoryButtons(['Ümumi', 'Endirim', 'Xüsusi']);
+        applyFiltersAndRender();
+        hideStatus();
         return;
       }
 
       try {
         const response = await fetch(SHEET_URL);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const rawText = await response.text();
         
         const jsonString = rawText.substring(rawText.indexOf('{'), rawText.lastIndexOf('}') + 1);
@@ -203,7 +260,7 @@
         const rows = data.table.rows;
 
         if (!rows || rows.length === 0) {
-          container.innerHTML = '<p class="col-span-full text-center text-gray-500 py-8">Hələ ki, məhsul əlavə olunmayıb.</p>';
+          showStatus('empty', 'Hələ ki, məhsul əlavə olunmayıb.');
           return;
         }
 
@@ -211,6 +268,7 @@
         const categoriesSet = new Set();
 
         rows.forEach((row, index) => {
+          // Başlıq sətrini keç (əgər varsa)
           if (index === 0 && row.c && row.c[0] && row.c[0].v.toString().toLowerCase().includes('ad')) {
             return;
           }
@@ -226,15 +284,40 @@
         });
 
         renderCategoryButtons(Array.from(categoriesSet));
-        renderProducts(allProducts);
+        applyFiltersAndRender();
+        hideStatus();
 
       } catch (err) {
         console.error('Xəta:', err);
+        showStatus('error', 'Məlumat yüklənərkən xəta baş verdi. Demo məhsullar göstərilir.');
         // Xəta baş verərsə saytın ağ qalmaması üçün demo məhsulları göstəririk
         allProducts = demoProducts;
-        renderCategoryButtons(['Ümumi']);
-        renderProducts(allProducts);
+        renderCategoryButtons(['Ümumi', 'Endirim', 'Xüsusi']);
+        applyFiltersAndRender();
       }
+    }
+
+    function showStatus(type, message) {
+      const statusEl = document.getElementById('status-message');
+      const emptyEl = document.getElementById('empty-state');
+      const listEl = document.getElementById('product-list');
+      if (!statusEl) return;
+      statusEl.classList.remove('hidden');
+      emptyEl.classList.add('hidden');
+      listEl.innerHTML = '';
+      
+      let icon = '';
+      let colorClass = 'text-gray-500';
+      if (type === 'loading') { icon = '<i class="fa-solid fa-spinner fa-spin text-4xl text-emerald-600 mb-3"></i>'; colorClass = 'text-emerald-700'; }
+      else if (type === 'error') { icon = '<i class="fa-solid fa-triangle-exclamation text-4xl text-amber-500 mb-3"></i>'; colorClass = 'text-amber-600'; }
+      else if (type === 'empty') { icon = '<i class="fa-regular fa-folder-open text-4xl text-gray-400 mb-3"></i>'; colorClass = 'text-gray-500'; }
+      
+      statusEl.innerHTML = `<div class="${colorClass} font-medium">${icon}<p>${message}</p></div>`;
+    }
+
+    function hideStatus() {
+      const statusEl = document.getElementById('status-message');
+      if (statusEl) statusEl.classList.add('hidden');
     }
 
     function renderCategoryButtons(categories) {
@@ -258,6 +341,7 @@
     }
 
     function filterByCategory(selectedCategory, clickedBtn) {
+      currentCategory = selectedCategory;
       const buttons = document.querySelectorAll('.cat-filter-btn');
       buttons.forEach(btn => {
         btn.className = 'cat-filter-btn bg-white hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium text-xs sm:text-sm px-4 py-2 rounded-full border border-gray-300 whitespace-nowrap transition';
@@ -265,29 +349,71 @@
 
       clickedBtn.className = 'cat-filter-btn active-filter bg-emerald-700 text-white font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap shadow transition';
 
-      if (selectedCategory === 'Hamısı') {
-        renderProducts(allProducts);
-      } else {
-        const filtered = allProducts.filter(p => p.category.toLowerCase() === selectedCategory.toLowerCase());
-        renderProducts(filtered);
-      }
+      applyFiltersAndRender();
     }
 
-    function renderProducts(products) {
-      const container = document.getElementById('product-list');
-      if (!container) return;
-      container.innerHTML = '';
-
-      if (products.length === 0) {
-        container.innerHTML = '<p class="col-span-full text-center text-gray-500 py-8">Bu kateqoriyada heç bir məhsul tapılmadı.</p>';
-        return;
+    // Yeni: Axtarış məntiqi
+    function setupSearch() {
+      const desktopInput = document.getElementById('search-input');
+      const mobileInput = document.getElementById('search-input-mobile');
+      
+      function handleSearch(e) {
+        searchQuery = e.target.value.toLowerCase().trim();
+        // Digər inputu sinxronlaşdır
+        if (e.target === desktopInput && mobileInput) mobileInput.value = e.target.value;
+        if (e.target === mobileInput && desktopInput) desktopInput.value = e.target.value;
+        applyFiltersAndRender();
       }
+      
+      if (desktopInput) desktopInput.addEventListener('input', handleSearch);
+      if (mobileInput) mobileInput.addEventListener('input', handleSearch);
+    }
 
-      products.forEach(p => {
+    // Yeni: Məhsulları axtarış və kateqoriyaya görə filtrlə
+    function getFilteredProducts() {
+      let filtered = [...allProducts];
+      
+      // Kateqoriya filtri
+      if (currentCategory !== 'Hamısı') {
+        filtered = filtered.filter(p => p.category.toLowerCase() === currentCategory.toLowerCase());
+      }
+      
+      // Axtarış filtri
+      if (searchQuery) {
+        filtered = filtered.filter(p => 
+          p.title.toLowerCase().includes(searchQuery) || 
+          (p.desc && p.desc.toLowerCase().includes(searchQuery)) ||
+          (p.category && p.category.toLowerCase().includes(searchQuery))
+        );
+      }
+      
+      return filtered;
+    }
+
+    function applyFiltersAndRender() {
+      const filtered = getFilteredProducts();
+      const productCount = document.getElementById('product-count');
+      if (productCount) productCount.textContent = `${filtered.length} məhsul`;
+      
+      const container = document.getElementById('product-list');
+      const emptyState = document.getElementById('empty-state');
+      if (!container) return;
+      
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        if (emptyState) emptyState.classList.remove('hidden');
+        return;
+      } else {
+        if (emptyState) emptyState.classList.add('hidden');
+      }
+      
+      container.innerHTML = '';
+      
+      filtered.forEach(p => {
         const waLink = `https://wa.me/994516011390?text=${encodeURIComponent('Salam, bu məhsulu sifariş etmək istəyirəm: ' + p.title + ' (' + p.price + ' AZN)')}`;
-
+        
         const card = document.createElement('div');
-        card.className = 'bg-white rounded-xl shadow border border-gray-200 overflow-hidden flex flex-col justify-between hover:shadow-lg transition duration-200';
+        card.className = 'product-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between hover:shadow-lg';
         card.innerHTML = `
           <div>
             <div class="relative w-full h-40 sm:h-48 bg-gray-100 overflow-hidden">
@@ -304,7 +430,7 @@
           <div class="p-3 pt-0 flex items-center justify-between mt-2 border-t border-gray-100 pt-2">
             <span class="text-emerald-700 font-extrabold text-sm sm:text-base">${p.price} AZN</span>
             <a href="${waLink}" target="_blank" 
-               class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-2.5 py-1.5 rounded-lg flex items-center gap-1 font-semibold transition">
+               class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-3 py-2 rounded-lg flex items-center gap-1 font-semibold transition">
               <i class="fa-brands fa-whatsapp text-sm"></i> Sifariş
             </a>
           </div>
@@ -313,7 +439,10 @@
       });
     }
 
-    document.addEventListener('DOMContentLoaded', loadProducts);
+    document.addEventListener('DOMContentLoaded', () => {
+      loadProducts();
+      setupSearch();
+    });
   </script>
 </body>
 </html>
