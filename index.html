@@ -1,1 +1,308 @@
 
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mağaza - Onlayn Sifariş</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome İkonlar -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Xüsusi horizontal skrol görünüşü (mühiti təmiz saxlamaq üçün) */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans min-h-screen flex flex-col justify-between">
+
+  <!-- Header / Naviqasiya -->
+  <header class="bg-brand-950 text-white sticky top-0 z-50 shadow-md border-b border-brand-800">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="#" class="text-xl font-bold text-emerald-400 flex items-center gap-2">
+        <i class="fa-solid fa-shop"></i>
+        <span>MAĞAZA</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/994516011390" target="_blank" 
+           class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold px-3 py-2 rounded-lg flex items-center gap-2 transition">
+          <i class="fa-brands fa-whatsapp text-lg"></i>
+          <span>051 601 13 90</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-6 w-full">
+
+    <!-- Əsas Məlumatlar Paneli -->
+    <section class="bg-brand-950 text-white rounded-2xl shadow-xl p-6 mb-8 border border-brand-800">
+      
+      <div class="text-center mb-6 border-b border-brand-800 pb-4">
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-emerald-400">Xoş Gəlmisiniz!</h1>
+        <p class="text-emerald-200 text-sm mt-1">Ən keyfiyyətli məhsullar və sürətli xidmət</p>
+      </div>
+
+      <!-- Qrid Bloklar -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
+        <!-- Ünvan -->
+        <div class="bg-brand-900/80 p-4 rounded-xl border border-brand-800 flex items-start gap-4">
+          <div class="p-3 bg-brand-800 text-emerald-300 rounded-lg">
+            <i class="fa-solid fa-location-dot text-xl"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-emerald-300 text-base">Ünvanımız</h3>
+            <p class="text-sm text-gray-200 mt-1">İmişli şəh., Şəhriyar küç.</p>
+            <p class="text-xs text-emerald-400 font-medium">("Şəfalı əllər" yaxınlığı)</p>
+          </div>
+        </div>
+
+        <!-- İş Saatları -->
+        <div class="bg-brand-900/80 p-4 rounded-xl border border-brand-800 flex items-start gap-4">
+          <div class="p-3 bg-brand-800 text-emerald-300 rounded-lg">
+            <i class="fa-solid fa-clock text-xl"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-emerald-300 text-base">İş Saatları</h3>
+            <p class="text-sm text-gray-200 mt-1">Hər gün: <span class="font-semibold text-emerald-300">08:00 – 23:00</span></p>
+            <p class="text-xs text-emerald-400 font-medium">Gecə saat 11-ə kimi xidmətinizdəyik</p>
+          </div>
+        </div>
+
+        <!-- Çatdırılma -->
+        <div class="bg-brand-900/80 p-4 rounded-xl border border-brand-800 flex items-start gap-4">
+          <div class="p-3 bg-brand-800 text-emerald-300 rounded-lg">
+            <i class="fa-solid fa-truck-fast text-xl"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-emerald-300 text-base">Çatdırılma Şərtləri</h3>
+            <p class="text-xs text-gray-200 mt-1"><strong>100 AZN-dən yuxarı:</strong> <span class="text-emerald-400 font-bold">PULSUZ</span></p>
+            <p class="text-xs text-gray-300">100 AZN-dək: Ödənişli</p>
+            <span class="inline-block mt-1 bg-emerald-800/80 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 rounded">Çatdırılma mövcuddur</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- WhatsApp Keçidləri -->
+      <div class="mt-8 pt-6 border-t border-brand-800 flex flex-col sm:flex-row items-center justify-center gap-4">
+        
+        <a href="https://wa.me/994516011390?text=Salam,%20sifari%C5%9F%20vermk%20ist%C9%99yir%C9%99m" 
+           target="_blank" 
+           class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-3 transition shadow-lg">
+          <i class="fa-brands fa-whatsapp text-2xl"></i>
+          <span>WhatsApp İlə Əlaqə (051 601 13 90)</span>
+        </a>
+
+        <a href="https://whatsapp.com/channel/0029VbDddS80bIdqWp3iWl47" 
+           target="_blank" 
+           class="w-full sm:w-auto bg-brand-900 hover:bg-brand-800 text-emerald-300 border border-emerald-700 font-semibold py-3 px-6 rounded-xl flex items-center justify-center gap-3 transition">
+          <i class="fa-solid fa-bullhorn text-lg"></i>
+          <span>WhatsApp Kanalımıza Qoşulun</span>
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- Məhsullar və Kateqoriya Süzgəcləri Bölməsi -->
+    <section>
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-xl font-bold text-brand-950">Məhsullarımız</h2>
+      </div>
+
+      <!-- Kateqoriya Süzgəc Düymələri (Dinamik Yaradılır) -->
+      <div id="category-filters" class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 no-scrollbar">
+        <!-- JS vasitəsilə kateqoriya düymələri avtomatik əlavə olunacaq -->
+      </div>
+
+      <!-- Dinamik Məhsul Siyahısı -->
+      <div id="product-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
+        <!-- JS vasitəsilə məhsullar bura yüklənəcək -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-brand-950 text-emerald-200/80 py-6 border-t border-brand-800 text-center text-sm">
+    <div class="max-w-6xl mx-auto px-4">
+      <p>© Bütün hüquqlar qorunur. Ünvan: İmişli şəh., Şəhriyar küç. ("Şəfalı əllər" yaxınlığı)</p>
+      <p class="text-xs text-emerald-400/60 mt-1">İş saatları: 08:00 – 23:00 | Tel / WhatsApp: 051 601 13 90</p>
+    </div>
+  </footer>
+
+  <!-- Google Sheets & Süzgəc İnteqrasiyası -->
+  <script>
+    const SHEET_ID = 'YOUR_GOOGLE_SHEET_ID_HERE'; 
+    const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+
+    let allProducts = [];
+
+    async function loadProducts() {
+      const container = document.getElementById('product-list');
+      
+      container.innerHTML = `
+        <div class="col-span-full text-center py-12 text-brand-900">
+          <i class="fa-solid fa-spinner fa-spin text-4xl text-emerald-600 mb-3"></i>
+          <p class="font-medium text-gray-600">Məhsullar yüklənir...</p>
+        </div>
+      `;
+
+      try {
+        const response = await fetch(SHEET_URL);
+        const rawText = await response.text();
+        
+        const jsonString = rawText.substring(rawText.indexOf('{'), rawText.lastIndexOf('}') + 1);
+        const data = JSON.parse(jsonString);
+        
+        const rows = data.table.rows;
+
+        if (!rows || rows.length === 0) {
+          container.innerHTML = '<p class="col-span-full text-center text-gray-500 py-8">Hələ ki, məhsul əlavə olunmayıb.</p>';
+          return;
+        }
+
+        allProducts = [];
+        const categoriesSet = new Set();
+
+        // Cədvəldən oxuma: A: Ad, B: Qiymət, C: Şəkil, D: Təsvir, E: Kateqoriya
+        rows.forEach((row, index) => {
+          if (index === 0 && row.c[0] && row.c[0].v.toString().toLowerCase().includes('ad')) {
+            return; // Başlıq sətrini keçirik
+          }
+
+          const title    = row.c[0] ? row.c[0].v : 'Məhsul';
+          const price    = row.c[1] ? row.c[1].v : '0';
+          const image    = row.c[2] ? row.c[2].v : 'https://via.placeholder.com/300?text=Məhsul';
+          const desc     = row.c[3] ? row.c[3].v : '';
+          const category = row.c[4] && row.c[4].v ? row.c[4].v.toString().trim() : 'Digər';
+
+          categoriesSet.add(category);
+
+          allProducts.push({ title, price, image, desc, category });
+        });
+
+        // Kateqoriya düymələrini yaradırıq
+        renderCategoryButtons(Array.from(categoriesSet));
+
+        // İlkin olaraq Bütün məhsulları ekrana çıxarırıq
+        renderProducts(allProducts);
+
+      } catch (err) {
+        console.error('Xəta:', err);
+        container.innerHTML = `
+          <div class="col-span-full text-center py-8 text-red-600">
+            <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
+            <p class="font-semibold text-sm">Məhsullar yüklənərkən xəta baş verdi.</p>
+            <p class="text-xs text-gray-500 mt-1">Google Sheet ID-ni və ya giriş icazəsini yoxlayın.</p>
+          </div>
+        `;
+      }
+    }
+
+    // Süzgəc Düymələrini Yaradan Funksiya
+    function renderCategoryButtons(categories) {
+      const filterContainer = document.getElementById('category-filters');
+      filterContainer.innerHTML = '';
+
+      // "Hamısı" Düyməsi
+      const allBtn = document.createElement('button');
+      allBtn.className = 'cat-filter-btn active-filter bg-emerald-700 text-white font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap shadow transition';
+      allBtn.textContent = 'Hamısı';
+      allBtn.onclick = () => filterByCategory('Hamısı', allBtn);
+      filterContainer.appendChild(allBtn);
+
+      // Cədvəldən gələn digər kateqoriyalar
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'cat-filter-btn bg-white hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium text-xs sm:text-sm px-4 py-2 rounded-full border border-gray-300 whitespace-nowrap transition';
+        btn.textContent = cat;
+        btn.onclick = () => filterByCategory(cat, btn);
+        filterContainer.appendChild(btn);
+      });
+    }
+
+    // Seçilən kateqoriyaya görə filtrləmə
+    function filterByCategory(selectedCategory, clickedBtn) {
+      // Bütün düymələri pasiv edirik
+      const buttons = document.querySelectorAll('.cat-filter-btn');
+      buttons.forEach(btn => {
+        btn.className = 'cat-filter-btn bg-white hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium text-xs sm:text-sm px-4 py-2 rounded-full border border-gray-300 whitespace-nowrap transition';
+      });
+
+      // Kliklənən düyməni aktiv (yaşıl) edirik
+      clickedBtn.className = 'cat-filter-btn active-filter bg-emerald-700 text-white font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap shadow transition';
+
+      if (selectedCategory === 'Hamısı') {
+        renderProducts(allProducts);
+      } else {
+        const filtered = allProducts.filter(p => p.category.toLowerCase() === selectedCategory.toLowerCase());
+        renderProducts(filtered);
+      }
+    }
+
+    // Məhsul Kartlarını Ekrana Çıxaran Funksiya
+    function renderProducts(products) {
+      const container = document.getElementById('product-list');
+      container.innerHTML = '';
+
+      if (products.length === 0) {
+        container.innerHTML = '<p class="col-span-full text-center text-gray-500 py-8">Bu kateqoriyada heç bir məhsul tapılmadı.</p>';
+        return;
+      }
+
+      products.forEach(p => {
+        const waLink = `https://wa.me/994516011390?text=${encodeURIComponent('Salam, bu məhsulu sifariş etmək istəyirəm: ' + p.title + ' (' + p.price + ' AZN)')}`;
+
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-xl shadow border border-gray-200 overflow-hidden flex flex-col justify-between hover:shadow-lg transition duration-200';
+        card.innerHTML = `
+          <div>
+            <div class="relative w-full h-40 sm:h-48 bg-gray-100 overflow-hidden">
+              <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover hover:scale-105 transition duration-300" onerror="this.src='https://via.placeholder.com/300?text=Şəkil+Yoxdur'">
+              <span class="absolute top-2 left-2 bg-emerald-950/80 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full backdrop-blur-sm">
+                ${p.category}
+              </span>
+            </div>
+            <div class="p-3">
+              <h3 class="font-bold text-gray-800 text-sm sm:text-base line-clamp-2">${p.title}</h3>
+              ${p.desc ? `<p class="text-xs text-gray-500 mt-1 line-clamp-2">${p.desc}</p>` : ''}
+            </div>
+          </div>
+          <div class="p-3 pt-0 flex items-center justify-between mt-2 border-t border-gray-100 pt-2">
+            <span class="text-emerald-700 font-extrabold text-sm sm:text-base">${p.price} AZN</span>
+            <a href="${waLink}" target="_blank" 
+               class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-2.5 py-1.5 rounded-lg flex items-center gap-1 font-semibold transition">
+              <i class="fa-brands fa-whatsapp text-sm"></i> Sifariş
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProducts);
+  </script>
+</body>
+</html>
