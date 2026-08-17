@@ -27,7 +27,6 @@
     }
   </script>
   <style>
-    /* Xüsusi horizontal skrol görünüşü (mühiti təmiz saxlamaq üçün) */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
@@ -130,14 +129,12 @@
         <h2 class="text-xl font-bold text-brand-950">Məhsullarımız</h2>
       </div>
 
-      <!-- Kateqoriya Süzgəc Düymələri (Dinamik Yaradılır) -->
+      <!-- Kateqoriya Süzgəc Düymələri -->
       <div id="category-filters" class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 no-scrollbar">
-        <!-- JS vasitəsilə kateqoriya düymələri avtomatik əlavə olunacaq -->
       </div>
 
       <!-- Dinamik Məhsul Siyahısı -->
       <div id="product-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
-        <!-- JS vasitəsilə məhsullar bura yüklənəcək -->
       </div>
     </section>
 
@@ -153,13 +150,33 @@
 
   <!-- Google Sheets & Süzgəc İnteqrasiyası -->
   <script>
+    // Google Sheet ID-nizi aşağıdakı tırnaq arasına yerləşdirin
     const SHEET_ID = 'YOUR_GOOGLE_SHEET_ID_HERE'; 
     const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
     let allProducts = [];
 
+    // Nümunə test məhsulları (Google Sheet hələ qoşulmadıqda görsənir)
+    const demoProducts = [
+      {
+        title: "Nümunə Məhsul 1",
+        price: "15",
+        image: "https://via.placeholder.com/300?text=Məhsul+1",
+        desc: "Sürətli çatdırılma ilə keyfiyyətli məhsul.",
+        category: "Ümumi"
+      },
+      {
+        title: "Nümunə Məhsul 2",
+        price: "25",
+        image: "https://via.placeholder.com/300?text=Məhsul+2",
+        desc: "Ən çox satılan məhsullarımızdan biri.",
+        category: "Ümumi"
+      }
+    ];
+
     async function loadProducts() {
       const container = document.getElementById('product-list');
+      if (!container) return;
       
       container.innerHTML = `
         <div class="col-span-full text-center py-12 text-brand-900">
@@ -167,6 +184,14 @@
           <p class="font-medium text-gray-600">Məhsullar yüklənir...</p>
         </div>
       `;
+
+      // Əgər Sheet ID hələ yazılmayıbsa, demo məhsulları çıxarırıq
+      if (!SHEET_ID || SHEET_ID === 'YOUR_GOOGLE_SHEET_ID_HERE') {
+        allProducts = demoProducts;
+        renderCategoryButtons(['Ümumi']);
+        renderProducts(allProducts);
+        return;
+      }
 
       try {
         const response = await fetch(SHEET_URL);
@@ -185,54 +210,44 @@
         allProducts = [];
         const categoriesSet = new Set();
 
-        // Cədvəldən oxuma: A: Ad, B: Qiymət, C: Şəkil, D: Təsvir, E: Kateqoriya
         rows.forEach((row, index) => {
-          if (index === 0 && row.c[0] && row.c[0].v.toString().toLowerCase().includes('ad')) {
-            return; // Başlıq sətrini keçirik
+          if (index === 0 && row.c && row.c[0] && row.c[0].v.toString().toLowerCase().includes('ad')) {
+            return;
           }
 
-          const title    = row.c[0] ? row.c[0].v : 'Məhsul';
-          const price    = row.c[1] ? row.c[1].v : '0';
-          const image    = row.c[2] ? row.c[2].v : 'https://via.placeholder.com/300?text=Məhsul';
-          const desc     = row.c[3] ? row.c[3].v : '';
-          const category = row.c[4] && row.c[4].v ? row.c[4].v.toString().trim() : 'Digər';
+          const title    = row.c && row.c[0] ? row.c[0].v : 'Məhsul';
+          const price    = row.c && row.c[1] ? row.c[1].v : '0';
+          const image    = row.c && row.c[2] ? row.c[2].v : 'https://via.placeholder.com/300?text=Məhsul';
+          const desc     = row.c && row.c[3] ? row.c[3].v : '';
+          const category = row.c && row.c[4] && row.c[4].v ? row.c[4].v.toString().trim() : 'Digər';
 
           categoriesSet.add(category);
-
           allProducts.push({ title, price, image, desc, category });
         });
 
-        // Kateqoriya düymələrini yaradırıq
         renderCategoryButtons(Array.from(categoriesSet));
-
-        // İlkin olaraq Bütün məhsulları ekrana çıxarırıq
         renderProducts(allProducts);
 
       } catch (err) {
         console.error('Xəta:', err);
-        container.innerHTML = `
-          <div class="col-span-full text-center py-8 text-red-600">
-            <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
-            <p class="font-semibold text-sm">Məhsullar yüklənərkən xəta baş verdi.</p>
-            <p class="text-xs text-gray-500 mt-1">Google Sheet ID-ni və ya giriş icazəsini yoxlayın.</p>
-          </div>
-        `;
+        // Xəta baş verərsə saytın ağ qalmaması üçün demo məhsulları göstəririk
+        allProducts = demoProducts;
+        renderCategoryButtons(['Ümumi']);
+        renderProducts(allProducts);
       }
     }
 
-    // Süzgəc Düymələrini Yaradan Funksiya
     function renderCategoryButtons(categories) {
       const filterContainer = document.getElementById('category-filters');
+      if (!filterContainer) return;
       filterContainer.innerHTML = '';
 
-      // "Hamısı" Düyməsi
       const allBtn = document.createElement('button');
       allBtn.className = 'cat-filter-btn active-filter bg-emerald-700 text-white font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap shadow transition';
       allBtn.textContent = 'Hamısı';
       allBtn.onclick = () => filterByCategory('Hamısı', allBtn);
       filterContainer.appendChild(allBtn);
 
-      // Cədvəldən gələn digər kateqoriyalar
       categories.forEach(cat => {
         const btn = document.createElement('button');
         btn.className = 'cat-filter-btn bg-white hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium text-xs sm:text-sm px-4 py-2 rounded-full border border-gray-300 whitespace-nowrap transition';
@@ -242,15 +257,12 @@
       });
     }
 
-    // Seçilən kateqoriyaya görə filtrləmə
     function filterByCategory(selectedCategory, clickedBtn) {
-      // Bütün düymələri pasiv edirik
       const buttons = document.querySelectorAll('.cat-filter-btn');
       buttons.forEach(btn => {
         btn.className = 'cat-filter-btn bg-white hover:bg-emerald-50 text-gray-700 hover:text-emerald-800 font-medium text-xs sm:text-sm px-4 py-2 rounded-full border border-gray-300 whitespace-nowrap transition';
       });
 
-      // Kliklənən düyməni aktiv (yaşıl) edirik
       clickedBtn.className = 'cat-filter-btn active-filter bg-emerald-700 text-white font-semibold text-xs sm:text-sm px-4 py-2 rounded-full whitespace-nowrap shadow transition';
 
       if (selectedCategory === 'Hamısı') {
@@ -261,9 +273,9 @@
       }
     }
 
-    // Məhsul Kartlarını Ekrana Çıxaran Funksiya
     function renderProducts(products) {
       const container = document.getElementById('product-list');
+      if (!container) return;
       container.innerHTML = '';
 
       if (products.length === 0) {
